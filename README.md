@@ -23,13 +23,19 @@ build keeps them.
 ## Change anything else
 
 1. Edit the files in `src/` (`body.html`, `style.css`, `script.js`).
-2. Build: `pip install playwright && python3 build.py`
+2. Build: `pip install playwright pillow numpy && python3 build.py`
    (Playwright renders `og-image.png`, the link preview image).
-3. Copy `out/site/index.html` and `out/site/og-image.png` to the root of `main`
-   and push. GitHub Pages publishes the change within a minute or two.
+3. Copy everything in `out/site/` to the root of `main` and push. GitHub Pages
+   publishes the change within a minute or two.
 
 `out/jeetaklb.html` is the same page without the document wrapper, for the
 Claude artifact preview.
+
+## Icons
+
+`icon-source.jpg` is the app icon. `make_icons.py` (run by `build.py`) crops it
+into `favicon.ico`, `favicon-32.png`, `icon-192.png` (rounded, for browser tabs)
+and `apple-touch-icon.png` (full square, iPhones round it themselves).
 
 ## Logo
 

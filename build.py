@@ -272,9 +272,6 @@ artifact = f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}</style>\n
 (OUT / "jeetaklb.html").write_text(artifact)
 
 # ---------------------------------------------------------------- deployable site
-fav = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#E23C0E"/>'
-       f'<g transform="translate(14.8 10) scale(0.19)"><path fill="#fff" fill-rule="evenodd" d="{PIN_D}"/></g></svg>')
-fav_uri = "data:image/svg+xml," + urllib.parse.quote(fav)
 desc = "Food, groceries and anything else from shops near you, delivered across 21 villages in the Upper Metn."
 site = f"""<!doctype html>
 <html lang="en" dir="ltr">
@@ -285,7 +282,10 @@ site = f"""<!doctype html>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#1D3D2F">
 <link rel="canonical" href="https://jeetaklb.com/">
-<link rel="icon" type="image/svg+xml" href="{fav_uri}">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jeetak">
 <meta property="og:url" content="https://jeetaklb.com/">
@@ -308,6 +308,10 @@ site = f"""<!doctype html>
 """
 SITE.mkdir(exist_ok=True)
 (SITE / "index.html").write_text(site)
+
+# ---------------------------------------------------------------- favicon and home-screen icons
+import make_icons  # noqa: E402
+make_icons.build()
 
 # ---------------------------------------------------------------- link preview image
 og_html = f"""<html><body style="margin:0;width:1200px;height:630px;background:#E23C0E;display:grid;place-items:center">
