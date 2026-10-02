@@ -62,6 +62,11 @@
   --kraft: #C99A5D;
   --kraft-dark: #A97C43;
   --pulse: rgba(255, 122, 69, 0.5);
+  --melon: #F7A3A8;
+  --water: #BFE6F4;
+  --water-deep: #86C6E0;
+  --tomato: #D9412F;
+  --food-size: clamp(5.25rem, 22vw, 7rem);
 
   --font-display: "Kanit", "Readex Pro", system-ui, sans-serif;
   --font-body: "Readex Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -277,7 +282,7 @@ p { margin: 0; }
 .trail { fill: none; stroke: var(--orange-lit); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 0.1 13; }
 .trail-faint { opacity: 0.28; }
 
-.pin-fill { fill: var(--orange-lit); }
+.pin-fill { fill: var(--orange); }
 .pin-core { fill: var(--cream); }
 .pin-anim { transform-box: fill-box; transform-origin: 50% 100%; }
 .landed .pin-anim { animation: land 0.6s cubic-bezier(0.3, 1.5, 0.5, 1); }
@@ -342,12 +347,13 @@ h2 { font-size: var(--step-h2); }
 .herb-stem { fill: none; stroke: var(--herb-dark); stroke-width: 3; stroke-linecap: round; }
 .c-kraft { fill: var(--kraft); }
 .c-kraft-dark { fill: var(--kraft-dark); }
-.c-bag { fill: var(--orange-lit); }
+.c-bag { fill: var(--orange); }
+.c-white { fill: var(--white); }
 .c-cream { fill: var(--cream); }
 .c-pine { fill: var(--pine); }
 .c-shadow { fill: var(--pine-deep); opacity: 0.55; }
 .bag-handle { fill: none; stroke: var(--pine-deep); stroke-width: 5; stroke-linecap: round; }
-.bag-seam { fill: none; stroke: var(--orange); stroke-width: 2.5; }
+.bag-seam { fill: none; stroke: var(--orange-ink); stroke-width: 2.5; }
 .steam-line { fill: none; stroke: var(--cream); stroke-width: 3.2; stroke-linecap: round; opacity: 0; }
 
 .steam-line { animation: steam 2.8s ease-in-out infinite; transform-box: fill-box; }
@@ -569,7 +575,7 @@ h2 { font-size: var(--step-h2); }
 /* ---------- sign-off ---------- */
 .signoff { background: var(--orange); color: var(--white); }
 .signoff-grid { display: grid; gap: 2rem; align-items: center; }
-.logo-tile { width: 100%; display: grid; place-items: center start; }
+.logo-tile { width: 100%; display: grid; place-items: center; }
 .lockup { width: min(100%, 21rem); height: auto; fill: var(--white); }
 .signoff h2 { margin-bottom: 1rem; }
 .signoff p.body { max-width: 30rem; font-size: var(--step-lede); font-weight: 500; color: var(--white); }
@@ -578,6 +584,7 @@ h2 { font-size: var(--step-h2); }
 .signoff .store small { font-weight: 600; }
 @media (min-width: 820px) {
   .signoff-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4rem; }
+  .logo-tile { place-items: center start; }
 }
 .foot {
   margin-top: clamp(3rem, 7vw, 5rem);
@@ -591,15 +598,224 @@ h2 { font-size: var(--step-h2); }
   color: var(--white);
 }
 
+/* ---------- footer: food pops up from under the page ---------- */
+.signoff { padding-block-end: 0; }
+.foot-stage {
+  position: relative;
+  height: calc(clamp(6.75rem, 26vw, 8.5rem) + 7rem);
+  margin-top: calc(0.75rem - 7rem); /* the top 7rem is headroom for hops, over the row above */
+  overflow: hidden;
+  pointer-events: none;
+}
+.food,
+.foot-scooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.food {
+  width: var(--food-size);
+  height: var(--food-size);
+  transform: translateY(102%);
+  transform-origin: 50% 100%;
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.food.is-still { transform: translate(-50%, 26%) rotate(var(--tilt, 0deg)); }
+.food > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.foot-scooter { width: clamp(8rem, 34vw, 10.5rem); transform: translateX(-120%); }
+.foot-scooter > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.foot-scooter .c-bag { stroke: var(--pine-deep); stroke-width: 2.5; }
+.foot-scooter .spokes { animation-duration: 0.45s; }
+
+.ol { stroke: var(--pine-deep); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ln { fill: none; stroke: var(--pine-deep); stroke-width: 2.4; stroke-linecap: round; }
+.ln-soft { opacity: 0.35; }
+.ln-water { stroke: var(--water-deep); }
+.ln-crust { stroke: var(--kraft-dark); }
+.c-melon { fill: var(--melon); }
+.c-water { fill: var(--water); }
+.c-seed { fill: var(--pine-deep); }
+.c-tomato { fill: var(--tomato); }
+.c-bag-lit { fill: var(--orange-lit); }
+
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .steam-line { opacity: 0.7; }
   .speed { opacity: 0.5; }
 }
+/* ---------- intro: a scooter rides in, then the view pulls back into the hero ---------- */
+:root { --pine-clear: rgba(29, 61, 47, 0); }
+
+.intro { display: none; }
+.intro-on .intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  background-color: var(--pine);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: intro-bg 0.7s ease 2.05s forwards, intro-gone 0s linear 3.4s forwards;
+}
+html.intro-on, .intro-on body { overflow: hidden; }
+
+.intro-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-62%);
+}
+.intro-road {
+  position: absolute;
+  left: 0;
+  top: 97%;
+  width: 100%;
+  height: 10px;
+  transform: translateY(-50%);
+  overflow: hidden;
+  animation: intro-fade-out 0.4s ease 2s forwards;
+}
+.intro-road line {
+  stroke: var(--orange-lit);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 18;
+  animation: intro-road 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both;
+}
+
+.intro-rider {
+  position: relative;
+  width: min(72vw, 21rem);
+  margin-inline: auto;
+  transform-origin: 61% 97%;
+  animation: intro-zoom 0.85s cubic-bezier(0.65, 0, 0.35, 1) 2s forwards,
+             intro-fade-out 0.3s ease 2.62s forwards;
+}
+.intro-lean > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.intro-ride { animation: intro-ride-in 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both; }
+.intro-lean { transform-origin: 88% 97%; animation: intro-brake 0.5s ease-out 1.5s both; }
+.intro-scoot { animation: scoot 0.22s ease-in-out 0.15s 6 alternate; }
+.intro .spokes { animation: intro-wheel 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both; }
+.intro-speeds { animation: intro-speeds 1.6s linear 0.1s both; }
+.intro .bag-logo {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: intro-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 1.7s both;
+}
+
+/* The landing page settles in around the scooter as it lands. */
+.intro-on .hero-top,
+.intro-on .hero-copy > * { animation: intro-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.intro-on .hero-top { animation-delay: 2.15s; }
+.intro-on .hero-copy > :nth-child(1) { animation-delay: 2.25s; }
+.intro-on .hero-copy > :nth-child(2) { animation-delay: 2.33s; }
+.intro-on .hero-copy > :nth-child(3) { animation-delay: 2.41s; }
+.intro-on .hero-copy > :nth-child(4) { animation-delay: 2.49s; }
+.intro-on .hero-copy > :nth-child(5) { animation-delay: 2.57s; }
+.intro-on .hero-art { animation: intro-fade-in 0.8s ease 2s both; }
+
+/* Tap to skip */
+.intro-skip .intro { animation: none; opacity: 0; transition: opacity 0.2s ease; pointer-events: none; }
+.intro-skip .hero-top,
+.intro-skip .hero-copy > *,
+.intro-skip .hero-art { animation: none; }
+
+@keyframes intro-bg { to { background-color: var(--pine-clear); } }
+@keyframes intro-gone { to { visibility: hidden; pointer-events: none; } }
+@keyframes intro-road { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 360; } }
+@keyframes intro-ride-in { from { transform: translateX(-85vw); } to { transform: none; } }
+@keyframes intro-wheel { from { transform: rotate(0deg); } to { transform: rotate(1440deg); } }
+@keyframes intro-brake {
+  0% { transform: rotate(0deg); }
+  35% { transform: rotate(2.5deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes intro-speeds {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes intro-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@keyframes intro-zoom { to { transform: translate(var(--tx, 0px), var(--ty, 30vh)) scale(var(--ts, 0.1)); } }
+@keyframes intro-fade-out { to { opacity: 0; } }
+@keyframes intro-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Preview only: replay the intro */
+.intro-replay {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  padding: 0.6rem 1.05rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--pine);
+  font: 600 0.9375rem/1 var(--font-body);
+  box-shadow: 0 6px 18px rgba(16, 36, 27, 0.35);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.intro-on .intro-replay { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-on .intro { display: none; }
+  html.intro-on, .intro-on body { overflow: visible; }
+}
 </style>
 </head>
 <body>
+<script>(function(){try{if(location.hash||sessionStorage.getItem("jeetak-intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)return;document.documentElement.classList.add("intro-on")}catch(e){}})();</script>
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-stage">
+    <svg class="intro-road" height="10" focusable="false"><line x1="-20" y1="5" x2="4000" y2="5"/></svg>
+    <div class="intro-rider" id="introRider">
+      <div class="intro-ride">
+        <div class="intro-lean">
+          <svg viewBox="-46 14 208 100" focusable="false">
+            <g class="intro-speeds"><path class="speed" d="M-28 46 H-6"/><path class="speed sp2" d="M-42 64 H-10"/><path class="speed sp3" d="M-26 82 H-4"/></g>
+            <g class="intro-scoot">
+                  <circle class="tire" cx="40" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M31 96 H49 M35.5 88.2 L44.5 103.8 M35.5 103.8 L44.5 88.2"/></g>
+                  <circle class="c-stone" cx="40" cy="96" r="5"/>
+                  <circle class="tire" cx="138" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M129 96 H147 M133.5 88.2 L142.5 103.8 M133.5 103.8 L142.5 88.2"/></g>
+                  <circle class="c-stone" cx="138" cy="96" r="5"/>
+                  <path class="rack" d="M10 60 H46"/>
+                  <rect class="c-bag" x="8" y="22" width="38" height="36" rx="5"/>
+                  <path class="bag-seam" d="M8 34 H46"/>
+                  <g class="bag-logo"><svg x="12" y="40.5" width="30" height="10.8" viewBox="0 0 1896 683"><use href="#jk-word" class="c-white"/></svg></g>
+                  <path class="scoot-body" d="M14 88 C12 74 22 62 38 60 H82 C88 60 92 64 92 70 V88 H62 C60 78 52 72 40 72 C28 72 20 78 18 88 Z"/>
+                  <path class="scoot-dark" d="M42 60 C42 54 46 51 52 51 H80 C86 51 88 55 88 60 Z"/>
+                  <path class="scoot-body" d="M90 82 H122 C124 82 125 84 125 86 V90 H90 Z"/>
+                  <path class="scoot-body" d="M118 90 C122 78 126 64 130 48 L139 50 C135 66 131 80 128 90 Z"/>
+                  <path class="scoot-line" d="M134 49 L141 30"/>
+                  <path class="scoot-bar" d="M131 29 H151"/>
+                  <circle class="win-on" cx="143" cy="40" r="4"/>
+                  <path class="scoot-body" d="M122 92 C124 80 152 80 154 92 L148 92 C146 86 130 86 128 92 Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <svg class="sprite" aria-hidden="true" focusable="false">
   <defs>
     <path id="jk-word" fill-rule="evenodd" d="M62 680.4C50 678.9 37 676.6 29.8 674.6C20.2 672 4.6 665.4 2.9 663.4C1.7 661.9 3.7 654.4 15.5 616.5C18.4 607.2 21.3 597.2 22 594.3C24.1 585.2 24.4 585 34.1 589.4C51.2 597.3 62.7 600 78.3 600C89.5 600 96.5 598.4 105.5 593.6C115.1 588.6 121 582 126.8 569.9C132.4 558.4 134.7 549.9 141.5 517.5C144 505.4 148 486.3 150.5 475C152.9 463.7 156.3 448 157.9 440C163.1 415.5 179.6 337 185.9 307.5C189.1 292.1 193 273.2 194.5 265.5C196 257.5 197.8 250.7 198.7 249.8C200.2 248.1 203.7 248 245 248C282.7 248 289.9 248.2 290.9 249.4C291.7 250.4 291.9 252.5 291.5 255.7C290.4 263.2 282.8 298.5 270 355.5C265.5 375.3 261.3 394.4 260.5 398C259.7 401.6 257.5 411.5 255.5 420C253.6 428.5 248.8 449.7 245 467C222.3 568.7 217.6 586.8 209 605.5C190.9 644.8 157.2 670.4 113.3 678.1C101.9 680.1 71 681.5 62 680.4ZM382 571.3C345 569.2 323 553.9 315.3 524.8C312.9 515.8 313.2 495.5 315.9 483C322.7 451.2 337.7 380.9 340.7 366.5C349.9 321.6 356.9 305 373.9 286.8C391.4 268.1 413.6 257.7 441.5 255C456.2 253.7 563.2 253.7 575.7 255.1C591.4 256.8 605.3 261.8 613.9 268.8C624.5 277.4 630.3 286.1 633.6 298C636.1 307 636.1 328 633.7 341.5C631 356.4 622.4 394.6 620.2 401.7C615.7 415.9 606 428 594.7 433.3C583 438.9 581.4 439 491 439L408 439L407.1 441.2C405.5 445.1 400 472.7 400 476.5C400 482.9 402.1 489.1 405.6 492.5C412.2 499.2 409.7 499 501.2 499.3C558.5 499.4 584.2 499.8 585 500.6C585.7 501.3 584 511 579 534.1C575.1 551.9 571.5 567.2 571.1 568C570.7 568.8 569 569.8 567.4 570.2C564.7 570.9 393.1 571.9 382 571.3ZM1289.5 571C1265.6 567.6 1248.2 558.3 1239 544C1231.1 531.8 1228.3 512.9 1231.5 493.9C1235.7 468.4 1242.7 442.6 1248.7 430.5C1255.6 416.6 1267.5 403.3 1279.3 396.2C1287.7 391.2 1301.4 385.5 1311 383.2C1329.8 378.5 1342.2 377.5 1379.5 377.6C1417 377.7 1432.4 379.1 1455 384.1C1460.5 385.3 1465.3 386.1 1465.6 385.8C1466.7 384.6 1472.9 351.3 1473 346.1C1473 334.5 1468.5 327.7 1458.4 324.5C1452.9 322.7 1447.2 322.6 1373 322L1293.5 321.5L1293.2 319.4C1293 318.2 1294 312.6 1295.3 306.9C1296.7 301.2 1299.7 288 1302.1 277.5C1304.9 265.3 1307.1 257.9 1308.2 256.8C1309.9 255.1 1314.8 255 1394.8 255C1443.5 255 1483.1 255.4 1488 256C1512.5 258.8 1531.3 267.8 1543.1 282.4C1548.6 289.3 1552.1 297.3 1554.4 308.3C1557.3 322.1 1556.4 332.1 1549.1 369.5C1546.9 380.5 1542.8 401.2 1540 415.5C1537.2 429.8 1532.4 454.5 1529.4 470.5C1526.4 486.5 1522.6 506.5 1520.9 515C1519.3 523.5 1516.4 539 1514.5 549.4C1512.5 559.7 1510.7 568.6 1510.4 569.1C1509.7 570.3 1440.9 570.2 1439.1 569.1C1438 568.4 1437.8 566.3 1438.4 558.6C1438.7 553.3 1438.8 549 1438.5 549C1438.2 549 1433.4 551.3 1427.9 554.1C1402.1 567 1379.3 571 1327 571.5C1309.7 571.7 1292.8 571.5 1289.5 571ZM703.2 569.9C680.8 567 660.9 554.9 652.7 539.3C646.2 526.6 645.5 523.3 645.5 505C645.5 491.5 645.9 486.8 647.7 479.5C648.8 474.5 652.6 456.5 656 439.5C667.2 383.5 677.1 337.6 679.7 330C693.2 290.2 716.4 267 751.8 257.9C764.6 254.7 779 254 839.5 254C913.4 254 919.6 254.6 937.9 263.6C953.2 271.1 963.1 282.9 967.6 299C968.4 302 969.4 310.1 969.7 317C970.4 331.9 969.4 339 961.3 375.5C957.1 395.1 955 402.3 952 408.8C944.7 424.2 930.2 435.4 914 438C909.9 438.6 876 439 822.8 439C776.2 439 737.9 439.4 737.6 439.8C735.6 443.1 731.7 465.7 731.6 475.1C731.5 484.9 731.7 485.9 734.2 489.7C737.7 495 744.2 498 753.4 498.7C757.3 498.9 795.2 499.2 837.7 499.3C880.1 499.4 915.2 499.8 915.6 500.3C916.6 501.3 915.1 509.9 909.2 537.5C902.5 568.6 902.4 568.9 899.4 570C896.3 571.2 712.3 571.1 703.2 569.9ZM1071.6 569.5C1044.1 564.9 1027 550.5 1021.3 527.3C1019 517.7 1019.2 499.4 1021.9 486.5C1023 481 1026.4 465.2 1029.4 451.5C1032.4 437.8 1036.2 420 1037.9 412C1049.1 360.4 1054.2 336.7 1055.5 331.3C1056.3 327.9 1057 324.6 1057 324C1057 323.3 1048.3 323 1030.7 323C1010.3 323 1004 322.7 1002.6 321.7C1000.8 320.4 1000.9 319.8 1003.8 307.9C1005.5 301.1 1009 286.8 1011.6 276.2C1014.1 265.6 1016.6 256.7 1017.1 256.5C1017.5 256.2 1030.1 255.9 1044.9 255.9C1069.6 256 1072 255.8 1072.9 254.2C1073.8 252.5 1083.4 214.1 1089 189.8C1091.2 180.2 1092.7 175.7 1094.2 174.3C1096.1 172.6 1098.9 172.5 1133.9 172.2C1154.6 172 1172.6 172.2 1173.9 172.5C1176.1 173.1 1176.2 173.4 1175.7 178.4C1175.4 181.3 1172.2 194.6 1168.6 208.1C1159 244.1 1156.8 253.1 1157.4 254.5C1157.7 255.5 1165.6 255.7 1193.7 255.5C1234.7 255.2 1243.6 255.6 1244.4 257.5C1244.7 258.3 1244 262.6 1242.9 267.2C1241.8 271.8 1239.8 280.7 1238.5 287C1233.8 309.6 1230.9 320.5 1229.3 321.8C1228 322.7 1217.5 323 1184.8 323L1142 323L1141.5 325.2C1141.3 326.5 1139.9 332.2 1138.6 338C1137.2 343.8 1135 354.4 1133.5 361.5C1132.1 368.6 1128.5 385.1 1125.5 398C1113 452.5 1110 467.9 1110 478C1110.1 490.4 1114 496.1 1124.6 498.9C1127 499.5 1139.6 500 1155.6 500C1170.4 500.1 1184.2 500.4 1186.4 500.7L1190.2 501.3L1189.7 505.9C1188.5 516.7 1177 567.3 1175.4 569.1C1173.8 570.9 1171.5 571 1126.6 570.9C1092.4 570.8 1077.3 570.4 1071.6 569.5ZM1547.3 568.3C1546.4 566.1 1548.1 556.9 1556 519C1559.8 501.1 1566.2 469.8 1570.4 449.5C1574.5 429.1 1579.7 404 1581.9 393.5C1591.7 347.2 1594.2 335.7 1597 323.5C1598.6 316.4 1601.8 302 1604 291.5C1609 268.7 1614.4 244.2 1620.4 218.5C1622.9 208 1626 194.1 1627.5 187.5C1628.9 180.9 1630.8 174.8 1631.6 174C1632.8 172.7 1638.8 172.5 1670.3 172.2C1708.9 171.9 1713.4 172.1 1714.3 174.5C1714.6 175.2 1714 179.6 1712.9 184.2C1711.8 188.8 1706.9 210 1701.9 231.5C1697 253 1691.6 276.1 1690 283C1678.3 333.1 1669.4 375.7 1670.2 378.1C1670.7 379.5 1692.6 359.4 1722 330.4C1750.9 302 1790.8 264 1795.9 260.1C1799.2 257.6 1799.7 257.5 1812.9 257.6C1820.4 257.7 1841.7 257.8 1860.2 257.9C1886.5 258 1894 258.3 1894 259.2C1894 260.9 1880.6 273.6 1788.1 360.4C1757.2 389.3 1741.5 404.3 1741.2 405.1C1741 405.5 1745.1 411.6 1750.3 418.7C1764.1 437.6 1788.9 473 1805.5 497.5C1811.5 506.3 1820.2 518.9 1824.8 525.5C1840.4 547.7 1852.1 566.1 1851.8 567.8C1851.5 569.4 1847.9 569.5 1804.2 569.8L1757 570L1751.4 562.3C1748.3 558 1740.3 546.2 1733.6 536C1710.6 501 1669.6 440.5 1668.6 439.8C1667.1 438.7 1658.2 438.8 1657.6 439.9C1657.3 440.4 1654.1 454.4 1650.6 471.1C1647 487.8 1642.5 508.8 1640.6 517.7C1638.6 526.6 1635.9 540.1 1634.5 547.7C1631.7 562.9 1630.3 568.1 1628.6 569.2C1628 569.6 1609.6 570 1587.7 570C1551.6 570 1547.9 569.8 1547.3 568.3ZM1410.8 500C1417.5 499.6 1425.2 498.4 1427.9 497.5C1434.5 495.3 1441.2 489.3 1443.9 483.1C1445.8 478.7 1453.1 446.7 1453.4 441.5C1453.5 439.5 1452.9 439.5 1397 439.5C1343 439.5 1340.3 439.6 1335.1 441.5C1323.6 445.7 1316.5 455.5 1313.4 471.2C1309.9 489.2 1315 497.6 1330.8 499.9C1338.6 501.1 1395.6 501.1 1410.8 500ZM546.1 374.7C548 373.5 550.3 370.9 551.3 368.9C553.8 363.6 557.2 347.5 557.3 339.8C557.4 331.6 555.7 328.7 548.4 325L543.5 322.5L498.5 322.5C457.5 322.5 453 322.7 448.1 324.3C434.5 328.9 429 336.5 424 357.5C419.8 375.5 419.9 375 420.5 376C420.9 376.6 444.4 377 481.9 377L542.7 377L546.1 374.7ZM878.5 375.8C883.5 373.6 886.5 365.3 889.1 347.2C890.6 336.5 889.9 331.6 886.4 327.9C881.3 322.6 880.3 322.5 830 322.5C788.8 322.5 782.9 322.7 777.9 324.2C766.5 327.8 760.2 335.2 756.1 350.1C753 361.4 750 375.3 750.6 376.2C751.5 377.5 875.5 377.2 878.5 375.8ZM239.8 220.8C214.4 192.4 201.2 174.5 189.7 153C173.7 123.3 170 94.8 178.6 69C187.4 42.7 205.3 22.7 230.5 10.9C257.6 -1.8 289.7 -0.4 313.9 14.7C339.5 30.8 352.2 55.9 350.7 87.5C349.5 111.3 340.3 131.6 317.6 159.9C307.5 172.5 286.5 195.4 275.4 206.1C257.3 223.3 250.8 229 249.1 229C248 229 244.1 225.5 239.8 220.8ZM275.2 129C283.3 126 289.7 121.3 295.3 114.5C302.2 105.9 304.4 99.6 304.4 88C304.5 79.2 304.3 78 301.2 71.8C293.1 55.2 278.8 47.9 259 50.2C247.3 51.6 233.5 60.4 227.7 70.3C222.1 79.8 220 97.3 223.3 106.6C227.6 118.4 236.9 127.1 249 130.6C255.4 132.5 268.2 131.7 275.2 129Z"/>
@@ -759,7 +975,7 @@ h2 { font-size: var(--step-h2); }
                 <path class="bag-handle" d="M47 40 V31 Q47 25 53 25 H67 Q73 25 73 31 V40"/>
                 <rect class="c-bag" x="29" y="38" width="62" height="65" rx="10"/>
                 <path class="bag-seam" d="M29 54 H91"/>
-                <svg x="48" y="57" width="24" height="30.6" viewBox="0 0 181 231"><use href="#jk-pin" class="c-cream"/></svg>
+                <svg x="38" y="62" width="44" height="15.8" viewBox="0 0 1896 683"><use href="#jk-word" class="c-white"/></svg>
                 <g transform="translate(73 88)">
                   <rect class="c-cream" width="12" height="12" rx="1.5"/>
                   <rect class="c-pine" x="1.6" y="1.6" width="3.6" height="3.6"/>
@@ -913,7 +1129,7 @@ h2 { font-size: var(--step-h2); }
                   <path class="rack" d="M10 60 H46"/>
                   <rect class="c-bag" x="8" y="22" width="38" height="36" rx="5"/>
                   <path class="bag-seam" d="M8 34 H46"/>
-                  <svg x="19" y="36" width="16" height="20.4" viewBox="0 0 181 231"><use href="#jk-pin" class="c-cream"/></svg>
+                  <g class="bag-logo"><svg x="12" y="40.5" width="30" height="10.8" viewBox="0 0 1896 683"><use href="#jk-word" class="c-white"/></svg></g>
                   <path class="scoot-body" d="M14 88 C12 74 22 62 38 60 H82 C88 60 92 64 92 70 V88 H62 C60 78 52 72 40 72 C28 72 20 78 18 88 Z"/>
                   <path class="scoot-dark" d="M42 60 C42 54 46 51 52 51 H80 C86 51 88 55 88 60 Z"/>
                   <path class="scoot-body" d="M90 82 H122 C124 82 125 84 125 86 V90 H90 Z"/>
@@ -962,6 +1178,84 @@ h2 { font-size: var(--step-h2); }
       <span>jeetaklb.com</span>
     </footer>
   </div>
+  <div class="foot-stage" id="footStage" aria-hidden="true"></div>
+  <template id="footFood"><div class="food" data-food="manoushe"><svg viewBox="0 0 100 100" focusable="false">
+      <g transform="rotate(-14 50 66)">
+        <ellipse class="ol c-crust" cx="50" cy="68" rx="42" ry="29"/>
+        <ellipse class="c-dough" cx="50" cy="64.5" rx="40.5" ry="26"/>
+        <ellipse class="c-zaatar" cx="50" cy="63" rx="31" ry="18.5"/>
+        <g class="c-zaatar-dark"><circle cx="38" cy="60" r="2"/><circle cx="47" cy="68" r="1.8"/><circle cx="55" cy="57" r="2.1"/>
+          <circle cx="63" cy="66" r="1.8"/><circle cx="70" cy="60" r="1.6"/><circle cx="43" cy="53" r="1.4"/><circle cx="58" cy="73" r="1.5"/></g>
+        <g class="c-cream"><ellipse cx="44" cy="58" rx="1.8" ry="1"/><ellipse cx="60" cy="61" rx="1.8" ry="1"/><ellipse cx="51" cy="66" rx="1.8" ry="1"/>
+          <ellipse cx="66" cy="70" rx="1.8" ry="1"/><ellipse cx="36" cy="66" rx="1.8" ry="1"/></g>
+      </g></svg></div><div class="food" data-food="shawarma"><svg viewBox="0 0 100 100" focusable="false">
+      <path class="ol c-cream" d="M29 42 C29 35 71 35 71 42 L65 101 H35 Z"/>
+      <path class="ln ln-soft" d="M38 54 L62 49 M37 62 L63 56"/>
+      <path class="ol c-kraft" d="M32.3 72 L68 62 L65 101 H35 Z"/>
+      <path class="ol c-herb" d="M28 43 C28 35 34 30 41 32 C45 24 56 24 60 31 C67 29 73 35 72 43 C63 39 37 39 28 43 Z"/>
+      <circle class="c-tomato" cx="43" cy="35" r="3.6"/><circle class="c-tomato" cx="57" cy="34" r="3"/>
+      <circle class="c-crust" cx="50" cy="31" r="3.2"/></svg></div><div class="food" data-food="coffee"><svg viewBox="0 0 100 100" focusable="false">
+      <path class="steam-line" d="M44 21 C40 15 48 11 44 4"/>
+      <path class="steam-line s2" d="M56 21 C52 15 60 11 56 4"/>
+      <path class="ol c-cream" d="M31 37 H69 L63 101 H37 Z"/>
+      <path class="ol c-pine" d="M33.5 57 H66.5 L64.6 79 H35.4 Z"/>
+      <svg x="45" y="60.5" width="10" height="12.8" viewBox="0 0 181 231"><use href="#jk-pin" class="c-bag-lit"/></svg>
+      <rect class="ol c-white" x="27" y="29" width="46" height="10" rx="4"/>
+      <rect class="ol c-white" x="34" y="23" width="32" height="7" rx="3.5"/></svg></div><div class="food" data-food="kaak"><svg viewBox="0 0 100 100" focusable="false">
+      <path class="ol c-dough" fill-rule="evenodd" d="M50 12 C67 12 78 25 77 41 C88 53 89 84 71 93 C60 98 40 98 29 93 C11 84 12 53 23 41 C22 25 33 12 50 12 Z M50 24 C59 24 64.5 31 63.5 40 C57 38 43 38 36.5 40 C35.5 31 41 24 50 24 Z"/>
+      <path class="c-crust" d="M22 78 C30 92 70 92 78 78 C74 88 26 88 22 78 Z"/>
+      <g class="c-cream"><ellipse cx="34" cy="56" rx="2" ry="1.1" transform="rotate(-20 34 56)"/><ellipse cx="45" cy="50" rx="2" ry="1.1"/>
+        <ellipse cx="58" cy="52" rx="2" ry="1.1" transform="rotate(25 58 52)"/><ellipse cx="68" cy="60" rx="2" ry="1.1"/>
+        <ellipse cx="40" cy="68" rx="2" ry="1.1" transform="rotate(30 40 68)"/><ellipse cx="53" cy="64" rx="2" ry="1.1"/>
+        <ellipse cx="64" cy="74" rx="2" ry="1.1" transform="rotate(-25 64 74)"/><ellipse cx="30" cy="40" rx="2" ry="1.1" transform="rotate(-50 30 40)"/>
+        <ellipse cx="70" cy="40" rx="2" ry="1.1" transform="rotate(50 70 40)"/><ellipse cx="50" cy="17.5" rx="2" ry="1.1"/></g></svg></div><div class="food" data-food="watermelon"><svg viewBox="0 0 100 100" focusable="false">
+      <path class="ol c-herb-dark" d="M50 9 L91 70 Q50 106 9 70 Z"/>
+      <path class="c-cream" d="M50 16 L85 68 Q50 98 15 68 Z"/>
+      <path class="c-melon" d="M50 21 L81 66 Q50 92 19 66 Z"/>
+      <g class="c-seed"><ellipse cx="50" cy="44" rx="1.8" ry="3"/><ellipse cx="40" cy="58" rx="1.8" ry="3" transform="rotate(-15 40 58)"/>
+        <ellipse cx="60" cy="58" rx="1.8" ry="3" transform="rotate(15 60 58)"/><ellipse cx="50" cy="68" rx="1.8" ry="3"/>
+        <ellipse cx="31" cy="68" rx="1.8" ry="3" transform="rotate(-25 31 68)"/><ellipse cx="69" cy="68" rx="1.8" ry="3" transform="rotate(25 69 68)"/></g></svg></div><div class="food" data-food="water"><svg viewBox="0 0 100 100" focusable="false">
+      <rect class="ol c-water" x="22" y="40" width="56" height="64" rx="14"/>
+      <path class="ol c-water" d="M40 41 V30 H60 V41"/>
+      <rect class="ol c-pine" x="36.5" y="20" width="27" height="11" rx="3"/>
+      <path class="ln ln-water" d="M24 58 H76 M24 76 H76"/>
+      <rect class="c-white" x="29" y="47" width="6" height="36" rx="3" opacity="0.75"/></svg></div><div class="food" data-food="booza"><svg viewBox="0 0 100 100" focusable="false">
+      <path class="ol c-kraft" d="M33 55 L50 102 L67 55 Z"/>
+      <path class="ln ln-crust" d="M40 62 L56 86 M48 58 L62 72 M60 62 L44 86 M52 58 L38 72"/>
+      <path class="ol c-herb" d="M28 57 C23 41 35 31 50 32 C65 31 77 41 72 57 C66 62 60 55 55 60 C49 55 43 62 37 58 Z"/>
+      <g class="c-herb-dark"><ellipse cx="40" cy="46" rx="2.4" ry="1.5" transform="rotate(-20 40 46)"/><ellipse cx="55" cy="42" rx="2.4" ry="1.5"/>
+        <ellipse cx="62" cy="51" rx="2.4" ry="1.5" transform="rotate(25 62 51)"/><ellipse cx="48" cy="52" rx="2.4" ry="1.5"/></g>
+      <circle class="ol c-cream" cx="51" cy="24" r="11.5"/>
+      <path class="c-white" d="M45 20 C46 16 50 15 52 16 C49 17 47 19 46.5 22 Z" opacity="0.8"/></svg></div><div class="food" data-food="groceries"><svg viewBox="0 0 100 100" focusable="false">
+      <rect class="ol c-dough" x="53" y="12" width="13" height="52" rx="6.5" transform="rotate(14 59.5 38)"/>
+      <path class="ln ln-crust" d="M58 22 L64 20 M57 31 L63 29 M56 40 L62 38" transform="rotate(14 59.5 38)"/>
+      <circle class="ol c-herb" cx="37" cy="44" r="10"/>
+      <circle class="ol c-herb" cx="46" cy="38" r="10.5"/>
+      <path class="ln" d="M41 50 L44 40" opacity="0.45"/>
+      <path class="ol c-kraft" d="M25 50 H75 L71 102 H29 Z"/>
+      <path class="c-kraft-dark" d="M26.6 51.6 H73.4 L72.9 58 H27.1 Z"/></svg></div><div class="foot-scooter"><svg viewBox="-46 14 208 100" focusable="false">
+            <g class="intro-speeds-loop"><path class="speed" d="M-28 46 H-6"/><path class="speed sp2" d="M-42 64 H-10"/><path class="speed sp3" d="M-26 82 H-4"/></g>
+            <g class="scoot">
+                  <circle class="tire" cx="40" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M31 96 H49 M35.5 88.2 L44.5 103.8 M35.5 103.8 L44.5 88.2"/></g>
+                  <circle class="c-stone" cx="40" cy="96" r="5"/>
+                  <circle class="tire" cx="138" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M129 96 H147 M133.5 88.2 L142.5 103.8 M133.5 103.8 L142.5 88.2"/></g>
+                  <circle class="c-stone" cx="138" cy="96" r="5"/>
+                  <path class="rack" d="M10 60 H46"/>
+                  <rect class="c-bag" x="8" y="22" width="38" height="36" rx="5"/>
+                  <path class="bag-seam" d="M8 34 H46"/>
+                  <g class="bag-logo"><svg x="12" y="40.5" width="30" height="10.8" viewBox="0 0 1896 683"><use href="#jk-word" class="c-white"/></svg></g>
+                  <path class="scoot-body" d="M14 88 C12 74 22 62 38 60 H82 C88 60 92 64 92 70 V88 H62 C60 78 52 72 40 72 C28 72 20 78 18 88 Z"/>
+                  <path class="scoot-dark" d="M42 60 C42 54 46 51 52 51 H80 C86 51 88 55 88 60 Z"/>
+                  <path class="scoot-body" d="M90 82 H122 C124 82 125 84 125 86 V90 H90 Z"/>
+                  <path class="scoot-body" d="M118 90 C122 78 126 64 130 48 L139 50 C135 66 131 80 128 90 Z"/>
+                  <path class="scoot-line" d="M134 49 L141 30"/>
+                  <path class="scoot-bar" d="M131 29 H151"/>
+                  <circle class="win-on" cx="143" cy="40" r="4"/>
+                  <path class="scoot-body" d="M122 92 C124 80 152 80 154 92 L148 92 C146 86 130 86 128 92 Z"/>
+            </g>
+          </svg></div></template>
 </section>
 
 <script>
@@ -1232,7 +1526,7 @@ h2 { font-size: var(--step-h2); }
     }
 
     var CYCLE = 9200, START = 700, END = 6500, FADE = 650;
-    var t0 = null, raf = 0, running = false, inView = true;
+    var t0 = null, raf = 0, running = false, inView = true, held = false;
 
     function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
 
@@ -1249,7 +1543,7 @@ h2 { font-size: var(--step-h2); }
     }
 
     function start() {
-      if (running || !inView || document.hidden) return;
+      if (held || running || !inView || document.hidden) return;
       running = true;
       t0 = null;
       raf = window.requestAnimationFrame(frame);
@@ -1272,6 +1566,116 @@ h2 { font-size: var(--step-h2); }
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stop(); else start();
     });
+
+    // The intro holds the order at the shop until the scooter lands there.
+    return {
+      hold: function () {
+        held = true;
+        stop();
+        place(0);
+        house.classList.remove("lit");
+        badge.classList.remove("show");
+        pin.classList.remove("landed");
+        svg.classList.remove("is-fading");
+      },
+      release: function () {
+        held = false;
+        start();
+      }
+    };
+  }
+
+  // Intro: a scooter with the orange bag rides in, then the view pulls back
+  // and the scooter becomes the order pin on the mountain road.
+  var INTRO_ORIGIN_X = 0.61;   // the scooter's wheel line, as a share of the intro drawing
+  var INTRO_ORIGIN_Y = 0.97;
+  var INTRO_BODY_W = 146 / 208; // the scooter's width within the drawing
+  var INTRO_LANDED_W = 30;      // px wide when it reaches the road, about the pin's size
+  var INTRO_AIM = 1900, INTRO_HANDOFF = 2850, INTRO_END = 3100;
+
+  function initIntro(route) {
+    var intro = document.getElementById("intro");
+    if (!intro) return;
+    var rider = document.getElementById("introRider");
+    var replay = document.getElementById("introReplay");
+    var timers = [];
+
+    function clear() {
+      timers.forEach(window.clearTimeout);
+      timers = [];
+    }
+
+    function aim() {
+      var box = rider && rider.getBoundingClientRect();
+      if (!box || !box.width) return;
+      // Land on the start of the mountain road. When it's below the fold
+      // (short screens, laptops), drive off into the hills at the bottom instead.
+      var spot = { x: window.innerWidth / 2, y: window.innerHeight - 10 };
+      var landed = INTRO_LANDED_W * 0.75;
+      var svg = document.getElementById("heroArt");
+      var road = svg && svg.querySelector("#route");
+      if (road && svg.getScreenCTM && road.getPointAtLength) {
+        var start = road.getPointAtLength(0);
+        var pt = svg.createSVGPoint();
+        pt.x = start.x;
+        pt.y = start.y;
+        var s = pt.matrixTransform(svg.getScreenCTM());
+        if (s.y <= window.innerHeight - 16 && s.y >= 16 && s.x >= 8 && s.x <= window.innerWidth - 8) {
+          spot = s;
+          landed = INTRO_LANDED_W;
+        }
+      }
+      var ox = box.left + box.width * INTRO_ORIGIN_X;
+      var oy = box.top + box.height * INTRO_ORIGIN_Y;
+      rider.style.setProperty("--tx", (spot.x - ox).toFixed(1) + "px");
+      rider.style.setProperty("--ty", (spot.y - oy).toFixed(1) + "px");
+      rider.style.setProperty("--ts", (landed / (box.width * INTRO_BODY_W)).toFixed(3));
+    }
+
+    function finish() {
+      clear();
+      root.classList.remove("intro-on", "intro-skip");
+      if (route) route.release();
+    }
+
+    function schedule(elapsed) {
+      timers.push(window.setTimeout(aim, Math.max(0, INTRO_AIM - elapsed)));
+      timers.push(window.setTimeout(function () { if (route) route.release(); }, Math.max(0, INTRO_HANDOFF - elapsed)));
+      timers.push(window.setTimeout(finish, Math.max(0, INTRO_END - elapsed)));
+    }
+
+    function play() {
+      clear();
+      root.classList.remove("intro-on", "intro-skip");
+      window.scrollTo(0, 0);
+      void root.offsetWidth; // restart the CSS animations
+      root.classList.add("intro-on");
+      if (route) route.hold();
+      schedule(0);
+    }
+
+    function skip() {
+      if (!root.classList.contains("intro-on") || root.classList.contains("intro-skip")) return;
+      clear();
+      root.classList.add("intro-skip");
+      if (route) route.release();
+      timers.push(window.setTimeout(finish, 220));
+    }
+
+    intro.addEventListener("click", skip);
+    if (replay) replay.addEventListener("click", play);
+
+    if (root.classList.contains("intro-on")) {
+      try { window.sessionStorage.setItem("jeetak-intro", "1"); } catch (e) { /* not stored */ }
+      if (route) route.hold();
+      // The CSS animations started at first paint; line the timers up with them.
+      var elapsed = 0;
+      if (rider && rider.getAnimations) {
+        var anims = rider.getAnimations();
+        if (anims.length && anims[0].currentTime != null) elapsed = anims[0].currentTime;
+      }
+      schedule(elapsed);
+    }
   }
 
   // The sample order status card.
@@ -1310,11 +1714,162 @@ h2 { font-size: var(--step-h2); }
     update();
   }
 
+  // Footer: food pops up from under the page, wiggles and ducks back down.
+  // Tap one and it jumps. Every so often the scooter rides past along the bottom.
+  function initFooterFun() {
+    var stage = document.getElementById("footStage");
+    var tpl = document.getElementById("footFood");
+    if (!stage || !tpl || !tpl.content) return;
+    var kinds = Array.prototype.slice.call(tpl.content.querySelectorAll(".food"));
+    var scooterTpl = tpl.content.querySelector(".foot-scooter");
+    if (!kinds.length) return;
+
+    if (reduceMotion || !stage.animate) {
+      [[0.2, -6], [0.5, 4], [0.8, -3]].forEach(function (spot, i) {
+        var el = kinds[(i * 3) % kinds.length].cloneNode(true);
+        el.classList.add("is-still");
+        el.style.left = spot[0] * 100 + "%";
+        el.style.setProperty("--tilt", spot[1] + "deg");
+        stage.appendChild(el);
+      });
+      return;
+    }
+
+    var live = [];
+    var timer = 0, active = false, ticks = 0, scooting = false, scooterNext = false, lastKind = -1;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function pickKind() {
+      var k;
+      do { k = Math.floor(Math.random() * kinds.length); } while (k === lastKind && kinds.length > 1);
+      lastKind = k;
+      return k;
+    }
+
+    function freeSpot(w) {
+      var width = stage.clientWidth;
+      for (var tries = 0; tries < 8; tries++) {
+        var x = rand(width * 0.04, width * 0.96 - w);
+        var clear = live.every(function (it) { return Math.abs(it.x - x) > (it.w + w) * 0.6; });
+        if (clear) return x;
+      }
+      return null;
+    }
+
+    function remove(item) {
+      var i = live.indexOf(item);
+      if (i >= 0) live.splice(i, 1);
+      if (item.el.parentNode) item.el.parentNode.removeChild(item.el);
+    }
+
+    function hop(item) {
+      if (!item.anim || item.hopping) return;
+      item.hopping = true;
+      try { item.anim.commitStyles(); } catch (e) { /* starts from its resting spot */ }
+      item.anim.cancel();
+      var from = window.getComputedStyle(item.el).transform;
+      var spin = Math.random() < 0.5 ? -1 : 1;
+      var jump = item.el.animate([
+        { transform: from === "none" ? "translateY(20%)" : from },
+        { transform: "translateY(-60%) rotate(" + spin * 200 + "deg)", offset: 0.42, easing: "cubic-bezier(.4,0,.9,.6)" },
+        { transform: "translateY(110%) rotate(" + spin * 390 + "deg)" }
+      ], { duration: 820, easing: "cubic-bezier(.2,.7,.4,1)", fill: "forwards" });
+      jump.onfinish = function () { remove(item); };
+    }
+
+    function pop() {
+      if (live.length >= 3) return;
+      var el = kinds[pickKind()].cloneNode(true);
+      stage.appendChild(el);
+      var w = el.offsetWidth;
+      var x = freeSpot(w);
+      if (x === null) { stage.removeChild(el); return; }
+      el.style.left = x.toFixed(0) + "px";
+      var item = { el: el, x: x, w: w };
+      live.push(item);
+      var tilt = rand(5, 9) * (Math.random() < 0.5 ? -1 : 1);
+      var peek = rand(4, 16).toFixed(1) + "%";
+      var up = "translateY(" + peek + ") ";
+      item.anim = el.animate([
+        { transform: "translateY(102%) rotate(0deg)", easing: "cubic-bezier(.2,.9,.3,1.3)" },
+        { transform: up + "rotate(0deg)", offset: 0.2, easing: "ease-in-out" },
+        { transform: up + "rotate(" + tilt + "deg)", offset: 0.33, easing: "ease-in-out" },
+        { transform: up + "rotate(" + -tilt + "deg)", offset: 0.45, easing: "ease-in-out" },
+        { transform: up + "rotate(" + tilt * 0.45 + "deg)", offset: 0.55, easing: "ease-in-out" },
+        { transform: up + "rotate(0deg)", offset: 0.63, easing: "cubic-bezier(.5,0,.75,0)" },
+        { transform: "translateY(102%) rotate(0deg)" }
+      ], { duration: rand(2100, 2900), fill: "forwards" });
+      item.anim.onfinish = function () { if (!item.hopping) remove(item); };
+      el.addEventListener("pointerdown", function () { hop(item); });
+    }
+
+    function rideBy() {
+      if (!scooterTpl) return;
+      var el = scooterTpl.cloneNode(true);
+      stage.appendChild(el);
+      var width = stage.clientWidth, w = el.offsetWidth;
+      scooting = true;
+      var ride = el.animate([
+        { transform: "translateX(" + (-w - 10) + "px)" },
+        { transform: "translateX(" + (width + 10) + "px)" }
+      ], { duration: Math.max(2200, width * 3.4), easing: "cubic-bezier(.3,.15,.7,.85)" });
+      ride.onfinish = function () {
+        scooting = false;
+        if (el.parentNode) el.parentNode.removeChild(el);
+      };
+    }
+
+    function tick() {
+      timer = 0;
+      if (!active) return;
+      if (!scooting) {
+        ticks++;
+        if (scooterNext) {
+          if (!live.length) { scooterNext = false; rideBy(); }
+        } else if (ticks === 5 || ticks % 12 === 0) {
+          scooterNext = true;
+        } else {
+          pop();
+        }
+      }
+      timer = window.setTimeout(tick, rand(650, 1400));
+    }
+
+    function start() {
+      if (active || document.hidden) return;
+      active = true;
+      timer = window.setTimeout(tick, 350);
+    }
+    function stop() {
+      active = false;
+      window.clearTimeout(timer);
+    }
+
+    var inView = false;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          inView = entry.isIntersecting;
+          if (inView) start(); else stop();
+        });
+      }, { threshold: 0.1 }).observe(stage);
+    } else {
+      inView = true;
+      start();
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else if (inView) start();
+    });
+  }
+
   orderStores();
   initLanguage();
-  initRoute();
+  var route = initRoute();
+  initIntro(route);
   initStatus();
   initOverscroll();
+  initFooterFun();
 })();
 </script>
 </body>
