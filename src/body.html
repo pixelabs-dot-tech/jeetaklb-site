@@ -1,0 +1,234 @@
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="jk-word" fill-rule="evenodd" d="{{WORDMARK_D}}"/>
+    <path id="jk-slogan" fill-rule="evenodd" d="{{SLOGAN_D}}"/>
+    <path id="jk-pin" fill-rule="evenodd" d="{{PIN_D}}"/>
+  </defs>
+</svg>
+
+<header class="hero" id="top">
+  <div class="wrap hero-top">
+    <a class="brand" href="#top" aria-label="Jeetak">
+      <svg class="wordmark" viewBox="0 0 {{WM_W}} {{WM_H}}" aria-hidden="true" focusable="false"><use href="#jk-word"/></svg>
+    </a>
+    <div class="hero-actions">
+      <a class="join-link" href="#join" data-i18n="joinLink">Join Jeetak</a>
+      <button class="lang" id="langToggle" type="button" lang="ar" aria-label="اقرأ الصفحة بالعربي">عربي</button>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow" data-i18n="heroEyebrow">Upper Metn · 21 villages</p>
+      <h1 data-i18n="heroTitle">From the village shop to your door.</h1>
+      <p class="lede" data-i18n="heroLede">Food, groceries and anything else nearby, ordered in one app. No calls. No voice notes.</p>
+      <div class="stores">
+        {{STORE_IOS}}
+        {{STORE_ANDROID}}
+      </div>
+      <p class="store-note" data-i18n-state="storeNote">The app is launching soon on iPhone and Android.</p>
+    </div>
+  </div>
+  <div class="hero-art">
+    {{HERO_SVG}}
+  </div>
+</header>
+
+<main>
+  <section class="section services" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="svcEyebrow">What we bring</p>
+        <h2 data-i18n="svcTitle">Everything you need.</h2>
+        <p class="section-lede" data-i18n="svcLede">Order it in the app and we bring it over.</p>
+      </div>
+      <ul class="svc-list">
+        <li class="svc">
+          <div class="svc-art" aria-hidden="true">
+            <svg viewBox="0 0 120 120" focusable="false">
+              <path class="steam-line s1" d="M42 48 C36 40 48 35 42 26"/>
+              <path class="steam-line s2" d="M60 44 C54 36 66 31 60 22"/>
+              <path class="steam-line s3" d="M78 48 C72 40 84 35 78 26"/>
+              <ellipse class="c-crust" cx="60" cy="81" rx="44" ry="24"/>
+              <ellipse class="c-dough" cx="60" cy="78" rx="44" ry="24"/>
+              <ellipse class="c-zaatar" cx="60" cy="77" rx="35" ry="18.5"/>
+              <g class="c-zaatar-dark">
+                <circle cx="44" cy="73" r="2"/><circle cx="53" cy="81" r="1.8"/><circle cx="61" cy="70" r="2.1"/>
+                <circle cx="69" cy="79" r="1.8"/><circle cx="77" cy="72" r="1.9"/><circle cx="58" cy="87" r="1.6"/>
+                <circle cx="47" cy="84" r="1.5"/><circle cx="72" cy="86" r="1.6"/><circle cx="38" cy="78" r="1.4"/>
+                <circle cx="83" cy="80" r="1.4"/><circle cx="66" cy="65" r="1.3"/><circle cx="51" cy="66" r="1.3"/>
+              </g>
+              <g class="c-sesame">
+                <ellipse cx="50" cy="71" rx="1.7" ry="0.9"/><ellipse cx="66" cy="74" rx="1.7" ry="0.9"/><ellipse cx="57" cy="78" rx="1.7" ry="0.9"/>
+                <ellipse cx="75" cy="77" rx="1.7" ry="0.9"/><ellipse cx="44" cy="80" rx="1.7" ry="0.9"/><ellipse cx="63" cy="85" rx="1.7" ry="0.9"/>
+                <ellipse cx="70" cy="68" rx="1.7" ry="0.9"/>
+              </g>
+            </svg>
+          </div>
+          <div class="svc-text">
+            <h3 data-i18n="svcFoodTitle">Food</h3>
+            <p data-i18n="svcFoodBody">Man’oushe, shawarma or a full family lunch from the restaurants near you.</p>
+          </div>
+        </li>
+        <li class="svc">
+          <div class="svc-art" aria-hidden="true">
+            <svg viewBox="0 0 120 120" focusable="false">
+              <g class="bob">
+                <path class="herb-stem" d="M46 60 L43 42 M50 60 L51 37 M54 60 L59 43"/>
+                <circle class="c-herb" cx="42" cy="39" r="7.5"/>
+                <circle class="c-herb" cx="51" cy="33" r="8.5"/>
+                <circle class="c-herb" cx="60" cy="40" r="7.5"/>
+                <circle class="c-herb-dark" cx="47" cy="45" r="6"/>
+                <circle class="c-herb-dark" cx="56" cy="46" r="5"/>
+              </g>
+              <g class="bob b2">
+                <ellipse class="c-dough" cx="75" cy="44" rx="13" ry="20" transform="rotate(16 75 44)"/>
+                <ellipse class="c-dough-lite" cx="75" cy="44" rx="7.5" ry="13" transform="rotate(16 75 44)"/>
+              </g>
+              <path class="c-kraft" d="M28 56 H92 L87 100 Q86.6 104 82.6 104 H37.4 Q33.4 104 33 100 Z"/>
+              <path class="c-kraft-dark" d="M28 56 H92 L91.3 62.5 H28.7 Z"/>
+            </svg>
+          </div>
+          <div class="svc-text">
+            <h3 data-i18n="svcGrocTitle">Groceries</h3>
+            <p data-i18n="svcGrocBody">Bread, labneh, vegetables and water gallons from the shops nearby. No phone call needed.</p>
+          </div>
+        </li>
+        <li class="svc">
+          <div class="svc-art" aria-hidden="true">
+            <svg viewBox="0 0 120 120" focusable="false">
+              <ellipse class="c-shadow bag-shadow" cx="60" cy="107" rx="27" ry="4.5"/>
+              <g class="hop">
+                <path class="bag-handle" d="M47 40 V31 Q47 25 53 25 H67 Q73 25 73 31 V40"/>
+                <rect class="c-bag" x="29" y="38" width="62" height="65" rx="10"/>
+                <path class="bag-seam" d="M29 54 H91"/>
+                <svg x="48" y="57" width="24" height="30.6" viewBox="0 0 {{PIN_W}} {{PIN_H}}"><use href="#jk-pin" class="c-cream"/></svg>
+                <g transform="translate(73 88)">
+                  <rect class="c-cream" width="12" height="12" rx="1.5"/>
+                  <rect class="c-pine" x="1.6" y="1.6" width="3.6" height="3.6"/>
+                  <rect class="c-pine" x="6.8" y="1.6" width="3.6" height="3.6"/>
+                  <rect class="c-pine" x="1.6" y="6.8" width="3.6" height="3.6"/>
+                  <rect class="c-pine" x="7.6" y="7.6" width="2" height="2"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="svc-text">
+            <h3 data-i18n="svcAnyTitle">Anything else</h3>
+            <p data-i18n="svcAnyBody">If a shop on Jeetak sells it, a driver brings it to your door.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section how" id="how">
+    <div class="wrap how-grid">
+      <div>
+        <div class="section-head">
+          <p class="eyebrow" data-i18n="howEyebrow">How it works</p>
+          <h2 data-i18n="howTitle">Order. Wait a bit. Open the door.</h2>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <div><h3 data-i18n="step1Title">Order in the app</h3><p data-i18n="step1Body">Browse the restaurants and shops in your area, fill your cart and check out.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <div><h3 data-i18n="step2Title">The shop gets it ready</h3><p data-i18n="step2Body">You see the moment your order is accepted, and while it’s being prepared.</p></div>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <div><h3 data-i18n="step3Title">A driver brings it over</h3><p data-i18n="step3Body">A Jeetak driver picks it up and brings it to your door.</p></div>
+          </li>
+        </ol>
+      </div>
+      <div class="status" aria-hidden="true">
+        <div class="status-head">
+          <svg viewBox="0 0 {{PIN_W}} {{PIN_H}}" focusable="false"><use href="#jk-pin"/></svg>
+          <span data-i18n="statusTitle">Your order</span>
+        </div>
+        <ol class="status-list" id="statusList">
+          {{STATUS_ITEMS}}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section coverage" id="villages">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="covEyebrow">Where we deliver</p>
+        <h2 data-i18n="covTitle">21 villages. One app.</h2>
+        <p class="section-lede" data-i18n="covLede">Jeetak delivers to all of these villages in the Upper Metn.</p>
+      </div>
+      <ul class="signs" id="signs">
+        {{SIGNS}}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section join" id="join">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="joinEyebrow">Work with Jeetak</p>
+        <h2 data-i18n="joinTitle">Join Jeetak.</h2>
+        <p class="section-lede" data-i18n="joinLede">Own a restaurant or shop, or want to deliver? Download the app made for you and apply from your phone.</p>
+      </div>
+      <div class="join-grid">
+        <article class="join-card">
+          <div class="join-art" aria-hidden="true">
+            {{SHOP_SVG}}
+          </div>
+          <div class="join-body">
+            <p class="join-kicker" data-i18n="vendorKicker">Restaurants &amp; shops</p>
+            <h3 data-i18n="vendorTitle">Become a partner</h3>
+            <p class="join-text" data-i18n="vendorBody">Get orders from customers across 21 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.</p>
+            <p class="join-apply" data-app="vendor" data-i18n-state="vendorApply">The vendor app is coming soon. You’ll download it and apply right here.</p>
+            <div class="stores">
+              {{STORE_VENDOR_IOS}}
+              {{STORE_VENDOR_ANDROID}}
+            </div>
+          </div>
+        </article>
+        <article class="join-card">
+          <div class="join-art" aria-hidden="true">
+            {{SCOOTER_SVG}}
+          </div>
+          <div class="join-body">
+            <p class="join-kicker" data-i18n="driverKicker">Drivers</p>
+            <h3 data-i18n="driverTitle">Become a driver</h3>
+            <p class="join-text" data-i18n="driverBody">Deliver orders around the Upper Metn and earn on every delivery. The driver app shows your deliveries and earnings.</p>
+            <p class="join-apply" data-app="driver" data-i18n-state="driverApply">The driver app is coming soon. You’ll download it and apply right here.</p>
+            <div class="stores">
+              {{STORE_DRIVER_IOS}}
+              {{STORE_DRIVER_ANDROID}}
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section class="section signoff" id="get">
+  <div class="wrap">
+    <div class="signoff-grid">
+      <div class="logo-tile">
+        <svg class="lockup" viewBox="0 0 {{LOCK_W}} {{LOCK_H}}" role="img" aria-label="jeetak, شو ما بدّك" focusable="false"><use href="#jk-word"/><use href="#jk-slogan"/></svg>
+      </div>
+      <div>
+        <h2 data-i18n="ctaTitle">Get Jeetak on your phone.</h2>
+        <p class="body" data-i18n-state="ctaBody">The app launches soon on iPhone and Android. The download links will appear right here.</p>
+        <div class="stores">
+          {{STORE_IOS}}
+          {{STORE_ANDROID}}
+        </div>
+      </div>
+    </div>
+    <footer class="foot">
+      <span data-i18n="footCopy">© 2026 Jeetak</span>
+      <span>jeetaklb.com</span>
+    </footer>
+  </div>
+</section>
