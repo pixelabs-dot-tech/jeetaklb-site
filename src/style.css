@@ -36,6 +36,11 @@
   --kraft: #C99A5D;
   --kraft-dark: #A97C43;
   --pulse: rgba(255, 122, 69, 0.5);
+  --melon: #F7A3A8;
+  --water: #BFE6F4;
+  --water-deep: #86C6E0;
+  --tomato: #D9412F;
+  --food-size: clamp(5.25rem, 22vw, 7rem);
 
   --font-display: "Kanit", "Readex Pro", system-ui, sans-serif;
   --font-body: "Readex Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -251,7 +256,7 @@ p { margin: 0; }
 .trail { fill: none; stroke: var(--orange-lit); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 0.1 13; }
 .trail-faint { opacity: 0.28; }
 
-.pin-fill { fill: var(--orange-lit); }
+.pin-fill { fill: var(--orange); }
 .pin-core { fill: var(--cream); }
 .pin-anim { transform-box: fill-box; transform-origin: 50% 100%; }
 .landed .pin-anim { animation: land 0.6s cubic-bezier(0.3, 1.5, 0.5, 1); }
@@ -316,12 +321,13 @@ h2 { font-size: var(--step-h2); }
 .herb-stem { fill: none; stroke: var(--herb-dark); stroke-width: 3; stroke-linecap: round; }
 .c-kraft { fill: var(--kraft); }
 .c-kraft-dark { fill: var(--kraft-dark); }
-.c-bag { fill: var(--orange-lit); }
+.c-bag { fill: var(--orange); }
+.c-white { fill: var(--white); }
 .c-cream { fill: var(--cream); }
 .c-pine { fill: var(--pine); }
 .c-shadow { fill: var(--pine-deep); opacity: 0.55; }
 .bag-handle { fill: none; stroke: var(--pine-deep); stroke-width: 5; stroke-linecap: round; }
-.bag-seam { fill: none; stroke: var(--orange); stroke-width: 2.5; }
+.bag-seam { fill: none; stroke: var(--orange-ink); stroke-width: 2.5; }
 .steam-line { fill: none; stroke: var(--cream); stroke-width: 3.2; stroke-linecap: round; opacity: 0; }
 
 .steam-line { animation: steam 2.8s ease-in-out infinite; transform-box: fill-box; }
@@ -543,7 +549,7 @@ h2 { font-size: var(--step-h2); }
 /* ---------- sign-off ---------- */
 .signoff { background: var(--orange); color: var(--white); }
 .signoff-grid { display: grid; gap: 2rem; align-items: center; }
-.logo-tile { width: 100%; display: grid; place-items: center start; }
+.logo-tile { width: 100%; display: grid; place-items: center; }
 .lockup { width: min(100%, 21rem); height: auto; fill: var(--white); }
 .signoff h2 { margin-bottom: 1rem; }
 .signoff p.body { max-width: 30rem; font-size: var(--step-lede); font-weight: 500; color: var(--white); }
@@ -552,6 +558,7 @@ h2 { font-size: var(--step-h2); }
 .signoff .store small { font-weight: 600; }
 @media (min-width: 820px) {
   .signoff-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4rem; }
+  .logo-tile { place-items: center start; }
 }
 .foot {
   margin-top: clamp(3rem, 7vw, 5rem);
@@ -564,6 +571,49 @@ h2 { font-size: var(--step-h2); }
   font-size: 0.875rem;
   color: var(--white);
 }
+
+/* ---------- footer: food pops up from under the page ---------- */
+.signoff { padding-block-end: 0; }
+.foot-stage {
+  position: relative;
+  height: calc(clamp(6.75rem, 26vw, 8.5rem) + 7rem);
+  margin-top: calc(0.75rem - 7rem); /* the top 7rem is headroom for hops, over the row above */
+  overflow: hidden;
+  pointer-events: none;
+}
+.food,
+.foot-scooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.food {
+  width: var(--food-size);
+  height: var(--food-size);
+  transform: translateY(102%);
+  transform-origin: 50% 100%;
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.food.is-still { transform: translate(-50%, 26%) rotate(var(--tilt, 0deg)); }
+.food > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.foot-scooter { width: clamp(8rem, 34vw, 10.5rem); transform: translateX(-120%); }
+.foot-scooter > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.foot-scooter .c-bag { stroke: var(--pine-deep); stroke-width: 2.5; }
+.foot-scooter .spokes { animation-duration: 0.45s; }
+
+.ol { stroke: var(--pine-deep); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ln { fill: none; stroke: var(--pine-deep); stroke-width: 2.4; stroke-linecap: round; }
+.ln-soft { opacity: 0.35; }
+.ln-water { stroke: var(--water-deep); }
+.ln-crust { stroke: var(--kraft-dark); }
+.c-melon { fill: var(--melon); }
+.c-water { fill: var(--water); }
+.c-seed { fill: var(--pine-deep); }
+.c-tomato { fill: var(--tomato); }
+.c-bag-lit { fill: var(--orange-lit); }
 
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }

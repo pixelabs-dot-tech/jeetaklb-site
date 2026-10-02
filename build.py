@@ -197,14 +197,7 @@ def shop_svg():
             </svg>"""
 
 
-SCOOTER_SVG = f"""<svg viewBox="0 0 240 140" focusable="false">
-              <path class="speed" d="M24 66 H44"/>
-              <path class="speed sp2" d="M14 82 H40"/>
-              <path class="speed sp3" d="M26 98 H46"/>
-              <path class="road-dots moving" d="M-7 129 H247"/>
-              <g transform="translate(46 18)">
-                <g class="scoot">
-                  <circle class="tire" cx="40" cy="96" r="15"/>
+SCOOTER_PARTS = f"""<circle class="tire" cx="40" cy="96" r="15"/>
                   <g class="spokes"><path class="spoke" d="M31 96 H49 M35.5 88.2 L44.5 103.8 M35.5 103.8 L44.5 88.2"/></g>
                   <circle class="c-stone" cx="40" cy="96" r="5"/>
                   <circle class="tire" cx="138" cy="96" r="15"/>
@@ -213,7 +206,7 @@ SCOOTER_SVG = f"""<svg viewBox="0 0 240 140" focusable="false">
                   <path class="rack" d="M10 60 H46"/>
                   <rect class="c-bag" x="8" y="22" width="38" height="36" rx="5"/>
                   <path class="bag-seam" d="M8 34 H46"/>
-                  <svg x="19" y="36" width="16" height="20.4" viewBox="0 0 {PIN_W} {PIN_H}"><use href="#jk-pin" class="c-cream"/></svg>
+                  <g class="bag-logo"><svg x="12" y="40.5" width="30" height="10.8" viewBox="0 0 {WM_W} {WM_H}"><use href="#jk-word" class="c-white"/></svg></g>
                   <path class="scoot-body" d="M14 88 C12 74 22 62 38 60 H82 C88 60 92 64 92 70 V88 H62 C60 78 52 72 40 72 C28 72 20 78 18 88 Z"/>
                   <path class="scoot-dark" d="M42 60 C42 54 46 51 52 51 H80 C86 51 88 55 88 60 Z"/>
                   <path class="scoot-body" d="M90 82 H122 C124 82 125 84 125 86 V90 H90 Z"/>
@@ -221,10 +214,62 @@ SCOOTER_SVG = f"""<svg viewBox="0 0 240 140" focusable="false">
                   <path class="scoot-line" d="M134 49 L141 30"/>
                   <path class="scoot-bar" d="M131 29 H151"/>
                   <circle class="win-on" cx="143" cy="40" r="4"/>
-                  <path class="scoot-body" d="M122 92 C124 80 152 80 154 92 L148 92 C146 86 130 86 128 92 Z"/>
+                  <path class="scoot-body" d="M122 92 C124 80 152 80 154 92 L148 92 C146 86 130 86 128 92 Z"/>"""
+
+SCOOTER_SVG = f"""<svg viewBox="0 0 240 140" focusable="false">
+              <path class="speed" d="M24 66 H44"/>
+              <path class="speed sp2" d="M14 82 H40"/>
+              <path class="speed sp3" d="M26 98 H46"/>
+              <path class="road-dots moving" d="M-7 129 H247"/>
+              <g transform="translate(46 18)">
+                <g class="scoot">
+                  {SCOOTER_PARTS}
                 </g>
               </g>
             </svg>"""
+
+
+from food_items import FOOD  # noqa: E402
+
+FOOD_ITEMS = "".join(
+    f'<div class="food" data-food="{name}"><svg viewBox="0 0 100 100" focusable="false">'
+    f'{inner.replace("{PIN_W}", str(PIN_W)).replace("{PIN_H}", str(PIN_H))}</svg></div>'
+    for name, inner in FOOD)
+FOOT_SCOOTER = f"""<div class="foot-scooter"><svg viewBox="-46 14 208 100" focusable="false">
+            <g class="intro-speeds-loop"><path class="speed" d="M-28 46 H-6"/><path class="speed sp2" d="M-42 64 H-10"/><path class="speed sp3" d="M-26 82 H-4"/></g>
+            <g class="scoot">
+                  {SCOOTER_PARTS}
+            </g>
+          </svg></div>"""
+
+
+def intro_html(every_visit, replay):
+    """The intro overlay. The early script turns it on before the page paints, so the
+    page never flashes first; it stays off for reduced motion and deep links, and,
+    on the live site, after the first view in a browser session."""
+    seen = "" if every_visit else 'sessionStorage.getItem("jeetak-intro")||'
+    early = ('<script>(function(){try{if(location.hash||' + seen +
+             'matchMedia("(prefers-reduced-motion: reduce)").matches)return;'
+             'document.documentElement.classList.add("intro-on")}catch(e){}})();</script>')
+    overlay = f"""<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-stage">
+    <svg class="intro-road" height="10" focusable="false"><line x1="-20" y1="5" x2="4000" y2="5"/></svg>
+    <div class="intro-rider" id="introRider">
+      <div class="intro-ride">
+        <div class="intro-lean">
+          <svg viewBox="-46 14 208 100" focusable="false">
+            <g class="intro-speeds"><path class="speed" d="M-28 46 H-6"/><path class="speed sp2" d="M-42 64 H-10"/><path class="speed sp3" d="M-26 82 H-4"/></g>
+            <g class="intro-scoot">
+                  {SCOOTER_PARTS}
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>"""
+    chip = '\n<button class="intro-replay" id="introReplay" type="button">Replay intro</button>' if replay else ""
+    return early + "\n" + overlay + chip
 
 
 CHECK = '<span class="st-dot"><svg viewBox="0 0 12 12" focusable="false"><path d="M2.5 6.2 5 8.6 9.5 3.6"/></svg></span>'
@@ -247,6 +292,9 @@ SIGNS = "\n        ".join(
     f'<li class="sign" data-lat="{lat}" data-ar="{ar}"><span class="sign-ar" lang="ar">{ar}</span>'
     f'<span class="sign-lat">{lat}</span></li>' for lat, ar in VILLAGES)
 
+# The intro is in the preview only until it's approved for the live site.
+SITE_INTRO = True
+
 body = (SRC / "body.html").read_text()
 for key, val in {
     "WORDMARK_D": WORD_D, "SLOGAN_D": SLOGAN_D, "PIN_D": PIN_D,
@@ -256,11 +304,13 @@ for key, val in {
     "STORE_DRIVER_IOS": store("driver", "ios", "App Store"), "STORE_DRIVER_ANDROID": store("driver", "android", "Google Play"),
     "SHOP_SVG": shop_svg(), "SCOOTER_SVG": SCOOTER_SVG,
     "HERO_SVG": HERO_SVG, "STATUS_ITEMS": STATUS_ITEMS, "SIGNS": SIGNS,
+    "FOOD_ITEMS": FOOD_ITEMS + FOOT_SCOOTER,
 }.items():
     body = body.replace("{{" + key + "}}", str(val))
-assert "{{" not in body, re.findall(r"\{\{\w+\}\}", body)
+assert re.findall(r"\{\{\w+\}\}", body) == ["{{INTRO}}"], re.findall(r"\{\{\w+\}\}", body)
 
 css = (SRC / "style.css").read_text()
+intro_css = (SRC / "intro.css").read_text()
 js = (SRC / "script.js").read_text()
 font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
               '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -268,11 +318,15 @@ font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 
 # ---------------------------------------------------------------- artifact preview
 OUT.mkdir(exist_ok=True)
-artifact = f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}</style>\n{body}\n<script>\n{js}</script>\n"
+preview_body = body.replace("{{INTRO}}", intro_html(every_visit=True, replay=True))
+artifact = (f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}{intro_css}</style>\n"
+            f"{preview_body}\n<script>\n{js}</script>\n")
 (OUT / "jeetaklb.html").write_text(artifact)
 
 # ---------------------------------------------------------------- deployable site
 desc = "Food, groceries and anything else from shops near you, delivered across 21 villages in the Upper Metn."
+site_body = body.replace("{{INTRO}}", intro_html(every_visit=False, replay=False) if SITE_INTRO else "")
+site_css = css + (intro_css if SITE_INTRO else "")
 site = f"""<!doctype html>
 <html lang="en" dir="ltr">
 <head>
@@ -297,10 +351,10 @@ site = f"""<!doctype html>
 <meta name="twitter:card" content="summary_large_image">
 {font_links}
 <style>
-{css}</style>
+{site_css}</style>
 </head>
 <body>
-{body}
+{site_body}
 <script>
 {js}</script>
 </body>

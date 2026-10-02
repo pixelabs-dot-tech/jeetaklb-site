@@ -1,0 +1,130 @@
+/* ---------- intro: a scooter rides in, then the view pulls back into the hero ---------- */
+:root { --pine-clear: rgba(29, 61, 47, 0); }
+
+.intro { display: none; }
+.intro-on .intro {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  background-color: var(--pine);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: intro-bg 0.7s ease 2.05s forwards, intro-gone 0s linear 3.4s forwards;
+}
+html.intro-on, .intro-on body { overflow: hidden; }
+
+.intro-stage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-62%);
+}
+.intro-road {
+  position: absolute;
+  left: 0;
+  top: 97%;
+  width: 100%;
+  height: 10px;
+  transform: translateY(-50%);
+  overflow: hidden;
+  animation: intro-fade-out 0.4s ease 2s forwards;
+}
+.intro-road line {
+  stroke: var(--orange-lit);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 18;
+  animation: intro-road 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both;
+}
+
+.intro-rider {
+  position: relative;
+  width: min(72vw, 21rem);
+  margin-inline: auto;
+  transform-origin: 61% 97%;
+  animation: intro-zoom 0.85s cubic-bezier(0.65, 0, 0.35, 1) 2s forwards,
+             intro-fade-out 0.3s ease 2.62s forwards;
+}
+.intro-lean > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.intro-ride { animation: intro-ride-in 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both; }
+.intro-lean { transform-origin: 88% 97%; animation: intro-brake 0.5s ease-out 1.5s both; }
+.intro-scoot { animation: scoot 0.22s ease-in-out 0.15s 6 alternate; }
+.intro .spokes { animation: intro-wheel 1.5s cubic-bezier(0.16, 0.84, 0.3, 1) 0.15s both; }
+.intro-speeds { animation: intro-speeds 1.6s linear 0.1s both; }
+.intro .bag-logo {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: intro-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) 1.7s both;
+}
+
+/* The landing page settles in around the scooter as it lands. */
+.intro-on .hero-top,
+.intro-on .hero-copy > * { animation: intro-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.intro-on .hero-top { animation-delay: 2.15s; }
+.intro-on .hero-copy > :nth-child(1) { animation-delay: 2.25s; }
+.intro-on .hero-copy > :nth-child(2) { animation-delay: 2.33s; }
+.intro-on .hero-copy > :nth-child(3) { animation-delay: 2.41s; }
+.intro-on .hero-copy > :nth-child(4) { animation-delay: 2.49s; }
+.intro-on .hero-copy > :nth-child(5) { animation-delay: 2.57s; }
+.intro-on .hero-art { animation: intro-fade-in 0.8s ease 2s both; }
+
+/* Tap to skip */
+.intro-skip .intro { animation: none; opacity: 0; transition: opacity 0.2s ease; pointer-events: none; }
+.intro-skip .hero-top,
+.intro-skip .hero-copy > *,
+.intro-skip .hero-art { animation: none; }
+
+@keyframes intro-bg { to { background-color: var(--pine-clear); } }
+@keyframes intro-gone { to { visibility: hidden; pointer-events: none; } }
+@keyframes intro-road { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 360; } }
+@keyframes intro-ride-in { from { transform: translateX(-85vw); } to { transform: none; } }
+@keyframes intro-wheel { from { transform: rotate(0deg); } to { transform: rotate(1440deg); } }
+@keyframes intro-brake {
+  0% { transform: rotate(0deg); }
+  35% { transform: rotate(2.5deg); }
+  100% { transform: rotate(0deg); }
+}
+@keyframes intro-speeds {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes intro-pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+@keyframes intro-zoom { to { transform: translate(var(--tx, 0px), var(--ty, 30vh)) scale(var(--ts, 0.1)); } }
+@keyframes intro-fade-out { to { opacity: 0; } }
+@keyframes intro-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Preview only: replay the intro */
+.intro-replay {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  padding: 0.6rem 1.05rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--pine);
+  font: 600 0.9375rem/1 var(--font-body);
+  box-shadow: 0 6px 18px rgba(16, 36, 27, 0.35);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.intro-on .intro-replay { opacity: 0; pointer-events: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-on .intro { display: none; }
+  html.intro-on, .intro-on body { overflow: visible; }
+}

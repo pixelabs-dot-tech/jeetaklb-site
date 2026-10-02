@@ -265,7 +265,7 @@
     }
 
     var CYCLE = 9200, START = 700, END = 6500, FADE = 650;
-    var t0 = null, raf = 0, running = false, inView = true;
+    var t0 = null, raf = 0, running = false, inView = true, held = false;
 
     function ease(x) { return x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2; }
 
@@ -282,7 +282,7 @@
     }
 
     function start() {
-      if (running || !inView || document.hidden) return;
+      if (held || running || !inView || document.hidden) return;
       running = true;
       t0 = null;
       raf = window.requestAnimationFrame(frame);
@@ -305,6 +305,116 @@
     document.addEventListener("visibilitychange", function () {
       if (document.hidden) stop(); else start();
     });
+
+    // The intro holds the order at the shop until the scooter lands there.
+    return {
+      hold: function () {
+        held = true;
+        stop();
+        place(0);
+        house.classList.remove("lit");
+        badge.classList.remove("show");
+        pin.classList.remove("landed");
+        svg.classList.remove("is-fading");
+      },
+      release: function () {
+        held = false;
+        start();
+      }
+    };
+  }
+
+  // Intro: a scooter with the orange bag rides in, then the view pulls back
+  // and the scooter becomes the order pin on the mountain road.
+  var INTRO_ORIGIN_X = 0.61;   // the scooter's wheel line, as a share of the intro drawing
+  var INTRO_ORIGIN_Y = 0.97;
+  var INTRO_BODY_W = 146 / 208; // the scooter's width within the drawing
+  var INTRO_LANDED_W = 30;      // px wide when it reaches the road, about the pin's size
+  var INTRO_AIM = 1900, INTRO_HANDOFF = 2850, INTRO_END = 3100;
+
+  function initIntro(route) {
+    var intro = document.getElementById("intro");
+    if (!intro) return;
+    var rider = document.getElementById("introRider");
+    var replay = document.getElementById("introReplay");
+    var timers = [];
+
+    function clear() {
+      timers.forEach(window.clearTimeout);
+      timers = [];
+    }
+
+    function aim() {
+      var box = rider && rider.getBoundingClientRect();
+      if (!box || !box.width) return;
+      // Land on the start of the mountain road. When it's below the fold
+      // (short screens, laptops), drive off into the hills at the bottom instead.
+      var spot = { x: window.innerWidth / 2, y: window.innerHeight - 10 };
+      var landed = INTRO_LANDED_W * 0.75;
+      var svg = document.getElementById("heroArt");
+      var road = svg && svg.querySelector("#route");
+      if (road && svg.getScreenCTM && road.getPointAtLength) {
+        var start = road.getPointAtLength(0);
+        var pt = svg.createSVGPoint();
+        pt.x = start.x;
+        pt.y = start.y;
+        var s = pt.matrixTransform(svg.getScreenCTM());
+        if (s.y <= window.innerHeight - 16 && s.y >= 16 && s.x >= 8 && s.x <= window.innerWidth - 8) {
+          spot = s;
+          landed = INTRO_LANDED_W;
+        }
+      }
+      var ox = box.left + box.width * INTRO_ORIGIN_X;
+      var oy = box.top + box.height * INTRO_ORIGIN_Y;
+      rider.style.setProperty("--tx", (spot.x - ox).toFixed(1) + "px");
+      rider.style.setProperty("--ty", (spot.y - oy).toFixed(1) + "px");
+      rider.style.setProperty("--ts", (landed / (box.width * INTRO_BODY_W)).toFixed(3));
+    }
+
+    function finish() {
+      clear();
+      root.classList.remove("intro-on", "intro-skip");
+      if (route) route.release();
+    }
+
+    function schedule(elapsed) {
+      timers.push(window.setTimeout(aim, Math.max(0, INTRO_AIM - elapsed)));
+      timers.push(window.setTimeout(function () { if (route) route.release(); }, Math.max(0, INTRO_HANDOFF - elapsed)));
+      timers.push(window.setTimeout(finish, Math.max(0, INTRO_END - elapsed)));
+    }
+
+    function play() {
+      clear();
+      root.classList.remove("intro-on", "intro-skip");
+      window.scrollTo(0, 0);
+      void root.offsetWidth; // restart the CSS animations
+      root.classList.add("intro-on");
+      if (route) route.hold();
+      schedule(0);
+    }
+
+    function skip() {
+      if (!root.classList.contains("intro-on") || root.classList.contains("intro-skip")) return;
+      clear();
+      root.classList.add("intro-skip");
+      if (route) route.release();
+      timers.push(window.setTimeout(finish, 220));
+    }
+
+    intro.addEventListener("click", skip);
+    if (replay) replay.addEventListener("click", play);
+
+    if (root.classList.contains("intro-on")) {
+      try { window.sessionStorage.setItem("jeetak-intro", "1"); } catch (e) { /* not stored */ }
+      if (route) route.hold();
+      // The CSS animations started at first paint; line the timers up with them.
+      var elapsed = 0;
+      if (rider && rider.getAnimations) {
+        var anims = rider.getAnimations();
+        if (anims.length && anims[0].currentTime != null) elapsed = anims[0].currentTime;
+      }
+      schedule(elapsed);
+    }
   }
 
   // The sample order status card.
@@ -343,9 +453,160 @@
     update();
   }
 
+  // Footer: food pops up from under the page, wiggles and ducks back down.
+  // Tap one and it jumps. Every so often the scooter rides past along the bottom.
+  function initFooterFun() {
+    var stage = document.getElementById("footStage");
+    var tpl = document.getElementById("footFood");
+    if (!stage || !tpl || !tpl.content) return;
+    var kinds = Array.prototype.slice.call(tpl.content.querySelectorAll(".food"));
+    var scooterTpl = tpl.content.querySelector(".foot-scooter");
+    if (!kinds.length) return;
+
+    if (reduceMotion || !stage.animate) {
+      [[0.2, -6], [0.5, 4], [0.8, -3]].forEach(function (spot, i) {
+        var el = kinds[(i * 3) % kinds.length].cloneNode(true);
+        el.classList.add("is-still");
+        el.style.left = spot[0] * 100 + "%";
+        el.style.setProperty("--tilt", spot[1] + "deg");
+        stage.appendChild(el);
+      });
+      return;
+    }
+
+    var live = [];
+    var timer = 0, active = false, ticks = 0, scooting = false, scooterNext = false, lastKind = -1;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function pickKind() {
+      var k;
+      do { k = Math.floor(Math.random() * kinds.length); } while (k === lastKind && kinds.length > 1);
+      lastKind = k;
+      return k;
+    }
+
+    function freeSpot(w) {
+      var width = stage.clientWidth;
+      for (var tries = 0; tries < 8; tries++) {
+        var x = rand(width * 0.04, width * 0.96 - w);
+        var clear = live.every(function (it) { return Math.abs(it.x - x) > (it.w + w) * 0.6; });
+        if (clear) return x;
+      }
+      return null;
+    }
+
+    function remove(item) {
+      var i = live.indexOf(item);
+      if (i >= 0) live.splice(i, 1);
+      if (item.el.parentNode) item.el.parentNode.removeChild(item.el);
+    }
+
+    function hop(item) {
+      if (!item.anim || item.hopping) return;
+      item.hopping = true;
+      try { item.anim.commitStyles(); } catch (e) { /* starts from its resting spot */ }
+      item.anim.cancel();
+      var from = window.getComputedStyle(item.el).transform;
+      var spin = Math.random() < 0.5 ? -1 : 1;
+      var jump = item.el.animate([
+        { transform: from === "none" ? "translateY(20%)" : from },
+        { transform: "translateY(-60%) rotate(" + spin * 200 + "deg)", offset: 0.42, easing: "cubic-bezier(.4,0,.9,.6)" },
+        { transform: "translateY(110%) rotate(" + spin * 390 + "deg)" }
+      ], { duration: 820, easing: "cubic-bezier(.2,.7,.4,1)", fill: "forwards" });
+      jump.onfinish = function () { remove(item); };
+    }
+
+    function pop() {
+      if (live.length >= 3) return;
+      var el = kinds[pickKind()].cloneNode(true);
+      stage.appendChild(el);
+      var w = el.offsetWidth;
+      var x = freeSpot(w);
+      if (x === null) { stage.removeChild(el); return; }
+      el.style.left = x.toFixed(0) + "px";
+      var item = { el: el, x: x, w: w };
+      live.push(item);
+      var tilt = rand(5, 9) * (Math.random() < 0.5 ? -1 : 1);
+      var peek = rand(4, 16).toFixed(1) + "%";
+      var up = "translateY(" + peek + ") ";
+      item.anim = el.animate([
+        { transform: "translateY(102%) rotate(0deg)", easing: "cubic-bezier(.2,.9,.3,1.3)" },
+        { transform: up + "rotate(0deg)", offset: 0.2, easing: "ease-in-out" },
+        { transform: up + "rotate(" + tilt + "deg)", offset: 0.33, easing: "ease-in-out" },
+        { transform: up + "rotate(" + -tilt + "deg)", offset: 0.45, easing: "ease-in-out" },
+        { transform: up + "rotate(" + tilt * 0.45 + "deg)", offset: 0.55, easing: "ease-in-out" },
+        { transform: up + "rotate(0deg)", offset: 0.63, easing: "cubic-bezier(.5,0,.75,0)" },
+        { transform: "translateY(102%) rotate(0deg)" }
+      ], { duration: rand(2100, 2900), fill: "forwards" });
+      item.anim.onfinish = function () { if (!item.hopping) remove(item); };
+      el.addEventListener("pointerdown", function () { hop(item); });
+    }
+
+    function rideBy() {
+      if (!scooterTpl) return;
+      var el = scooterTpl.cloneNode(true);
+      stage.appendChild(el);
+      var width = stage.clientWidth, w = el.offsetWidth;
+      scooting = true;
+      var ride = el.animate([
+        { transform: "translateX(" + (-w - 10) + "px)" },
+        { transform: "translateX(" + (width + 10) + "px)" }
+      ], { duration: Math.max(2200, width * 3.4), easing: "cubic-bezier(.3,.15,.7,.85)" });
+      ride.onfinish = function () {
+        scooting = false;
+        if (el.parentNode) el.parentNode.removeChild(el);
+      };
+    }
+
+    function tick() {
+      timer = 0;
+      if (!active) return;
+      if (!scooting) {
+        ticks++;
+        if (scooterNext) {
+          if (!live.length) { scooterNext = false; rideBy(); }
+        } else if (ticks === 5 || ticks % 12 === 0) {
+          scooterNext = true;
+        } else {
+          pop();
+        }
+      }
+      timer = window.setTimeout(tick, rand(650, 1400));
+    }
+
+    function start() {
+      if (active || document.hidden) return;
+      active = true;
+      timer = window.setTimeout(tick, 350);
+    }
+    function stop() {
+      active = false;
+      window.clearTimeout(timer);
+    }
+
+    var inView = false;
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          inView = entry.isIntersecting;
+          if (inView) start(); else stop();
+        });
+      }, { threshold: 0.1 }).observe(stage);
+    } else {
+      inView = true;
+      start();
+    }
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else if (inView) start();
+    });
+  }
+
   orderStores();
   initLanguage();
-  initRoute();
+  var route = initRoute();
+  initIntro(route);
   initStatus();
   initOverscroll();
+  initFooterFun();
 })();
