@@ -590,13 +590,23 @@ h2 { font-size: var(--step-h2); }
   margin-top: clamp(3rem, 7vw, 5rem);
   padding-block: 1.4rem 0;
   border-top: 4px dotted var(--line-on-orange);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
+  display: grid;
+  gap: 1rem;
   font-size: 0.875rem;
   color: var(--white);
 }
+.foot-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.foot-links a, .foot-meta a {
+  position: relative;
+  z-index: 1;
+  color: var(--white);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.foot-links a:hover, .foot-meta a:hover { text-decoration: underline; }
+.foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
+.foot-meta a { font-size: 0.875rem; font-weight: 400; }
 
 /* ---------- footer: food pops up from under the page ---------- */
 .signoff { padding-block-end: 0; }
@@ -1174,8 +1184,18 @@ html.intro-on, .intro-on body { overflow: hidden; }
       </div>
     </div>
     <footer class="foot">
-      <span data-i18n="footCopy">© 2026 Jeetak</span>
-      <span>jeetaklb.com</span>
+      <nav class="foot-links" aria-label="Jeetak pages">
+        <a href="/about-us" data-i18n="lnkAbout">About us</a>
+        <a href="/terms" data-i18n="lnkTerms">Terms of use</a>
+        <a href="/customer_policy" data-i18n="lnkPrivacy">Privacy policy</a>
+        <a href="/vendor-policy" data-i18n="lnkVendor">Vendor policy</a>
+        <a href="/driver-policy" data-i18n="lnkDriver">Driver policy</a>
+        <a href="/account-deletion" data-i18n="lnkDelete">Delete account</a>
+      </nav>
+      <div class="foot-meta">
+        <span data-i18n="footCopy">© 2026 Jeetak SARL</span>
+        <a href="mailto:support@jeetaklb.com">support@jeetaklb.com</a>
+      </div>
     </footer>
   </div>
   <div class="foot-stage" id="footStage" aria-hidden="true"></div>
@@ -1323,7 +1343,13 @@ html.intro-on, .intro-on body { overflow: hidden; }
       ctaTitle: "Get Jeetak on your phone.",
       ctaBodySoon: "The app launches soon on iPhone and Android. The download links will appear right here.",
       ctaBodyLive: "Download the app and place your first order.",
-      footCopy: "© 2026 Jeetak",
+      footCopy: "© 2026 Jeetak SARL",
+      lnkAbout: "About us",
+      lnkTerms: "Terms of use",
+      lnkPrivacy: "Privacy policy",
+      lnkVendor: "Vendor policy",
+      lnkDriver: "Driver policy",
+      lnkDelete: "Delete account",
       langBtn: "عربي",
       langBtnLang: "ar",
       langAria: "اقرأ الصفحة بالعربي",
@@ -1381,7 +1407,13 @@ html.intro-on, .intro-on body { overflow: hidden; }
       ctaTitle: "نزّل جيتك على تلفونك.",
       ctaBodySoon: "التطبيق نازل قريباً على آيفون وأندرويد، وروابط التنزيل رح تكون هون.",
       ctaBodyLive: "نزّل التطبيق واطلب أوّل طلبية.",
-      footCopy: "© 2026 جيتك",
+      footCopy: "© 2026 جيتك ش.م.م.",
+      lnkAbout: "من نحن",
+      lnkTerms: "شروط الاستخدام",
+      lnkPrivacy: "سياسة الخصوصية",
+      lnkVendor: "سياسة المحلات",
+      lnkDriver: "سياسة الدليفري",
+      lnkDelete: "حذف الحساب",
       langBtn: "English",
       langBtnLang: "en",
       langAria: "Read this page in English",
