@@ -34,6 +34,15 @@ Claude artifact preview. It plays the intro on every load and has a Replay
 button; the live site plays it once per browser session. `SITE_INTRO` in
 `build.py` turns the intro off for the live site.
 
+## Policy pages
+
+`pages_text.py` holds the text of /about-us, /terms, /customer_policy,
+/vendor-policy, /driver-policy and /account-deletion, written in Markdown.
+`pages.py` (run by `build.py`, needs `pip install markdown`) turns each one into
+its own HTML file, served at those exact addresses. The app store listings link
+to them, so keep the file names unchanged. Change the "Last updated" date in
+`pages_text.py` whenever the text changes.
+
 ## Icons
 
 `icon-source.jpg` is the app icon. `make_icons.py` (run by `build.py`) crops it

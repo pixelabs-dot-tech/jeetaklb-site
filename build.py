@@ -307,7 +307,7 @@ for key, val in {
     "FOOD_ITEMS": FOOD_ITEMS + FOOT_SCOOTER,
 }.items():
     body = body.replace("{{" + key + "}}", str(val))
-assert re.findall(r"\{\{\w+\}\}", body) == ["{{INTRO}}"], re.findall(r"\{\{\w+\}\}", body)
+assert set(re.findall(r"\{\{\w+\}\}", body)) == {"{{INTRO}}", "{{SITE}}"}, re.findall(r"\{\{\w+\}\}", body)
 
 css = (SRC / "style.css").read_text()
 intro_css = (SRC / "intro.css").read_text()
@@ -318,14 +318,16 @@ font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 
 # ---------------------------------------------------------------- artifact preview
 OUT.mkdir(exist_ok=True)
-preview_body = body.replace("{{INTRO}}", intro_html(every_visit=True, replay=True))
+preview_body = (body.replace("{{INTRO}}", intro_html(every_visit=True, replay=True))
+                .replace("{{SITE}}", "https://jeetaklb.com"))
 artifact = (f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}{intro_css}</style>\n"
             f"{preview_body}\n<script>\n{js}</script>\n")
 (OUT / "jeetaklb.html").write_text(artifact)
 
 # ---------------------------------------------------------------- deployable site
 desc = "Food, groceries and anything else from shops near you, delivered across 21 villages in the Upper Metn."
-site_body = body.replace("{{INTRO}}", intro_html(every_visit=False, replay=False) if SITE_INTRO else "")
+site_body = (body.replace("{{INTRO}}", intro_html(every_visit=False, replay=False) if SITE_INTRO else "")
+             .replace("{{SITE}}", ""))
 site_css = css + (intro_css if SITE_INTRO else "")
 site = f"""<!doctype html>
 <html lang="en" dir="ltr">
@@ -362,6 +364,11 @@ site = f"""<!doctype html>
 """
 SITE.mkdir(exist_ok=True)
 (SITE / "index.html").write_text(site)
+
+# ---------------------------------------------------------------- policy pages
+import pages  # noqa: E402
+written = pages.render(SITE, WORD_D, WM_W, WM_H, font_links, VILLAGES)
+print("pages", ", ".join(written))
 
 # ---------------------------------------------------------------- favicon and home-screen icons
 import make_icons  # noqa: E402

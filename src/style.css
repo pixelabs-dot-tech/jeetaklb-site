@@ -564,13 +564,23 @@ h2 { font-size: var(--step-h2); }
   margin-top: clamp(3rem, 7vw, 5rem);
   padding-block: 1.4rem 0;
   border-top: 4px dotted var(--line-on-orange);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
+  display: grid;
+  gap: 1rem;
   font-size: 0.875rem;
   color: var(--white);
 }
+.foot-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.foot-links a, .foot-meta a {
+  position: relative;
+  z-index: 1;
+  color: var(--white);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.foot-links a:hover, .foot-meta a:hover { text-decoration: underline; }
+.foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
+.foot-meta a { font-size: 0.875rem; font-weight: 400; }
 
 /* ---------- footer: food pops up from under the page ---------- */
 .signoff { padding-block-end: 0; }
