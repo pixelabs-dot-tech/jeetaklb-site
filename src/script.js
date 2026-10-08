@@ -4,9 +4,9 @@
   // Paste the store links here once each app is live.
   // While a link is empty, its button shows "Coming soon".
   var STORE_LINKS = {
-    customer: { ios: "", android: "" },  // Jeetak customer app
-    vendor:   { ios: "", android: "" },  // vendor app for restaurants and shops
-    driver:   { ios: "", android: "" }   // driver app
+    customer: { ios: "", android: "https://play.google.com/store/apps/details?id=com.food.jeetak" },     // Jeetak customer app
+    vendor:   { ios: "", android: "https://play.google.com/store/apps/details?id=com.jeetak.vendor" },   // vendor app for restaurants and shops
+    driver:   { ios: "", android: "https://play.google.com/store/apps/details?id=com.jeetak.drivers" }   // driver app
   };
 
   var T = {
@@ -19,6 +19,8 @@
       storeLiveAndroid: "Get it on",
       storeNoteSoon: "The app is launching soon on iPhone and Android.",
       storeNoteLive: "Available now on iPhone and Android.",
+      storeNoteAndroid: "Available now on Android. The iPhone app is coming soon.",
+      storeNoteIos: "Available now on iPhone. The Android app is coming soon.",
       svcEyebrow: "What we bring",
       svcTitle: "Everything you need.",
       svcLede: "Order it in the app and we bring it over.",
@@ -54,14 +56,20 @@
       vendorBody: "Get orders from customers across 21 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.",
       vendorApplySoon: "The vendor app is coming soon. You’ll download it and apply right here.",
       vendorApplyLive: "Download the vendor app and apply.",
+      vendorApplyAndroid: "Download the vendor app on Android and apply. The iPhone version is coming soon.",
+      vendorApplyIos: "Download the vendor app on iPhone and apply. The Android version is coming soon.",
       driverKicker: "Drivers",
       driverTitle: "Become a driver",
       driverBody: "Deliver orders around the Upper Metn and earn on every delivery. The driver app shows your deliveries and earnings.",
       driverApplySoon: "The driver app is coming soon. You’ll download it and apply right here.",
       driverApplyLive: "Download the driver app and apply.",
+      driverApplyAndroid: "Download the driver app on Android and apply. The iPhone version is coming soon.",
+      driverApplyIos: "Download the driver app on iPhone and apply. The Android version is coming soon.",
       ctaTitle: "Get Jeetak on your phone.",
       ctaBodySoon: "The app launches soon on iPhone and Android. The download links will appear right here.",
       ctaBodyLive: "Download the app and place your first order.",
+      ctaBodyAndroid: "Get it on Google Play and place your first order. The iPhone app is coming soon.",
+      ctaBodyIos: "Download it on the App Store and place your first order. The Android app is coming soon.",
       footCopy: "© 2026 Jeetak SARL",
       lnkAbout: "About us",
       lnkTerms: "Terms of use",
@@ -83,6 +91,8 @@
       storeLiveAndroid: "نزّلو من",
       storeNoteSoon: "التطبيق نازل قريباً على آيفون وأندرويد.",
       storeNoteLive: "التطبيق موجود هلّق على آيفون وأندرويد.",
+      storeNoteAndroid: "التطبيق موجود هلّق على أندرويد، وعلى آيفون قريباً.",
+      storeNoteIos: "التطبيق موجود هلّق على آيفون، وعلى أندرويد قريباً.",
       svcEyebrow: "شو منجيبلك",
       svcTitle: "شو ما بدّك؟",
       svcLede: "اطلبه من التطبيق، ونحنا منجيبلك ياه.",
@@ -118,14 +128,20 @@
       vendorBody: "وصّل محلّك لزباين بـ21 ضيعة. بتقبل الطلبيات وبتجهّزها من تطبيق المحلات، ودليفري جيتك بيمرق ياخدها.",
       vendorApplySoon: "تطبيق المحلات نازل قريباً، ورح تنزّلو وتقدّم طلبك من هون.",
       vendorApplyLive: "نزّل تطبيق المحلات وقدّم طلبك.",
+      vendorApplyAndroid: "نزّل تطبيق المحلات على أندرويد وقدّم طلبك. نسخة الآيفون نازلة قريباً.",
+      vendorApplyIos: "نزّل تطبيق المحلات على آيفون وقدّم طلبك. نسخة الأندرويد نازلة قريباً.",
       driverKicker: "سائقين",
       driverTitle: "اشتغل دليفري",
       driverBody: "وصّل طلبيات بالمتن الأعلى واربح عن كل توصيلة. تطبيق الدليفري بيورجيك توصيلاتك ومدخولك.",
       driverApplySoon: "تطبيق الدليفري نازل قريباً، ورح تنزّلو وتقدّم طلبك من هون.",
       driverApplyLive: "نزّل تطبيق الدليفري وقدّم طلبك.",
+      driverApplyAndroid: "نزّل تطبيق الدليفري على أندرويد وقدّم طلبك. نسخة الآيفون نازلة قريباً.",
+      driverApplyIos: "نزّل تطبيق الدليفري على آيفون وقدّم طلبك. نسخة الأندرويد نازلة قريباً.",
       ctaTitle: "نزّل جيتك على تلفونك.",
       ctaBodySoon: "التطبيق نازل قريباً على آيفون وأندرويد، وروابط التنزيل رح تكون هون.",
       ctaBodyLive: "نزّل التطبيق واطلب أوّل طلبية.",
+      ctaBodyAndroid: "نزّلو من Google Play واطلب أوّل طلبية. تطبيق الآيفون نازل قريباً.",
+      ctaBodyIos: "نزّلو من App Store واطلب أوّل طلبية. تطبيق الأندرويد نازل قريباً.",
       footCopy: "© 2026 جيتك ش.م.م.",
       lnkAbout: "من نحن",
       lnkTerms: "شروط الاستخدام",
@@ -178,8 +194,10 @@
       }
     });
     each("[data-i18n-state]", function (el) {
-      var live = isLive(el.getAttribute("data-app"));
-      var value = dict[el.getAttribute("data-i18n-state") + (live ? "Live" : "Soon")];
+      var links = linksFor(el.getAttribute("data-app"));
+      var state = links.ios && links.android ? "Live" : links.android ? "Android" : links.ios ? "Ios" : "Soon";
+      var key = el.getAttribute("data-i18n-state");
+      var value = dict[key + state] != null ? dict[key + state] : dict[key + "Live"];
       if (value != null) el.textContent = value;
     });
   }
