@@ -11,7 +11,7 @@
 
   var T = {
     en: {
-      heroEyebrow: "Upper Metn · 21 villages",
+      heroEyebrow: "Upper Metn · 24 villages",
       heroTitle: "From the village shop to your door.",
       heroLede: "Food, groceries and anything else nearby, ordered in one app. No calls. No voice notes.",
       storeSoon: "Coming soon on",
@@ -45,15 +45,16 @@
       st4: "On the way",
       st5: "Delivered",
       covEyebrow: "Where we deliver",
-      covTitle: "21 villages. One app.",
+      covTitle: "24 villages. One app.",
       covLede: "Jeetak delivers to all of these villages in the Upper Metn.",
+      mapHint: "Swipe the map to see every village",
       joinLink: "Join Jeetak",
       joinEyebrow: "Work with Jeetak",
       joinTitle: "Join Jeetak.",
       joinLede: "Own a restaurant or shop, or want to deliver? Download the app made for you and apply from your phone.",
       vendorKicker: "Restaurants & shops",
       vendorTitle: "Become a partner",
-      vendorBody: "Get orders from customers across 21 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.",
+      vendorBody: "Get orders from customers across 24 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.",
       vendorApplySoon: "The vendor app is coming soon. You’ll download it and apply right here.",
       vendorApplyLive: "Download the vendor app and apply.",
       vendorApplyAndroid: "Download the vendor app on Android and apply. The iPhone version is coming soon.",
@@ -83,7 +84,7 @@
       docTitle: "Jeetak · Delivery across the Upper Metn"
     },
     ar: {
-      heroEyebrow: "المتن الأعلى · 21 ضيعة",
+      heroEyebrow: "المتن الأعلى · 24 ضيعة",
       heroTitle: "من دكّانة الضيعة لعند بابك.",
       heroLede: "أكل، أغراض البيت، وكل شي بدّك ياه من المحلات اللي حدّك، بتطلبه من تطبيق واحد. بلا تلفونات، وبلا فويسات.",
       storeSoon: "قريباً على",
@@ -117,15 +118,16 @@
       st4: "عالطريق",
       st5: "وصل",
       covEyebrow: "وين منوصل",
-      covTitle: "21 ضيعة. تطبيق واحد.",
+      covTitle: "24 ضيعة. تطبيق واحد.",
       covLede: "جيتك بيوصل لكل هالضيع بالمتن الأعلى.",
+      mapHint: "اسحب الخريطة لتشوف كل الضيع",
       joinLink: "انضمّ لجيتك",
       joinEyebrow: "اشتغل مع جيتك",
       joinTitle: "انضمّ لجيتك.",
       joinLede: "عندك مطعم أو محل، أو بدّك تشتغل دليفري؟ نزّل التطبيق المخصّص إلك وقدّم طلبك من تلفونك.",
       vendorKicker: "مطاعم ومحلات",
       vendorTitle: "صير شريك",
-      vendorBody: "وصّل محلّك لزباين بـ21 ضيعة. بتقبل الطلبيات وبتجهّزها من تطبيق المحلات، ودليفري جيتك بيمرق ياخدها.",
+      vendorBody: "وصّل محلّك لزباين بـ24 ضيعة. بتقبل الطلبيات وبتجهّزها من تطبيق المحلات، ودليفري جيتك بيمرق ياخدها.",
       vendorApplySoon: "تطبيق المحلات نازل قريباً، ورح تنزّلو وتقدّم طلبك من هون.",
       vendorApplyLive: "نزّل تطبيق المحلات وقدّم طلبك.",
       vendorApplyAndroid: "نزّل تطبيق المحلات على أندرويد وقدّم طلبك. نسخة الآيفون نازلة قريباً.",
@@ -632,6 +634,76 @@
     });
   }
 
+
+  // Coverage map: centre it on Hammana on phones, ripple the villages when it
+  // comes into view, and drop a Jeetak pin on a random village now and then.
+  function initMap() {
+    var card = document.getElementById("mapCard");
+    var frame = document.getElementById("mapFrame");
+    if (!card || !frame) return;
+    var hint = document.getElementById("mapHint");
+
+    function fit() {
+      var max = frame.scrollWidth - frame.clientWidth;
+      if (hint) hint.hidden = max <= 4;
+      return max;
+    }
+    var max = fit();
+    if (max > 4) {
+      var focus = parseFloat(frame.getAttribute("data-focus")) || 0.5;
+      frame.scrollLeft = Math.max(0, Math.min(max, frame.scrollWidth * focus - frame.clientWidth / 2));
+    }
+    window.addEventListener("resize", fit);
+
+    var villages = Array.prototype.slice.call(card.querySelectorAll(".map-v"));
+    card.addEventListener("click", function (e) {
+      var v = e.target.closest ? e.target.closest(".map-v") : null;
+      villages.forEach(function (el) { if (el !== v) el.classList.remove("is-active"); });
+      if (v) v.classList.toggle("is-active");
+    });
+
+    if (reduceMotion || !("IntersectionObserver" in window)) return;
+    var drop = document.getElementById("mapDrop");
+    var pin = drop && drop.querySelector(".map-drop-pin");
+    var timer = 0, last = -1;
+
+    function dropPin() {
+      timer = 0;
+      if (!pin || !villages.length) return;
+      var i;
+      do { i = Math.floor(Math.random() * villages.length); } while (i === last && villages.length > 1);
+      last = i;
+      var v = villages[i];
+      var dot = v.querySelector(".map-dot");
+      drop.setAttribute("transform", "translate(" + dot.getAttribute("cx") + " " + dot.getAttribute("cy") + ")");
+      if (pin.animate) {
+        pin.animate([
+          { transform: "translateY(-34px) scale(1, 1)", opacity: 0 },
+          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.22, easing: "cubic-bezier(.5,0,.8,.4)" },
+          { transform: "translateY(0) scale(1.2, 0.8)", opacity: 1, offset: 0.3 },
+          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.4 },
+          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.82 },
+          { transform: "translateY(-6px) scale(1, 1)", opacity: 0 }
+        ], { duration: 2300, easing: "ease-out", fill: "both" });
+      }
+      window.setTimeout(function () { v.classList.add("is-hit"); }, 500);
+      window.setTimeout(function () { v.classList.remove("is-hit"); }, 2000);
+      timer = window.setTimeout(dropPin, 2600 + Math.random() * 1200);
+    }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          card.classList.add("map-on");
+          if (!timer) timer = window.setTimeout(dropPin, 1400);
+        } else {
+          window.clearTimeout(timer);
+          timer = 0;
+        }
+      });
+    }, { threshold: 0.3 }).observe(card);
+  }
+
   orderStores();
   initLanguage();
   var route = initRoute();
@@ -639,4 +711,5 @@
   initStatus();
   initOverscroll();
   initFooterFun();
+  initMap();
 })();

@@ -456,7 +456,7 @@ h2 { font-size: var(--step-h2); }
 .sign-ar { font: 600 1.05rem/1.3 var(--font-ar-display); }
 .sign-lat { font-size: 0.6875rem; font-weight: 600; line-height: 1.25; letter-spacing: 0.06em; text-transform: uppercase; }
 @media (min-width: 1024px) {
-  .signs { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 0.7rem; }
+  .signs { grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 0.7rem; }
   .sign { padding: 0.75rem 0.6rem 0.7rem; }
   .sign-ar { font-size: 1.15rem; }
 }

@@ -183,7 +183,7 @@ In Lebanese Arabic, *jeetak* means "I came to you". Our slogan, *shou ma baddak*
 
 ## Where we deliver
 
-We deliver across 21 villages in the Upper Metn:
+We deliver across 24 villages in the Upper Metn:
 
 <ul class="doc-villages">{VILLAGES}</ul>
 

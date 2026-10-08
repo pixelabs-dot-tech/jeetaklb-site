@@ -1,0 +1,97 @@
+/* ---------- coverage map ---------- */
+:root {
+  --zone-fill: rgba(255, 250, 230, 0.07);
+}
+.map-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--pine);
+}
+.map-frame {
+  direction: ltr;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.map-frame::-webkit-scrollbar { display: none; }
+.village-map { display: block; width: max(100%, 52rem); max-width: none; height: auto; }
+
+.map-bg { fill: var(--pine); }
+.map-contour { fill: none; stroke: var(--ridge-far); stroke-width: 1.1; opacity: 0.6; }
+.map-contour.is-index { stroke-width: 1.9; opacity: 0.85; }
+.map-zone { fill: var(--zone-fill); }
+.map-zone-line {
+  fill: none;
+  stroke: var(--orange-lit);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.1 9;
+}
+
+.map-dot { fill: var(--cream); stroke: var(--pine-deep); stroke-width: 2.5; transition: fill 0.2s ease; }
+.map-ring {
+  fill: none;
+  stroke: var(--orange-lit);
+  stroke-width: 2;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.map-on .map-ring { animation: map-ring 1.5s cubic-bezier(0.2, 0.7, 0.3, 1) var(--d, 0ms) 1 both; }
+@keyframes map-ring {
+  /* the stroke thins as the ring grows, so it stays a fine line instead of a thick donut */
+  0% { opacity: 0.95; transform: scale(1); stroke-width: 2; }
+  100% { opacity: 0; transform: scale(4.2); stroke-width: 0.45; }
+}
+.map-label {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  fill: var(--cream);
+  stroke: var(--pine);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  transition: fill 0.2s ease;
+}
+.map-ar .map-label { font-family: var(--font-ar-display); font-size: 16px; font-weight: 600; }
+.map-leader { fill: none; stroke: var(--cream-dim); stroke-width: 1.2; opacity: 0.55; }
+.map-hit { fill: transparent; cursor: pointer; }
+.map-v:hover .map-dot, .map-v.is-active .map-dot { fill: var(--orange-lit); }
+.map-v:hover .map-label, .map-v.is-active .map-label { fill: var(--orange-lit); }
+
+.map-ar { display: none; }
+:root:lang(ar) .map-ar { display: inline; }
+:root:lang(ar) .map-en { display: none; }
+
+.map-small {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  fill: var(--cream-dim);
+}
+.map-small.map-ar { font-family: var(--font-ar-display); font-size: 14px; letter-spacing: 0; }
+.map-n { fill: var(--cream); }
+.map-arrow { fill: none; stroke: var(--cream-dim); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.map-north-a { fill: var(--orange-lit); }
+.map-north-b { fill: var(--cream-dim); }
+.map-sb-a { fill: var(--cream); }
+.map-sb-b { fill: var(--line-on-pine); }
+
+.map-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+.map-hint::before, .map-hint::after { content: ""; width: 1.4rem; border-top: 3px dotted var(--orange); }
+
+.map-v.is-hit .map-dot { fill: var(--orange-lit); }
+.map-drop { pointer-events: none; }
+.map-drop-pin { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }

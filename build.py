@@ -280,20 +280,50 @@ STATUS_ITEMS = "\n          ".join(
     for k, t, c in STATUS)
 
 VILLAGES = [
-    ("Arsoun", "أرصون"), ("Bhamdoun", "بحمدون"), ("Btebyat", "بتبيات"), ("Btekhnay", "بتخنيه"),
-    ("Bzebdine", "بزبدين"), ("Chbaniyeh", "الشبانية"), ("Deir El Harf", "دير الحرف"), ("Dlaibeh", "دليبة"),
-    ("Falougha · Khalwet", "فالوغا · خلوات"), ("Hammana", "حمّانا"), ("Jouar El Houz", "جوار الحوز"),
-    ("Khraybeh", "الخريبة"), ("Kornayel", "قرنايل"), ("Qalaa", "القلعة"), ("Qortada", "قرطاضة"),
-    ("Qoubbei", "قبيع"), ("Qraiyeh", "القريّة"), ("Qseibe", "القصيبة"), ("Ras El Maten", "رأس المتن"),
-    ("Salima", "صليما"), ("Saoufar", "صوفر"),
+    ("Arsoun", "أرصون"), ("Bhamdoun", "بحمدون"), ("Bmariam", "بمريم"), ("Btebyat", "بتبيات"),
+    ("Btekhnay", "بتخنيه"), ("Bzebdine", "بزبدين"), ("Chbaniyeh", "الشبانية"), ("Deir El Harf", "دير الحرف"),
+    ("Dlaibeh", "دليبة"), ("Falougha", "فالوغا"), ("Hammana", "حمّانا"), ("Jouar El Haouz", "جوار الحوز"),
+    ("Kfar Selouan", "كفرسلوان"), ("Khalwet", "خلوات"), ("Khraybeh", "الخريبة"), ("Kornayel", "قرنايل"),
+    ("Qalaa", "القلعة"), ("Qortada", "قرطاضة"), ("Qoubbei", "قبيع"), ("Qraiyeh", "القريّة"),
+    ("Qseibe", "القصيبة"), ("Ras El Maten", "رأس المتن"), ("Salima", "صليما"), ("Saoufar", "صوفر"),
 ]
-assert len(VILLAGES) == 21
+assert len(VILLAGES) == 24
 SIGNS = "\n        ".join(
     f'<li class="sign" data-lat="{lat}" data-ar="{ar}"><span class="sign-ar" lang="ar">{ar}</span>'
     f'<span class="sign-lat">{lat}</span></li>' for lat, ar in VILLAGES)
 
 # The intro is in the preview only until it's approved for the live site.
 SITE_INTRO = True
+
+# ---------------------------------------------------------------- coverage: tags or map
+import hashlib  # noqa: E402
+SITE_MAP = False   # the map is in the preview only until it's approved
+
+TAGS_HTML = f'''<ul class="signs" id="signs">
+        {SIGNS}
+      </ul>'''
+
+
+def map_html():
+    import village_coords  # noqa: F401
+    key_src = "".join((ROOT / f).read_text() for f in ("village_map.py", "village_coords.py", "label_widths.json"))
+    key = hashlib.sha256((key_src + repr(VILLAGES)).encode()).hexdigest()[:16]
+    cache = ROOT / "map_cache.json"
+    data = json.loads(cache.read_text()) if cache.exists() else {}
+    if data.get("key") != key:
+        import village_map
+        svg, info = village_map.build(VILLAGES)
+        data = {"key": key, "svg": svg, "info": info}
+        cache.write_text(json.dumps(data, ensure_ascii=False))
+    info = data["info"]
+    return (f'''<div class="map-card" id="mapCard">
+        <div class="map-frame" id="mapFrame" data-focus="{info["hammana_x"]:.3f}">{data["svg"]}</div>
+      </div>
+      <p class="map-hint" id="mapHint" data-i18n="mapHint" hidden>Swipe the map to see every village</p>''', info)
+
+
+MAP_HTML, MAP_INFO = map_html()
+print("map", MAP_INFO["missing"] and f"missing positions: {MAP_INFO['missing']}" or "all villages placed")
 
 body = (SRC / "body.html").read_text()
 for key, val in {
@@ -307,10 +337,11 @@ for key, val in {
     "FOOD_ITEMS": FOOD_ITEMS + FOOT_SCOOTER,
 }.items():
     body = body.replace("{{" + key + "}}", str(val))
-assert set(re.findall(r"\{\{\w+\}\}", body)) == {"{{INTRO}}", "{{SITE}}"}, re.findall(r"\{\{\w+\}\}", body)
+assert set(re.findall(r"\{\{\w+\}\}", body)) == {"{{INTRO}}", "{{SITE}}", "{{COVERAGE}}"}, re.findall(r"\{\{\w+\}\}", body)
 
 css = (SRC / "style.css").read_text()
 intro_css = (SRC / "intro.css").read_text()
+map_css = (SRC / "map.css").read_text()
 js = (SRC / "script.js").read_text()
 font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
               '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
@@ -319,16 +350,16 @@ font_links = ('<link rel="preconnect" href="https://fonts.googleapis.com">\n'
 # ---------------------------------------------------------------- artifact preview
 OUT.mkdir(exist_ok=True)
 preview_body = (body.replace("{{INTRO}}", intro_html(every_visit=True, replay=True))
-                .replace("{{SITE}}", "https://jeetaklb.com"))
-artifact = (f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}{intro_css}</style>\n"
+                .replace("{{SITE}}", "https://jeetaklb.com").replace("{{COVERAGE}}", MAP_HTML))
+artifact = (f"<title>jeetaklb.com</title>\n{font_links}\n<style>\n{css}{intro_css}{map_css}</style>\n"
             f"{preview_body}\n<script>\n{js}</script>\n")
 (OUT / "jeetaklb.html").write_text(artifact)
 
 # ---------------------------------------------------------------- deployable site
-desc = "Food, groceries and anything else from shops near you, delivered across 21 villages in the Upper Metn."
+desc = "Food, groceries and anything else from shops near you, delivered across 24 villages in the Upper Metn."
 site_body = (body.replace("{{INTRO}}", intro_html(every_visit=False, replay=False) if SITE_INTRO else "")
-             .replace("{{SITE}}", ""))
-site_css = css + (intro_css if SITE_INTRO else "")
+             .replace("{{SITE}}", "").replace("{{COVERAGE}}", MAP_HTML if SITE_MAP else TAGS_HTML))
+site_css = css + (intro_css if SITE_INTRO else "") + (map_css if SITE_MAP else "")
 site = f"""<!doctype html>
 <html lang="en" dir="ltr">
 <head>
