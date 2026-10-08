@@ -305,21 +305,22 @@ TAGS_HTML = f'''<ul class="signs" id="signs">
 
 
 def map_html():
-    import village_coords  # noqa: F401
+    """The coverage map, drawn twice: a wide layout for laptops and tablets and a compact one
+    for phones. map.css shows one or the other, so the whole map fits without swiping."""
     key_src = "".join((ROOT / f).read_text() for f in ("village_map.py", "village_coords.py", "label_widths.json"))
     key = hashlib.sha256((key_src + repr(VILLAGES)).encode()).hexdigest()[:16]
     cache = ROOT / "map_cache.json"
     data = json.loads(cache.read_text()) if cache.exists() else {}
-    if data.get("key") != key:
-        import village_map
-        svg, info = village_map.build(VILLAGES)
-        data = {"key": key, "svg": svg, "info": info}
+    if data.get("key") != key or "compact" not in data:
+        import village_map   # needs matplotlib; only loaded when the map has to be redrawn
+        data = {"key": key}
+        for layout in ("wide", "compact"):
+            svg, info = village_map.build(VILLAGES, layout)
+            data[layout] = {"svg": svg, "info": info}
         cache.write_text(json.dumps(data, ensure_ascii=False))
-    info = data["info"]
     return (f'''<div class="map-card" id="mapCard">
-        <div class="map-frame" id="mapFrame" data-focus="{info["hammana_x"]:.3f}">{data["svg"]}</div>
-      </div>
-      <p class="map-hint" id="mapHint" data-i18n="mapHint" hidden>Swipe the map to see every village</p>''', info)
+        <div class="map-frame">{data["wide"]["svg"]}{data["compact"]["svg"]}</div>
+      </div>''', data["wide"]["info"])
 
 
 MAP_HTML, MAP_INFO = map_html()

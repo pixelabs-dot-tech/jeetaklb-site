@@ -8,15 +8,17 @@
   overflow: hidden;
   background: var(--pine);
 }
-.map-frame {
-  direction: ltr;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
+.map-frame { direction: ltr; }   /* label positions are drawn left to right, in Arabic too */
+.village-map { display: block; width: 100%; height: auto; }
+
+/* Two drawings of the same map: the wide one for laptops and tablets, the compact one
+   (taller, with its own label layout) for phones, so the whole map fits without swiping. */
+.village-map.is-compact { display: none; }
+@media (max-width: 719px) {
+  .map-card { max-width: 520px; margin-inline: auto; }
+  .village-map.is-wide { display: none; }
+  .village-map.is-compact { display: block; }
 }
-.map-frame::-webkit-scrollbar { display: none; }
-.village-map { display: block; width: max(100%, 52rem); max-width: none; height: auto; }
 
 .map-bg { fill: var(--pine); }
 .map-contour { fill: none; stroke: var(--ridge-far); stroke-width: 1.1; opacity: 0.6; }
@@ -81,17 +83,18 @@
 .map-sb-a { fill: var(--cream); }
 .map-sb-b { fill: var(--line-on-pine); }
 
-.map-hint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-  font-size: 0.875rem;
-  color: var(--ink-soft);
-}
-.map-hint::before, .map-hint::after { content: ""; width: 1.4rem; border-top: 3px dotted var(--orange); }
-
 .map-v.is-hit .map-dot { fill: var(--orange-lit); }
 .map-drop { pointer-events: none; }
 .map-drop-pin { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
+
+/* the compact (phone) drawing shows at about 1:1, so its type and lines are set smaller */
+.is-compact .map-label { font-size: 10.5px; stroke-width: 3.4px; }
+.is-compact .map-ar .map-label { font-size: 12px; }
+.is-compact .map-small { font-size: 8.5px; letter-spacing: 0.05em; }
+.is-compact .map-small.map-ar { font-size: 10px; letter-spacing: 0; }
+.is-compact .map-dot { stroke-width: 1.8; }
+.is-compact .map-leader { stroke-width: 1; opacity: 0.6; }
+.is-compact .map-zone-line { stroke-width: 2.6; stroke-dasharray: 0.1 7.5; }
+.is-compact .map-arrow { stroke-width: 1.5; }
+.is-compact .map-contour { stroke-width: 0.9; }
+.is-compact .map-contour.is-index { stroke-width: 1.5; }

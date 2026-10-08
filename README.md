@@ -50,15 +50,18 @@ Set `SITE_MAP = True` in `build.py` to show a map of the Upper Metn there instea
 The artifact preview always shows the map.
 
 - `village_coords.py`: each village's position, from GeoNames.
-- `village_map.py`: draws the map as an SVG. It places the English and Arabic
-  labels so they don't overlap and outlines the delivery area around the villages.
-  The contour lines are decorative, not survey data.
+- `village_map.py`: draws the map as an SVG, in two layouts. "wide" is for screens
+  720px and up. "compact" is for phones: it is drawn taller (north-south distances
+  1.3x) with its own label layout and short leader lines, so the whole map fits a
+  phone without swiping. Both place the English and Arabic labels so they don't
+  overlap, and outline the delivery area around the villages. The contour lines
+  are decorative, not survey data.
 - `label_widths.json`: label widths measured in the page fonts. A village that
   isn't listed gets an estimate.
-- `map_cache.json`: the last map drawn. `build.py` redraws it (about 40 seconds)
+- `map_cache.json`: the last maps drawn. `build.py` redraws them (about 90 seconds)
   whenever the villages or these files change.
-- `src/map.css` styles the map. `initMap` in `src/script.js` centres it on Hammana
-  on phones and runs the pin drops.
+- `src/map.css` styles the map and picks the layout for the screen size. `initMap`
+  in `src/script.js` handles taps and runs the pin drops.
 
 To add a village, add its English and Arabic names to `VILLAGES` in `build.py`
 and its coordinates to `village_coords.py`. Then update the village count in

@@ -47,7 +47,6 @@
       covEyebrow: "Where we deliver",
       covTitle: "24 villages. One app.",
       covLede: "Jeetak delivers to all of these villages in the Upper Metn.",
-      mapHint: "Swipe the map to see every village",
       joinLink: "Join Jeetak",
       joinEyebrow: "Work with Jeetak",
       joinTitle: "Join Jeetak.",
@@ -120,7 +119,6 @@
       covEyebrow: "وين منوصل",
       covTitle: "24 ضيعة. تطبيق واحد.",
       covLede: "جيتك بيوصل لكل هالضيع بالمتن الأعلى.",
-      mapHint: "اسحب الخريطة لتشوف كل الضيع",
       joinLink: "انضمّ لجيتك",
       joinEyebrow: "اشتغل مع جيتك",
       joinTitle: "انضمّ لجيتك.",
@@ -635,59 +633,59 @@
   }
 
 
-  // Coverage map: centre it on Hammana on phones, ripple the villages when it
-  // comes into view, and drop a Jeetak pin on a random village now and then.
+  // Coverage map: tap a village to light it up. When the map comes into view the villages
+  // ripple out from Hammana, then a Jeetak pin drops on a random village now and then.
+  // The page holds a wide and a phone drawing of the map; only one of them is shown.
   function initMap() {
     var card = document.getElementById("mapCard");
-    var frame = document.getElementById("mapFrame");
-    if (!card || !frame) return;
-    var hint = document.getElementById("mapHint");
+    if (!card) return;
 
-    function fit() {
-      var max = frame.scrollWidth - frame.clientWidth;
-      if (hint) hint.hidden = max <= 4;
-      return max;
-    }
-    var max = fit();
-    if (max > 4) {
-      var focus = parseFloat(frame.getAttribute("data-focus")) || 0.5;
-      frame.scrollLeft = Math.max(0, Math.min(max, frame.scrollWidth * focus - frame.clientWidth / 2));
-    }
-    window.addEventListener("resize", fit);
-
-    var villages = Array.prototype.slice.call(card.querySelectorAll(".map-v"));
     card.addEventListener("click", function (e) {
       var v = e.target.closest ? e.target.closest(".map-v") : null;
-      villages.forEach(function (el) { if (el !== v) el.classList.remove("is-active"); });
+      Array.prototype.forEach.call(card.querySelectorAll(".map-v.is-active"), function (el) {
+        if (el !== v) el.classList.remove("is-active");
+      });
       if (v) v.classList.toggle("is-active");
     });
 
     if (reduceMotion || !("IntersectionObserver" in window)) return;
-    var drop = document.getElementById("mapDrop");
-    var pin = drop && drop.querySelector(".map-drop-pin");
     var timer = 0, last = -1;
+
+    function shownMap() {
+      var maps = card.querySelectorAll(".village-map");
+      for (var i = 0; i < maps.length; i++) {
+        if (maps[i].getClientRects().length) return maps[i];
+      }
+      return null;
+    }
 
     function dropPin() {
       timer = 0;
-      if (!pin || !villages.length) return;
-      var i;
-      do { i = Math.floor(Math.random() * villages.length); } while (i === last && villages.length > 1);
-      last = i;
-      var v = villages[i];
-      var dot = v.querySelector(".map-dot");
-      drop.setAttribute("transform", "translate(" + dot.getAttribute("cx") + " " + dot.getAttribute("cy") + ")");
-      if (pin.animate) {
-        pin.animate([
-          { transform: "translateY(-34px) scale(1, 1)", opacity: 0 },
-          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.22, easing: "cubic-bezier(.5,0,.8,.4)" },
-          { transform: "translateY(0) scale(1.2, 0.8)", opacity: 1, offset: 0.3 },
-          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.4 },
-          { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.82 },
-          { transform: "translateY(-6px) scale(1, 1)", opacity: 0 }
-        ], { duration: 2300, easing: "ease-out", fill: "both" });
+      var map = shownMap();
+      var villages = map ? map.querySelectorAll(".map-v") : [];
+      var drop = map && map.querySelector(".map-drop");
+      var pin = drop && drop.querySelector(".map-drop-pin");
+      if (pin && villages.length) {
+        var i;
+        do { i = Math.floor(Math.random() * villages.length); } while (i === last && villages.length > 1);
+        last = i;
+        var v = villages[i];
+        var dot = v.querySelector(".map-dot");
+        var fall = map.classList.contains("is-compact") ? 24 : 34;
+        drop.setAttribute("transform", "translate(" + dot.getAttribute("cx") + " " + dot.getAttribute("cy") + ")");
+        if (pin.animate) {
+          pin.animate([
+            { transform: "translateY(-" + fall + "px) scale(1, 1)", opacity: 0 },
+            { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.22, easing: "cubic-bezier(.5,0,.8,.4)" },
+            { transform: "translateY(0) scale(1.2, 0.8)", opacity: 1, offset: 0.3 },
+            { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.4 },
+            { transform: "translateY(0) scale(1, 1)", opacity: 1, offset: 0.82 },
+            { transform: "translateY(-6px) scale(1, 1)", opacity: 0 }
+          ], { duration: 2300, easing: "ease-out", fill: "both" });
+        }
+        window.setTimeout(function () { v.classList.add("is-hit"); }, 500);
+        window.setTimeout(function () { v.classList.remove("is-hit"); }, 2000);
       }
-      window.setTimeout(function () { v.classList.add("is-hit"); }, 500);
-      window.setTimeout(function () { v.classList.remove("is-hit"); }, 2000);
       timer = window.setTimeout(dropPin, 2600 + Math.random() * 1200);
     }
 
