@@ -45,9 +45,9 @@ to them, so keep the file names unchanged. Change the "Last updated" date in
 
 ## Coverage map
 
-The "Where we deliver" section on the live site shows the villages as name tags.
-Set `SITE_MAP = True` in `build.py` to show a map of the Upper Metn there instead.
-The artifact preview always shows the map.
+The "Where we deliver" section shows a map of the Upper Metn with every village.
+Set `SITE_MAP = False` in `build.py` to show the villages as name tags instead
+(the artifact preview always shows the map).
 
 - `village_coords.py`: each village's position, from GeoNames.
 - `village_map.py`: draws the map as an SVG, in two layouts. "wide" is for screens

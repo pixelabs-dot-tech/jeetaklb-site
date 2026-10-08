@@ -297,7 +297,7 @@ SITE_INTRO = True
 
 # ---------------------------------------------------------------- coverage: tags or map
 import hashlib  # noqa: E402
-SITE_MAP = False   # the map is in the preview only until it's approved
+SITE_MAP = True    # the map replaces the village name tags on the live site (approved 8 Oct 2026)
 
 TAGS_HTML = f'''<ul class="signs" id="signs">
         {SIGNS}
