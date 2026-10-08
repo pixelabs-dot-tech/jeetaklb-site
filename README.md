@@ -24,7 +24,7 @@ build keeps them.
 
 1. Edit the files in `src/` (`body.html`, `style.css`, `script.js`, `intro.css`).
    The footer food drawings are in `food_items.py`.
-2. Build: `pip install playwright pillow numpy && python3 build.py`
+2. Build: `pip install playwright pillow numpy markdown matplotlib && python3 build.py`
    (Playwright renders `og-image.png`, the link preview image).
 3. Copy everything in `out/site/` to the root of `main` and push. GitHub Pages
    publishes the change within a minute or two.
@@ -42,6 +42,27 @@ button; the live site plays it once per browser session. `SITE_INTRO` in
 its own HTML file, served at those exact addresses. The app store listings link
 to them, so keep the file names unchanged. Change the "Last updated" date in
 `pages_text.py` whenever the text changes.
+
+## Coverage map
+
+The "Where we deliver" section on the live site shows the villages as name tags.
+Set `SITE_MAP = True` in `build.py` to show a map of the Upper Metn there instead.
+The artifact preview always shows the map.
+
+- `village_coords.py`: each village's position, from GeoNames.
+- `village_map.py`: draws the map as an SVG. It places the English and Arabic
+  labels so they don't overlap and outlines the delivery area around the villages.
+  The contour lines are decorative, not survey data.
+- `label_widths.json`: label widths measured in the page fonts. A village that
+  isn't listed gets an estimate.
+- `map_cache.json`: the last map drawn. `build.py` redraws it (about 40 seconds)
+  whenever the villages or these files change.
+- `src/map.css` styles the map. `initMap` in `src/script.js` centres it on Hammana
+  on phones and runs the pin drops.
+
+To add a village, add its English and Arabic names to `VILLAGES` in `build.py`
+and its coordinates to `village_coords.py`. Then update the village count in
+`build.py`, `src/body.html`, `src/script.js` and `pages_text.py`.
 
 ## Icons
 
