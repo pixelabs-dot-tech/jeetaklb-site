@@ -317,6 +317,85 @@ If you have any questions or concerns about this Privacy Policy, please contact 
 Jeetak<br>
 Email: [support@jeetaklb.com](mailto:support@jeetaklb.com)<br>
 Phone: [79173773](tel:+96179173773)
+
+<h2 class="doc-part" id="driver-terms">Driver Policy</h2>
+
+<p class="doc-date">Last updated {UPDATED}</p>
+
+This policy applies to drivers who deliver orders through the Jeetak driver app. It works together with your agreement with {COMPANY} ("Jeetak"). If the two differ, your agreement applies.
+
+### 1. Working with Jeetak
+
+- You deliver with Jeetak as an independent contractor, not as an employee.
+- You choose when you're available by going online in the driver app.
+- You're responsible for your own taxes and for any registration your work needs.
+
+### 2. Requirements
+
+- Be at least 18 years old.
+- Hold a valid driving licence for your vehicle.
+- Use a motorcycle, scooter or car that is registered, roadworthy and insured as Lebanese law requires.
+- Have a smartphone that can run the Jeetak driver app, with mobile data.
+- Pass our review of your application and documents. We may check your documents again from time to time.
+
+### 3. Safety on the road
+
+- Follow traffic laws and drive carefully, especially on mountain roads and in bad weather.
+- Wear a helmet on a motorcycle or scooter.
+- Don't use your phone while driving. Stop somewhere safe before you use the app.
+- Never drive under the influence of alcohol or drugs.
+- If the weather or the roads become unsafe, stop and tell us. Your safety comes before any delivery.
+
+### 4. Picking up and delivering
+
+- Go to the shop when an order is assigned to you, check the order, and keep it sealed.
+- Carry orders in the Jeetak delivery bag, kept clean and upright.
+- Deliver to the address and pin shown in the app. If you can't find the customer, call them.
+- Update each step in the app, including pickup and delivery.
+- Be polite and respectful to customers and shop staff.
+
+### 5. Cash orders
+
+- For cash on delivery orders, collect the amount shown in the app.
+- Cash you collect belongs to the shop and to Jeetak until it's settled. Your driver wallet shows what you've collected and what you owe.
+- Settle your balance on the schedule Jeetak sets. Missing or unexplained amounts may be deducted from your earnings and can lead to suspension.
+
+### 6. Earnings
+
+- For each delivery you complete, you earn the delivery fee minus Jeetak's fixed platform fee per order. The driver app shows both.
+- Delivery fees depend on distance, so earnings vary from order to order.
+- Your deliveries and earnings are shown in the driver app. We pay you on the schedule in your agreement.
+
+### 7. Jeetak equipment
+
+Jeetak may give you branded equipment, such as a delivery bag, T-shirt or helmet. Keep it clean and in good condition, use it only for Jeetak deliveries, and return it when you stop delivering with Jeetak.
+
+### 8. Ratings and conduct
+
+- Customers can rate their delivery. Driver ratings are anonymous.
+- Consistently low ratings, late deliveries or complaints may lead to a review of your account.
+- Fraud, theft, harassment, unsafe driving or misuse of customer information leads to immediate deactivation.
+
+### 9. Customer information
+
+You see customers' names, phone numbers and addresses only to complete their deliveries. Don't save them, share them or contact customers for any other reason.
+
+### 10. Your information
+
+We collect your name, phone number, identity and driving documents, vehicle details, payout details, ratings, and delivery and earnings records. While you're online or on a delivery, the driver app collects your location to assign orders, guide pickups and drop-offs, and show customers where their order is. We don't collect your location while you're offline. We share your name and live location with the customer during their delivery, and your name with the shop for pickups. We keep financial records for as long as Lebanese law requires. Our [Customer Privacy Policy]({HOME}/customer_policy) describes how we protect information in general.
+
+### 11. Ending your account
+
+- You can stop delivering with Jeetak at any time. Settle your balance and return any Jeetak equipment first.
+- We may suspend or deactivate your account if you break this policy or your agreement.
+
+### 12. Changes to this policy
+
+We may update this policy. Before important changes apply, we'll tell you in the driver app.
+
+### 13. Contact us
+
+{COMPANY}, Mount Lebanon, Lebanon. Email: [{EMAIL}](mailto:{EMAIL})
 """
 
 DELETION = """
@@ -376,7 +455,7 @@ PAGES = [
      "The policy for restaurants and shops that sell through Jeetak.",
      VENDOR),
     ("driver-policy", "Driver Privacy Policy", "Driver policy", "Legal",
-     "How the Jeetak Driver app collects, uses, shares and protects drivers' information.",
+     "The Jeetak Driver app's privacy policy, and the policy for drivers who deliver with Jeetak.",
      DRIVER),
     ("account-deletion", "Delete your Jeetak account", "Delete account", "Account",
      "How to delete your Jeetak account, what we delete and what we keep.",
