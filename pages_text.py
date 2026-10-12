@@ -1,6 +1,8 @@
 """Text of the jeetaklb.com policy pages. Markdown; {EMAIL}, {COMPANY} and {HOME} are filled in by pages.py."""
 
 UPDATED = "6 October 2026"
+# Pages that show their own date line instead of "Last updated {UPDATED}"
+DATES = {"driver-policy": "Effective Date: 28 Nov 2024"}
 
 PRIVACY = """
 This policy explains what personal information Jeetak collects when you use the Jeetak app or website as a customer, how we use it, who we share it with, and the choices you have.
@@ -268,80 +270,53 @@ We may update this policy. Before important changes apply, we'll tell you in the
 """
 
 DRIVER = """
-This policy applies to drivers who deliver orders through the Jeetak driver app. It works together with your agreement with {COMPANY} ("Jeetak"). If the two differ, your agreement applies.
+## 1. Introduction
 
-## 1. Working with Jeetak
+Welcome to Jeetak Driver. Your privacy is important to us. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our mobile application. Please review this policy carefully. By using the app, you agree to the terms of this policy. If you do not agree, please do not use the app.
 
-- You deliver with Jeetak as an independent contractor, not as an employee.
-- You choose when you're available by going online in the driver app.
-- You're responsible for your own taxes and for any registration your work needs.
+## 2. Information We Collect
 
-## 2. Requirements
+- **Personal Information:** We collect personal information such as your name, email address, phone number, driver’s license information, vehicle details, and payment details during registration and use of the app.
+- **Location Data:** We collect and process location data to provide essential services, such as navigating to pickup and delivery locations and ensuring efficient route planning. Location data is collected even when the app is in the background or in a killed state when you are online or actively delivering.
+- **Usage Data:** We collect information on how you interact with the app, including delivery history, earnings, ratings, and app settings.
+- **Device Information:** We may collect information about the device you use to access the app, including the device type, operating system, IP address, and unique device identifiers.
 
-- Be at least 18 years old.
-- Hold a valid driving licence for your vehicle.
-- Use a motorcycle, scooter or car that is registered, roadworthy and insured as Lebanese law requires.
-- Have a smartphone that can run the Jeetak driver app, with mobile data.
-- Pass our review of your application and documents. We may check your documents again from time to time.
+## 3. How We Use Your Information
 
-## 3. Safety on the road
+- To facilitate and optimize delivery requests and navigation.
+- To process payments and manage your driver account.
+- To provide real-time updates to customers on your location and delivery status.
+- To send you notifications, updates, and important communication related to your deliveries.
+- To improve the app’s functionality and user experience.
+- To comply with legal obligations and enforce our terms of service.
 
-- Follow traffic laws and drive carefully, especially on mountain roads and in bad weather.
-- Wear a helmet on a motorcycle or scooter.
-- Don't use your phone while driving. Stop somewhere safe before you use the app.
-- Never drive under the influence of alcohol or drugs.
-- If the weather or the roads become unsafe, stop and tell us. Your safety comes before any delivery.
+## 4. Sharing Your Information
 
-## 4. Picking up and delivering
+We do not sell your personal information. We may share your information with:
 
-- Go to the shop when an order is assigned to you, check the order, and keep it sealed.
-- Carry orders in the Jeetak delivery bag, kept clean and upright.
-- Deliver to the address and pin shown in the app. If you can't find the customer, call them.
-- Update each step in the app, including pickup and delivery.
-- Be polite and respectful to customers and shop staff.
+- **Customers:** To provide them with accurate delivery information, including your location, vehicle details, and contact information.
+- **Service Providers:** For payment processing, customer support, and other operational needs.
+- **Legal Authorities:** If required by law or to protect our rights, property, and safety, or that of others.
 
-## 5. Cash orders
+## 5. Data Security
 
-- For cash on delivery orders, collect the amount shown in the app.
-- Cash you collect belongs to the shop and to Jeetak until it's settled. Your driver wallet shows what you've collected and what you owe.
-- Settle your balance on the schedule Jeetak sets. Missing or unexplained amounts may be deducted from your earnings and can lead to suspension.
+We take reasonable measures to protect your information from unauthorized access, alteration, or disclosure. However, no method of transmission over the internet or mobile networks is entirely secure, and we cannot guarantee absolute security.
 
-## 6. Earnings
+## 6. Your Rights
 
-- For each delivery you complete, you earn the delivery fee minus Jeetak's fixed platform fee per order. The driver app shows both.
-- Delivery fees depend on distance, so earnings vary from order to order.
-- Your deliveries and earnings are shown in the driver app. We pay you on the schedule in your agreement.
+You have the right to access, update, or delete your personal information at any time. You may also opt out of certain data processing activities, such as receiving notifications, except those required for the operation of the app.
 
-## 7. Jeetak equipment
+## 7. Changes to This Policy
 
-Jeetak may give you branded equipment, such as a delivery bag, T-shirt or helmet. Keep it clean and in good condition, use it only for Jeetak deliveries, and return it when you stop delivering with Jeetak.
+We may update this Privacy Policy periodically. We will notify you of any changes by posting the updated policy in the app or sending you an email. Please review the policy regularly for updates.
 
-## 8. Ratings and conduct
+## 8. Contact Us
 
-- Customers can rate their delivery. Driver ratings are anonymous.
-- Consistently low ratings, late deliveries or complaints may lead to a review of your account.
-- Fraud, theft, harassment, unsafe driving or misuse of customer information leads to immediate deactivation.
+If you have any questions or concerns about this Privacy Policy, please contact us at:
 
-## 9. Customer information
-
-You see customers' names, phone numbers and addresses only to complete their deliveries. Don't save them, share them or contact customers for any other reason.
-
-## 10. Your information
-
-We collect your name, phone number, identity and driving documents, vehicle details, payout details, ratings, and delivery and earnings records. While you're online or on a delivery, the driver app collects your location to assign orders, guide pickups and drop-offs, and show customers where their order is. We don't collect your location while you're offline. We share your name and live location with the customer during their delivery, and your name with the shop for pickups. We keep financial records for as long as Lebanese law requires. Our [Customer Privacy Policy]({HOME}/customer_policy) describes how we protect information in general.
-
-## 11. Ending your account
-
-- You can stop delivering with Jeetak at any time. Settle your balance and return any Jeetak equipment first.
-- We may suspend or deactivate your account if you break this policy or your agreement.
-
-## 12. Changes to this policy
-
-We may update this policy. Before important changes apply, we'll tell you in the driver app.
-
-## 13. Contact us
-
-{COMPANY}, Mount Lebanon, Lebanon. Email: [{EMAIL}](mailto:{EMAIL})
+Jeetak<br>
+Email: [support@jeetaklb.com](mailto:support@jeetaklb.com)<br>
+Phone: [79173773](tel:+96179173773)
 """
 
 DELETION = """
@@ -400,8 +375,8 @@ PAGES = [
     ("vendor-policy", "Vendor Policy", "Vendor policy", "Legal",
      "The policy for restaurants and shops that sell through Jeetak.",
      VENDOR),
-    ("driver-policy", "Driver Policy", "Driver policy", "Legal",
-     "The policy for drivers who deliver with the Jeetak driver app.",
+    ("driver-policy", "Driver Privacy Policy", "Driver policy", "Legal",
+     "How the Jeetak Driver app collects, uses, shares and protects drivers' information.",
      DRIVER),
     ("account-deletion", "Delete your Jeetak account", "Delete account", "Account",
      "How to delete your Jeetak account, what we delete and what we keep.",

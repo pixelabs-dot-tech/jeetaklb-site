@@ -4,7 +4,7 @@ import html as htmllib
 
 import markdown
 
-from pages_text import PAGES, UPDATED
+from pages_text import DATES, PAGES, UPDATED
 
 EMAIL = "support@jeetaklb.com"
 COMPANY = "Jeetak SARL"
@@ -186,7 +186,7 @@ def render(site_dir, word_d, wm_w, wm_h, font_links, villages):
   <article class="doc">
     <p class="doc-kicker">{htmllib.escape(kicker)}</p>
     <h1>{t}</h1>
-    <p class="doc-date">Last updated {UPDATED}</p>
+    <p class="doc-date">{htmllib.escape(DATES.get(slug, f"Last updated {UPDATED}"))}</p>
 {body}
   </article>
 </main>
