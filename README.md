@@ -16,9 +16,21 @@ var STORE_LINKS = {
 };
 ```
 
-A button switches from "Coming soon" to a live download link as soon as its link
+A store badge stays hidden while its link is empty and appears as soon as the link
 is filled in. Change the same lines in `src/script.js` on this branch so the next
 build keeps them.
+
+## Store badges
+
+`src/badge-app-store.svg` and `src/badge-google-play.png` are the official badges,
+from https://developer.apple.com/app-store/marketing/guidelines/ and
+https://play.google.com/intl/en_us/badges/. The Google Play file is trimmed of its
+transparent margin and is otherwise untouched. Keep them as they are: both
+guidelines forbid changing the artwork, and that includes dimming a badge for an app
+that isn't out yet. The footer carries the trademark credit Apple asks for.
+
+The Arabic page uses the same English badges. Google's public Arabic badge still has
+the old Play logo.
 
 ## Change anything else
 

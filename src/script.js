@@ -2,7 +2,7 @@
   "use strict";
 
   // Paste the store links here once each app is live.
-  // While a link is empty, its button shows "Coming soon".
+  // While a link is empty, its store badge stays hidden.
   var STORE_LINKS = {
     customer: { ios: "https://apps.apple.com/lb/app/jeetak-%D8%AC%D9%8A%D8%AA%D9%83/id6817658758", android: "https://play.google.com/store/apps/details?id=com.food.jeetak" },     // Jeetak customer app
     vendor:   { ios: "https://apps.apple.com/lb/app/jeetak-partner/id6817663791", android: "https://play.google.com/store/apps/details?id=com.jeetak.vendor" },   // vendor app for restaurants and shops
@@ -14,7 +14,6 @@
       heroEyebrow: "Upper Metn · 24 villages",
       heroTitle: "From the village shop to your door.",
       heroLede: "Food, groceries and anything else nearby, ordered in one app. No calls. No voice notes.",
-      storeSoon: "Coming soon on",
       storeLiveIos: "Download on the",
       storeLiveAndroid: "Get it on",
       storeNoteSoon: "The app is launching soon on iPhone and Android.",
@@ -71,6 +70,7 @@
       ctaBodyAndroid: "Get it on Google Play and place your first order. The iPhone app is coming soon.",
       ctaBodyIos: "Download it on the App Store and place your first order. The Android app is coming soon.",
       footCopy: "© 2026 Jeetak SARL",
+      footLegal: "Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.",
       lnkAbout: "About us",
       lnkTerms: "Terms of use",
       lnkPrivacy: "Privacy policy",
@@ -86,7 +86,6 @@
       heroEyebrow: "المتن الأعلى · 24 ضيعة",
       heroTitle: "من دكّانة الضيعة لعند بابك.",
       heroLede: "أكل، أغراض البيت، وكل شي بدّك ياه من المحلات اللي حدّك، بتطلبه من تطبيق واحد. بلا تلفونات، وبلا فويسات.",
-      storeSoon: "قريباً على",
       storeLiveIos: "نزّلو من",
       storeLiveAndroid: "نزّلو من",
       storeNoteSoon: "التطبيق نازل قريباً على آيفون وأندرويد.",
@@ -143,6 +142,7 @@
       ctaBodyAndroid: "نزّلو من Google Play واطلب أوّل طلبية. تطبيق الآيفون نازل قريباً.",
       ctaBodyIos: "نزّلو من App Store واطلب أوّل طلبية. تطبيق الأندرويد نازل قريباً.",
       footCopy: "© 2026 جيتك ش.م.م.",
+      footLegal: "Apple وشعار Apple علامتان تجاريتان لشركة Apple Inc.‎، مسجّلتان في الولايات المتحدة وبلدان أخرى. App Store علامة خدمة لشركة Apple Inc.‎، و Google Play وشعار Google Play علامتان تجاريتان لشركة Google LLC.‎",
       lnkAbout: "من نحن",
       lnkTerms: "شروط الاستخدام",
       lnkPrivacy: "سياسة الخصوصية",
@@ -178,19 +178,15 @@
     each(".store", function (el) {
       var key = el.getAttribute("data-store");
       var url = linksFor(el.getAttribute("data-app"))[key];
-      var small = el.querySelector("small");
       if (url) {
         el.setAttribute("href", url);
         el.setAttribute("target", "_blank");
         el.setAttribute("rel", "noopener");
-        el.removeAttribute("aria-disabled");
+        el.setAttribute("aria-label", key === "ios" ? dict.storeLiveIos + " App Store" : dict.storeLiveAndroid + " Google Play");
         el.classList.remove("is-soon");
-        small.textContent = key === "ios" ? dict.storeLiveIos : dict.storeLiveAndroid;
       } else {
         el.removeAttribute("href");
-        el.setAttribute("aria-disabled", "true");
         el.classList.add("is-soon");
-        small.textContent = dict.storeSoon;
       }
     });
     each("[data-i18n-state]", function (el) {

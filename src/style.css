@@ -185,41 +185,25 @@ p { margin: 0; }
   color: var(--cream-dim);
 }
 
-/* ---------- store buttons ---------- */
+/* ---------- store badges ---------- */
+/* The official badges, left as supplied. Apple and Google both ask for clear space of a quarter
+   of the badge height, and Google Play must be no smaller than the App Store badge. */
 .stores {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 0.875rem;
   margin-top: 1.75rem;
 }
-.store {
-  flex: 1 1 9.75rem;
-  max-width: 14rem;
-  min-width: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.6rem 0.95rem 0.6rem 0.8rem;
-  border: 2px solid var(--cream);
-  border-radius: 14px;
-  background: var(--cream);
-  color: var(--pine);
-  text-decoration: none;
-  line-height: 1.15;
-  transition: transform 0.15s ease, background-color 0.2s;
+.store { flex: none; display: block; }
+.store svg {
+  display: block;
+  height: clamp(2.5rem, 12.5vw, 3.25rem);
+  width: auto;
+  fill: #000;
 }
-:root[dir="rtl"] .store { padding: 0.6rem 0.8rem 0.6rem 0.95rem; }
-.store svg { flex: none; width: 1.4rem; height: 1.4rem; }
-.store small { display: block; font-size: 0.75rem; font-weight: 500; white-space: nowrap; }
-.store strong { display: block; font-size: 1.0625rem; font-weight: 600; letter-spacing: 0.005em; white-space: nowrap; }
-.store:not(.is-soon):hover { transform: translateY(-2px); }
-.store.is-soon {
-  background: transparent;
-  color: var(--cream);
-  border-style: dashed;
-  border-color: var(--line-on-pine);
-  cursor: default;
-}
+.store[data-store="ios"] svg { aspect-ratio: 119.66407 / 40; }
+.store[data-store="android"] svg { aspect-ratio: 564 / 168; }
+.store.is-soon { display: none; }
 .store-note { margin-top: 0.85rem; font-size: 0.9375rem; color: var(--cream-dim); }
 
 /* ---------- hero landscape ---------- */
@@ -494,14 +478,9 @@ h2 { font-size: var(--step-h2); }
 .join-text { color: var(--ink-soft); }
 .join-apply { margin-top: auto; padding-top: 0.75rem; font-size: 0.9375rem; font-weight: 500; color: var(--ink); }
 .join-card .stores { margin-top: 0.6rem; }
-.join-card .store { background: var(--pine); border-color: var(--pine); color: var(--cream); }
-.join-card .store.is-soon { background: transparent; border-color: var(--ink-soft); color: var(--pine); }
+.join-card .store svg { height: clamp(2.5rem, 11vw, 2.875rem); }
 @media (min-width: 820px) {
   .join-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
-}
-@media (max-width: 480px) {
-  .join-card .store > svg { display: none; }
-  .join-card .store { flex-basis: 7.5rem; padding-inline: 0.85rem; }
 }
 
 .road-dots { fill: none; stroke: var(--orange-lit); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.1 13; }
@@ -554,8 +533,6 @@ h2 { font-size: var(--step-h2); }
 .signoff h2 { margin-bottom: 1rem; }
 .signoff p.body { max-width: 30rem; font-size: var(--step-lede); font-weight: 500; color: var(--white); }
 .signoff .stores { margin-top: 1.6rem; }
-.signoff .store.is-soon { color: var(--white); border-color: var(--white); }
-.signoff .store small { font-weight: 600; }
 @media (min-width: 820px) {
   .signoff-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4rem; }
   .logo-tile { place-items: center start; }
@@ -581,6 +558,7 @@ h2 { font-size: var(--step-h2); }
 .foot-links a:hover, .foot-meta a:hover { text-decoration: underline; }
 .foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
 .foot-meta a { font-size: 0.875rem; font-weight: 400; }
+.foot-legal { max-width: 44rem; font-size: 0.75rem; line-height: 1.5; }
 
 /* ---------- footer: food pops up from under the page ---------- */
 .signoff { padding-block-end: 0; }

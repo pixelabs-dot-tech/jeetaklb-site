@@ -1,4 +1,5 @@
 """Assemble the Jeetak landing page: an artifact preview and a deployable site."""
+import base64
 import json
 import re
 import shutil
@@ -148,14 +149,34 @@ HERO_SVG = f"""<svg id="heroArt" viewBox="0 0 1600 520" preserveAspectRatio="xMi
     </svg>"""
 
 # ---------------------------------------------------------------- pieces
-PHONE = ('<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">'
-         '<rect x="6" y="2.5" width="12" height="19" rx="2.6" fill="none" stroke="currentColor" stroke-width="1.8"/>'
-         '<path d="M10.5 18.3h3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>')
+# The official store badges. Their guidelines forbid changing the artwork, so a store with no link
+# yet shows no badge rather than a dimmed one. The Google Play file is only trimmed of its
+# transparent margin.
+BADGES = {
+    "ios": ("badge-ios", 119.66407, 40, "Download on the App Store"),
+    "android": ("badge-android", 564, 168, "Get it on Google Play"),
+}
+STORE_LINKS = {app: {"ios": ios, "android": android} for app, ios, android in re.findall(
+    r'(customer|vendor|driver):\s*\{ ios: "([^"]*)", android: "([^"]*)" \}', (SRC / "script.js").read_text())}
 
 
-def store(app, key, name):
-    return (f'<a class="store is-soon" data-app="{app}" data-store="{key}" aria-disabled="true">{PHONE}'
-            f'<span><small>Coming soon on</small><strong>{name}</strong></span></a>')
+def badge_symbols():
+    art = (SRC / "badge-app-store.svg").read_text()
+    art = art[art.index(">") + 1:art.rindex("</svg>")]
+    art = re.sub(r'<title>.*?</title>|\s+(?:id|data-name)="[^"]*"', "", art, flags=re.S).strip()
+    png = base64.b64encode((SRC / "badge-google-play.png").read_bytes()).decode()
+    return (f'<symbol id="badge-ios" viewBox="0 0 119.66407 40">{art}</symbol>\n'
+            f'    <symbol id="badge-android" viewBox="0 0 564 168"><image href="data:image/png;base64,{png}" '
+            f'width="564" height="168"/></symbol>')
+
+
+def store(app, key):
+    symbol, w, h, label = BADGES[key]
+    url = STORE_LINKS[app][key]
+    link = f'class="store" href="{url}" target="_blank" rel="noopener"' if url else 'class="store is-soon"'
+    return (f'<a {link} data-app="{app}" data-store="{key}" aria-label="{label}">'
+            f'<svg width="{w}" height="{h}" viewBox="0 0 {w} {h}" aria-hidden="true" focusable="false">'
+            f'<use href="#{symbol}"/></svg></a>')
 
 
 def shop_svg():
@@ -330,9 +351,10 @@ body = (SRC / "body.html").read_text()
 for key, val in {
     "WORDMARK_D": WORD_D, "SLOGAN_D": SLOGAN_D, "PIN_D": PIN_D,
     "WM_W": WM_W, "WM_H": WM_H, "LOCK_W": LOCK_W, "LOCK_H": LOCK_H, "PIN_W": PIN_W, "PIN_H": PIN_H,
-    "STORE_IOS": store("customer", "ios", "App Store"), "STORE_ANDROID": store("customer", "android", "Google Play"),
-    "STORE_VENDOR_IOS": store("vendor", "ios", "App Store"), "STORE_VENDOR_ANDROID": store("vendor", "android", "Google Play"),
-    "STORE_DRIVER_IOS": store("driver", "ios", "App Store"), "STORE_DRIVER_ANDROID": store("driver", "android", "Google Play"),
+    "BADGE_SYMBOLS": badge_symbols(),
+    "STORE_IOS": store("customer", "ios"), "STORE_ANDROID": store("customer", "android"),
+    "STORE_VENDOR_IOS": store("vendor", "ios"), "STORE_VENDOR_ANDROID": store("vendor", "android"),
+    "STORE_DRIVER_IOS": store("driver", "ios"), "STORE_DRIVER_ANDROID": store("driver", "android"),
     "SHOP_SVG": shop_svg(), "SCOOTER_SVG": SCOOTER_SVG,
     "HERO_SVG": HERO_SVG, "STATUS_ITEMS": STATUS_ITEMS, "SIGNS": SIGNS,
     "FOOD_ITEMS": FOOD_ITEMS + FOOT_SCOOTER,
