@@ -44,7 +44,7 @@ main p{margin:18px 0 0;color:rgba(255,250,230,.8)}
   try { key=bytes(k); raw=bytes(document.getElementById('d').textContent.trim()); } catch(e){ fail(); return; }
   crypto.subtle.importKey('raw', key, {name:'AES-GCM'}, false, ['decrypt'])
     .then(function(ck){ return crypto.subtle.decrypt({name:'AES-GCM', iv: raw.slice(0,12)}, ck, raw.slice(12)); })
-    .then(function(pt){ var html=new TextDecoder().decode(pt); document.open(); document.write(html); document.close(); })
+    .then(function(pt){ var html=new TextDecoder().decode(pt); function show(){ document.open(); document.write(html); document.close(); } if(document.readyState==='complete') show(); else window.addEventListener('load', show); })
     .catch(fail);
 })();
 </script>
