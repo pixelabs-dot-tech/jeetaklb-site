@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jeetak Driver app · Become a Jeetak driver</title>
+<meta name="description" content="Deliver orders around the Upper Metn and earn on every delivery. Download the Jeetak Driver app and apply from your phone.">
+<meta name="theme-color" content="#1D3D2F">
+<link rel="canonical" href="https://jeetaklb.com/driver">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Jeetak">
+<meta property="og:url" content="https://jeetaklb.com/driver">
+<meta property="og:title" content="Jeetak Driver app · Become a Jeetak driver">
+<meta property="og:description" content="Deliver orders around the Upper Metn and earn on every delivery. Download the Jeetak Driver app and apply from your phone.">
+<meta property="og:image" content="https://jeetaklb.com/og-driver.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jeetak Driver: Become a Jeetak driver">
+<meta name="twitter:card" content="summary_large_image">
+<script>
+  // Phones go straight to their store (link previews don't run this, so they read the tags above).
+  (function () {
+    var links = {"ios": "", "android": "https://play.google.com/store/apps/details?id=com.jeetak.drivers"};
+    if (/[?&]stay\b/.test(location.search)) return;
+    var ua = navigator.userAgent || "";
+    var ios = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var target = /Android/i.test(ua) ? links.android : (ios ? links.ios : "");
+    if (target) location.replace(target);
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@600;800&family=Kanit:ital,wght@1,600;1,700&family=Readex+Pro:wght@400;500;600&display=swap">
+<style>
+:root {
+  --orange: #E23C0E;
+  --orange-lit: #FF7A45;
+  --orange-ink: #B32F0A;
+  --pine: #1D3D2F;
+  --pine-deep: #10241B;
+  --cream: #FFFAE6;
+  --cream-dim: #D6DCC8;
+  --ink: #15271E;
+  --ink-soft: #4A5D52;
+  --font-display: "Kanit", "Readex Pro", system-ui, sans-serif;
+  --font-body: "Readex Pro", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ar: "Baloo Bhaijaan 2", "Readex Pro", "Geeza Pro", "Noto Sans Arabic", sans-serif;
+  color-scheme: light;
+  background: var(--pine);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+.doc-wrap { width: 100%; max-width: 46rem; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2rem); }
+:focus-visible { outline: 3px solid var(--orange-ink); outline-offset: 3px; border-radius: 4px; }
+.doc-top :focus-visible, .doc-foot :focus-visible { outline-color: var(--orange-lit); }
+
+.doc-top { background: var(--pine); color: var(--cream); padding-top: env(safe-area-inset-top, 0px); }
+.doc-top-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; }
+.brand { display: block; line-height: 0; }
+.wordmark { display: block; width: 7.25rem; height: auto; fill: var(--cream); }
+.doc-home {
+  color: var(--cream);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-bottom: 2px dotted var(--orange-lit);
+}
+.doc-home:hover { border-bottom-style: solid; }
+
+.doc { padding-block: clamp(2.25rem, 6vw, 3.5rem) clamp(3rem, 8vw, 4.5rem); }
+.doc-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+}
+.doc-kicker::before { content: ""; width: 1.6rem; border-top: 4px dotted var(--orange); }
+.doc h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 6.5vw, 3.1rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+.doc-date { margin: 0.85rem 0 2rem; color: var(--ink-soft); font-size: 0.9375rem; }
+.doc h2 {
+  margin: 2.25rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 3.6vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--pine);
+  text-wrap: balance;
+}
+.doc h3 {
+  margin: 2.25rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.3rem, 3.6vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--pine);
+  text-wrap: balance;
+}
+/* a second document on the same page (the driver page holds the privacy policy, then the driver policy) */
+.doc h2.doc-part {
+  margin: 3.5rem 0 0;
+  padding-top: 2.5rem;
+  border-top: 4px dotted var(--orange);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 5.2vw, 2.4rem);
+  line-height: 1.08;
+  color: var(--ink);
+}
+.doc h2.doc-part + .doc-date { margin: 0.7rem 0 1.25rem; }
+.doc p, .doc li { max-width: 68ch; }
+.doc p { margin: 0.75rem 0; }
+.doc ul, .doc ol { margin: 0.6rem 0 1rem; padding-inline-start: 1.35rem; }
+.doc li { margin: 0.35rem 0; padding-inline-start: 0.2rem; }
+.doc ul li::marker { color: var(--orange); }
+.doc ol li::marker { color: var(--orange-ink); font-weight: 700; }
+.doc a { color: var(--orange-ink); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.doc strong { font-weight: 600; }
+
+.doc-villages {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0 !important;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.5rem;
+}
+.doc-villages li {
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  border-radius: 7px;
+  background: var(--pine);
+  color: var(--cream);
+  line-height: 1.25;
+}
+.doc-villages li::marker { content: none; }
+.v-ar { font-family: var(--font-ar); font-size: 1.05rem; font-weight: 600; }
+.v-lat { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+
+.doc-foot { background: var(--pine); color: var(--cream-dim); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.doc-foot .doc-wrap { display: grid; gap: 1rem; padding-block: 1.75rem 2rem; }
+.doc-links { display: flex; flex-wrap: wrap; gap: 0.45rem 1.25rem; }
+.doc-links a { color: var(--cream); font-size: 0.9375rem; font-weight: 500; text-decoration: none; }
+.doc-links a:hover { text-decoration: underline; }
+.doc-links a[aria-current="page"] { color: var(--orange-lit); }
+.doc-meta { margin: 0; font-size: 0.875rem; }
+.doc-meta a { color: var(--cream-dim); }
+
+.app-art, .og-art {
+  --orange: #E23C0E; --orange-lit: #FF7A45; --orange-ink: #B32F0A; --pine: #1D3D2F; --pine-deep: #10241B;
+  --cream: #FFFAE6; --stone: #EFE3C4; --glow: #FFD88A; --tree-fore: #0A1912; --white: #FFFFFF;
+  --dough: #E9C27C; --herb: #7FAE4E; --kraft: #C99A5D; --kraft-dark: #A97C43;
+}
+.road-dots { fill: none; stroke: var(--orange-lit); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.1 13; }
+.road-dots.moving { animation: road 0.55s linear infinite; }
+@keyframes road { to { stroke-dashoffset: 13; } }
+.awning-a { fill: var(--orange); } .awning-b { fill: var(--cream); }
+.c-stone { fill: var(--stone); } .c-door { fill: var(--pine-deep); } .win-on { fill: var(--glow); }
+.c-bag { fill: var(--orange); } .c-white { fill: var(--white); } .c-can { fill: var(--orange-lit); }
+.c-green { fill: var(--herb); } .c-jar { fill: var(--dough); } .c-kraft { fill: var(--kraft); }
+.c-parapet, .crate-slat { fill: var(--kraft-dark); } .c-roof { fill: var(--orange); }
+.shelf { fill: none; stroke: var(--stone); stroke-width: 2; }
+.ticket { transform-box: fill-box; transform-origin: 50% 100%; animation: ticket 4s ease-in-out infinite; }
+@keyframes ticket { 0%, 40% { transform: scale(0); } 48% { transform: scale(1.12); } 53%, 90% { transform: scale(1); } 100% { transform: scale(0); } }
+.ticket-paper { fill: var(--cream); } .ticket-dot { fill: var(--orange-lit); }
+.ticket-line { fill: none; stroke: var(--pine); stroke-width: 2.4; stroke-linecap: round; }
+.speed { fill: none; stroke: var(--cream); stroke-width: 3; stroke-linecap: round; opacity: 0; animation: speed 1.1s linear infinite; }
+.speed.sp2 { animation-delay: 0.35s; } .speed.sp3 { animation-delay: 0.7s; }
+@keyframes speed { 0% { opacity: 0; transform: translateX(10px); } 30% { opacity: 0.7; } 100% { opacity: 0; transform: translateX(-14px); } }
+.scoot { animation: scoot 0.5s ease-in-out infinite alternate; }
+@keyframes scoot { from { transform: translateY(0); } to { transform: translateY(-1.6px); } }
+.tire { fill: var(--tree-fore); }
+.spokes { transform-box: fill-box; transform-origin: center; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spoke { fill: none; stroke: var(--stone); stroke-width: 2; stroke-linecap: round; opacity: 0.6; }
+.scoot-body { fill: var(--cream); } .scoot-dark { fill: var(--pine-deep); }
+.scoot-line { fill: none; stroke: var(--cream); stroke-width: 5; stroke-linecap: round; }
+.scoot-bar { fill: none; stroke: var(--pine-deep); stroke-width: 4; stroke-linecap: round; }
+.rack { fill: none; stroke: var(--pine-deep); stroke-width: 3; stroke-linecap: round; }
+.bag-seam { fill: none; stroke: var(--orange-ink); stroke-width: 2.5; }
+@media (prefers-reduced-motion: reduce) {
+  .app-art * { animation: none !important; }
+  .app-art .speed { opacity: 0.5; }
+}
+
+.app-page { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
+.app-page > main { flex: 1 0 auto; display: flex; align-items: center; }
+.app-page > main > .app { width: 100%; }
+.app-wrap { max-width: 64rem; }
+.app { padding-block: clamp(2rem, 6vw, 3.5rem) clamp(3rem, 8vw, 4.5rem); }
+.app-grid { display: grid; gap: clamp(1.5rem, 4vw, 2.75rem); align-items: center; }
+@media (min-width: 760px) {
+  .app-grid { grid-template-columns: 1fr 1.05fr; }
+  .app-art { order: 2; }
+}
+.app-accent {
+  margin: 0.4rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 4.2vw, 1.85rem);
+  line-height: 1.15;
+  color: var(--orange-ink);
+}
+.app-art { margin: 0; background: var(--pine); border-radius: 22px; overflow: hidden; aspect-ratio: 12 / 7; }
+.app-art > svg { display: block; width: 100%; height: 100%; }
+.app-lede { margin: 1.1rem 0 0; font-size: 1.0625rem; max-width: 34rem; }
+.app-stores { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
+.app-store { display: inline-block; line-height: 0; border-radius: 9px; }
+.app-store svg { display: block; height: 2.875rem; width: auto; }
+.app-note { margin: 0.8rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+.app-more { margin: 1.75rem 0 0; font-size: 0.9375rem; color: var(--ink-soft); }
+.app-more a { color: var(--orange-ink); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+</style>
+</head>
+<body class="app-page">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="jk-word" fill-rule="evenodd" d="M62 680.4C50 678.9 37 676.6 29.8 674.6C20.2 672 4.6 665.4 2.9 663.4C1.7 661.9 3.7 654.4 15.5 616.5C18.4 607.2 21.3 597.2 22 594.3C24.1 585.2 24.4 585 34.1 589.4C51.2 597.3 62.7 600 78.3 600C89.5 600 96.5 598.4 105.5 593.6C115.1 588.6 121 582 126.8 569.9C132.4 558.4 134.7 549.9 141.5 517.5C144 505.4 148 486.3 150.5 475C152.9 463.7 156.3 448 157.9 440C163.1 415.5 179.6 337 185.9 307.5C189.1 292.1 193 273.2 194.5 265.5C196 257.5 197.8 250.7 198.7 249.8C200.2 248.1 203.7 248 245 248C282.7 248 289.9 248.2 290.9 249.4C291.7 250.4 291.9 252.5 291.5 255.7C290.4 263.2 282.8 298.5 270 355.5C265.5 375.3 261.3 394.4 260.5 398C259.7 401.6 257.5 411.5 255.5 420C253.6 428.5 248.8 449.7 245 467C222.3 568.7 217.6 586.8 209 605.5C190.9 644.8 157.2 670.4 113.3 678.1C101.9 680.1 71 681.5 62 680.4ZM382 571.3C345 569.2 323 553.9 315.3 524.8C312.9 515.8 313.2 495.5 315.9 483C322.7 451.2 337.7 380.9 340.7 366.5C349.9 321.6 356.9 305 373.9 286.8C391.4 268.1 413.6 257.7 441.5 255C456.2 253.7 563.2 253.7 575.7 255.1C591.4 256.8 605.3 261.8 613.9 268.8C624.5 277.4 630.3 286.1 633.6 298C636.1 307 636.1 328 633.7 341.5C631 356.4 622.4 394.6 620.2 401.7C615.7 415.9 606 428 594.7 433.3C583 438.9 581.4 439 491 439L408 439L407.1 441.2C405.5 445.1 400 472.7 400 476.5C400 482.9 402.1 489.1 405.6 492.5C412.2 499.2 409.7 499 501.2 499.3C558.5 499.4 584.2 499.8 585 500.6C585.7 501.3 584 511 579 534.1C575.1 551.9 571.5 567.2 571.1 568C570.7 568.8 569 569.8 567.4 570.2C564.7 570.9 393.1 571.9 382 571.3ZM1289.5 571C1265.6 567.6 1248.2 558.3 1239 544C1231.1 531.8 1228.3 512.9 1231.5 493.9C1235.7 468.4 1242.7 442.6 1248.7 430.5C1255.6 416.6 1267.5 403.3 1279.3 396.2C1287.7 391.2 1301.4 385.5 1311 383.2C1329.8 378.5 1342.2 377.5 1379.5 377.6C1417 377.7 1432.4 379.1 1455 384.1C1460.5 385.3 1465.3 386.1 1465.6 385.8C1466.7 384.6 1472.9 351.3 1473 346.1C1473 334.5 1468.5 327.7 1458.4 324.5C1452.9 322.7 1447.2 322.6 1373 322L1293.5 321.5L1293.2 319.4C1293 318.2 1294 312.6 1295.3 306.9C1296.7 301.2 1299.7 288 1302.1 277.5C1304.9 265.3 1307.1 257.9 1308.2 256.8C1309.9 255.1 1314.8 255 1394.8 255C1443.5 255 1483.1 255.4 1488 256C1512.5 258.8 1531.3 267.8 1543.1 282.4C1548.6 289.3 1552.1 297.3 1554.4 308.3C1557.3 322.1 1556.4 332.1 1549.1 369.5C1546.9 380.5 1542.8 401.2 1540 415.5C1537.2 429.8 1532.4 454.5 1529.4 470.5C1526.4 486.5 1522.6 506.5 1520.9 515C1519.3 523.5 1516.4 539 1514.5 549.4C1512.5 559.7 1510.7 568.6 1510.4 569.1C1509.7 570.3 1440.9 570.2 1439.1 569.1C1438 568.4 1437.8 566.3 1438.4 558.6C1438.7 553.3 1438.8 549 1438.5 549C1438.2 549 1433.4 551.3 1427.9 554.1C1402.1 567 1379.3 571 1327 571.5C1309.7 571.7 1292.8 571.5 1289.5 571ZM703.2 569.9C680.8 567 660.9 554.9 652.7 539.3C646.2 526.6 645.5 523.3 645.5 505C645.5 491.5 645.9 486.8 647.7 479.5C648.8 474.5 652.6 456.5 656 439.5C667.2 383.5 677.1 337.6 679.7 330C693.2 290.2 716.4 267 751.8 257.9C764.6 254.7 779 254 839.5 254C913.4 254 919.6 254.6 937.9 263.6C953.2 271.1 963.1 282.9 967.6 299C968.4 302 969.4 310.1 969.7 317C970.4 331.9 969.4 339 961.3 375.5C957.1 395.1 955 402.3 952 408.8C944.7 424.2 930.2 435.4 914 438C909.9 438.6 876 439 822.8 439C776.2 439 737.9 439.4 737.6 439.8C735.6 443.1 731.7 465.7 731.6 475.1C731.5 484.9 731.7 485.9 734.2 489.7C737.7 495 744.2 498 753.4 498.7C757.3 498.9 795.2 499.2 837.7 499.3C880.1 499.4 915.2 499.8 915.6 500.3C916.6 501.3 915.1 509.9 909.2 537.5C902.5 568.6 902.4 568.9 899.4 570C896.3 571.2 712.3 571.1 703.2 569.9ZM1071.6 569.5C1044.1 564.9 1027 550.5 1021.3 527.3C1019 517.7 1019.2 499.4 1021.9 486.5C1023 481 1026.4 465.2 1029.4 451.5C1032.4 437.8 1036.2 420 1037.9 412C1049.1 360.4 1054.2 336.7 1055.5 331.3C1056.3 327.9 1057 324.6 1057 324C1057 323.3 1048.3 323 1030.7 323C1010.3 323 1004 322.7 1002.6 321.7C1000.8 320.4 1000.9 319.8 1003.8 307.9C1005.5 301.1 1009 286.8 1011.6 276.2C1014.1 265.6 1016.6 256.7 1017.1 256.5C1017.5 256.2 1030.1 255.9 1044.9 255.9C1069.6 256 1072 255.8 1072.9 254.2C1073.8 252.5 1083.4 214.1 1089 189.8C1091.2 180.2 1092.7 175.7 1094.2 174.3C1096.1 172.6 1098.9 172.5 1133.9 172.2C1154.6 172 1172.6 172.2 1173.9 172.5C1176.1 173.1 1176.2 173.4 1175.7 178.4C1175.4 181.3 1172.2 194.6 1168.6 208.1C1159 244.1 1156.8 253.1 1157.4 254.5C1157.7 255.5 1165.6 255.7 1193.7 255.5C1234.7 255.2 1243.6 255.6 1244.4 257.5C1244.7 258.3 1244 262.6 1242.9 267.2C1241.8 271.8 1239.8 280.7 1238.5 287C1233.8 309.6 1230.9 320.5 1229.3 321.8C1228 322.7 1217.5 323 1184.8 323L1142 323L1141.5 325.2C1141.3 326.5 1139.9 332.2 1138.6 338C1137.2 343.8 1135 354.4 1133.5 361.5C1132.1 368.6 1128.5 385.1 1125.5 398C1113 452.5 1110 467.9 1110 478C1110.1 490.4 1114 496.1 1124.6 498.9C1127 499.5 1139.6 500 1155.6 500C1170.4 500.1 1184.2 500.4 1186.4 500.7L1190.2 501.3L1189.7 505.9C1188.5 516.7 1177 567.3 1175.4 569.1C1173.8 570.9 1171.5 571 1126.6 570.9C1092.4 570.8 1077.3 570.4 1071.6 569.5ZM1547.3 568.3C1546.4 566.1 1548.1 556.9 1556 519C1559.8 501.1 1566.2 469.8 1570.4 449.5C1574.5 429.1 1579.7 404 1581.9 393.5C1591.7 347.2 1594.2 335.7 1597 323.5C1598.6 316.4 1601.8 302 1604 291.5C1609 268.7 1614.4 244.2 1620.4 218.5C1622.9 208 1626 194.1 1627.5 187.5C1628.9 180.9 1630.8 174.8 1631.6 174C1632.8 172.7 1638.8 172.5 1670.3 172.2C1708.9 171.9 1713.4 172.1 1714.3 174.5C1714.6 175.2 1714 179.6 1712.9 184.2C1711.8 188.8 1706.9 210 1701.9 231.5C1697 253 1691.6 276.1 1690 283C1678.3 333.1 1669.4 375.7 1670.2 378.1C1670.7 379.5 1692.6 359.4 1722 330.4C1750.9 302 1790.8 264 1795.9 260.1C1799.2 257.6 1799.7 257.5 1812.9 257.6C1820.4 257.7 1841.7 257.8 1860.2 257.9C1886.5 258 1894 258.3 1894 259.2C1894 260.9 1880.6 273.6 1788.1 360.4C1757.2 389.3 1741.5 404.3 1741.2 405.1C1741 405.5 1745.1 411.6 1750.3 418.7C1764.1 437.6 1788.9 473 1805.5 497.5C1811.5 506.3 1820.2 518.9 1824.8 525.5C1840.4 547.7 1852.1 566.1 1851.8 567.8C1851.5 569.4 1847.9 569.5 1804.2 569.8L1757 570L1751.4 562.3C1748.3 558 1740.3 546.2 1733.6 536C1710.6 501 1669.6 440.5 1668.6 439.8C1667.1 438.7 1658.2 438.8 1657.6 439.9C1657.3 440.4 1654.1 454.4 1650.6 471.1C1647 487.8 1642.5 508.8 1640.6 517.7C1638.6 526.6 1635.9 540.1 1634.5 547.7C1631.7 562.9 1630.3 568.1 1628.6 569.2C1628 569.6 1609.6 570 1587.7 570C1551.6 570 1547.9 569.8 1547.3 568.3ZM1410.8 500C1417.5 499.6 1425.2 498.4 1427.9 497.5C1434.5 495.3 1441.2 489.3 1443.9 483.1C1445.8 478.7 1453.1 446.7 1453.4 441.5C1453.5 439.5 1452.9 439.5 1397 439.5C1343 439.5 1340.3 439.6 1335.1 441.5C1323.6 445.7 1316.5 455.5 1313.4 471.2C1309.9 489.2 1315 497.6 1330.8 499.9C1338.6 501.1 1395.6 501.1 1410.8 500ZM546.1 374.7C548 373.5 550.3 370.9 551.3 368.9C553.8 363.6 557.2 347.5 557.3 339.8C557.4 331.6 555.7 328.7 548.4 325L543.5 322.5L498.5 322.5C457.5 322.5 453 322.7 448.1 324.3C434.5 328.9 429 336.5 424 357.5C419.8 375.5 419.9 375 420.5 376C420.9 376.6 444.4 377 481.9 377L542.7 377L546.1 374.7ZM878.5 375.8C883.5 373.6 886.5 365.3 889.1 347.2C890.6 336.5 889.9 331.6 886.4 327.9C881.3 322.6 880.3 322.5 830 322.5C788.8 322.5 782.9 322.7 777.9 324.2C766.5 327.8 760.2 335.2 756.1 350.1C753 361.4 750 375.3 750.6 376.2C751.5 377.5 875.5 377.2 878.5 375.8ZM239.8 220.8C214.4 192.4 201.2 174.5 189.7 153C173.7 123.3 170 94.8 178.6 69C187.4 42.7 205.3 22.7 230.5 10.9C257.6 -1.8 289.7 -0.4 313.9 14.7C339.5 30.8 352.2 55.9 350.7 87.5C349.5 111.3 340.3 131.6 317.6 159.9C307.5 172.5 286.5 195.4 275.4 206.1C257.3 223.3 250.8 229 249.1 229C248 229 244.1 225.5 239.8 220.8ZM275.2 129C283.3 126 289.7 121.3 295.3 114.5C302.2 105.9 304.4 99.6 304.4 88C304.5 79.2 304.3 78 301.2 71.8C293.1 55.2 278.8 47.9 259 50.2C247.3 51.6 233.5 60.4 227.7 70.3C222.1 79.8 220 97.3 223.3 106.6C227.6 118.4 236.9 127.1 249 130.6C255.4 132.5 268.2 131.7 275.2 129Z"/>
+    <symbol id="badge-ios" viewBox="0 0 119.66407 40"><g>
+    <g>
+      <g>
+        <path d="M110.13477,0H9.53468c-.3667,0-.729,0-1.09473.002-.30615.002-.60986.00781-.91895.0127A13.21476,13.21476,0,0,0,5.5171.19141a6.66509,6.66509,0,0,0-1.90088.627A6.43779,6.43779,0,0,0,1.99757,1.99707,6.25844,6.25844,0,0,0,.81935,3.61816a6.60119,6.60119,0,0,0-.625,1.90332,12.993,12.993,0,0,0-.1792,2.002C.00587,7.83008.00489,8.1377,0,8.44434V31.5586c.00489.3105.00587.6113.01515.9219a12.99232,12.99232,0,0,0,.1792,2.0019,6.58756,6.58756,0,0,0,.625,1.9043A6.20778,6.20778,0,0,0,1.99757,38.001a6.27445,6.27445,0,0,0,1.61865,1.1787,6.70082,6.70082,0,0,0,1.90088.6308,13.45514,13.45514,0,0,0,2.0039.1768c.30909.0068.6128.0107.91895.0107C8.80567,40,9.168,40,9.53468,40H110.13477c.3594,0,.7246,0,1.084-.002.3047,0,.6172-.0039.9219-.0107a13.279,13.279,0,0,0,2-.1768,6.80432,6.80432,0,0,0,1.9082-.6308,6.27742,6.27742,0,0,0,1.6172-1.1787,6.39482,6.39482,0,0,0,1.1816-1.6143,6.60413,6.60413,0,0,0,.6191-1.9043,13.50643,13.50643,0,0,0,.1856-2.0019c.0039-.3106.0039-.6114.0039-.9219.0078-.3633.0078-.7246.0078-1.0938V9.53613c0-.36621,0-.72949-.0078-1.09179,0-.30664,0-.61426-.0039-.9209a13.5071,13.5071,0,0,0-.1856-2.002,6.6177,6.6177,0,0,0-.6191-1.90332,6.46619,6.46619,0,0,0-2.7988-2.7998,6.76754,6.76754,0,0,0-1.9082-.627,13.04394,13.04394,0,0,0-2-.17676c-.3047-.00488-.6172-.01074-.9219-.01269-.3594-.002-.7246-.002-1.084-.002Z" style="fill: #a6a6a6"/>
+        <path d="M8.44483,39.125c-.30468,0-.602-.0039-.90429-.0107a12.68714,12.68714,0,0,1-1.86914-.1631,5.88381,5.88381,0,0,1-1.65674-.5479,5.40573,5.40573,0,0,1-1.397-1.0166,5.32082,5.32082,0,0,1-1.02051-1.3965,5.72186,5.72186,0,0,1-.543-1.6572,12.41351,12.41351,0,0,1-.1665-1.875c-.00634-.2109-.01464-.9131-.01464-.9131V8.44434S.88185,7.75293.8877,7.5498a12.37039,12.37039,0,0,1,.16553-1.87207,5.7555,5.7555,0,0,1,.54346-1.6621A5.37349,5.37349,0,0,1,2.61183,2.61768,5.56543,5.56543,0,0,1,4.01417,1.59521a5.82309,5.82309,0,0,1,1.65332-.54394A12.58589,12.58589,0,0,1,7.543.88721L8.44532.875H111.21387l.9131.0127a12.38493,12.38493,0,0,1,1.8584.16259,5.93833,5.93833,0,0,1,1.6709.54785,5.59374,5.59374,0,0,1,2.415,2.41993,5.76267,5.76267,0,0,1,.5352,1.64892,12.995,12.995,0,0,1,.1738,1.88721c.0029.2832.0029.5874.0029.89014.0079.375.0079.73193.0079,1.09179V30.4648c0,.3633,0,.7178-.0079,1.0752,0,.3252,0,.6231-.0039.9297a12.73126,12.73126,0,0,1-.1709,1.8535,5.739,5.739,0,0,1-.54,1.67,5.48029,5.48029,0,0,1-1.0156,1.3857,5.4129,5.4129,0,0,1-1.3994,1.0225,5.86168,5.86168,0,0,1-1.668.5498,12.54218,12.54218,0,0,1-1.8692.1631c-.2929.0068-.5996.0107-.8974.0107l-1.084.002Z"/>
+      </g>
+      <g>
+        <g>
+          <g>
+            <path d="M24.76888,20.30068a4.94881,4.94881,0,0,1,2.35656-4.15206,5.06566,5.06566,0,0,0-3.99116-2.15768c-1.67924-.17626-3.30719,1.00483-4.1629,1.00483-.87227,0-2.18977-.98733-3.6085-.95814a5.31529,5.31529,0,0,0-4.47292,2.72787c-1.934,3.34842-.49141,8.26947,1.3612,10.97608.9269,1.32535,2.01018,2.8058,3.42763,2.7533,1.38706-.05753,1.9051-.88448,3.5794-.88448,1.65876,0,2.14479.88448,3.591.8511,1.48838-.02416,2.42613-1.33124,3.32051-2.66914a10.962,10.962,0,0,0,1.51842-3.09251A4.78205,4.78205,0,0,1,24.76888,20.30068Z" style="fill: #fff"/>
+            <path d="M22.03725,12.21089a4.87248,4.87248,0,0,0,1.11452-3.49062,4.95746,4.95746,0,0,0-3.20758,1.65961,4.63634,4.63634,0,0,0-1.14371,3.36139A4.09905,4.09905,0,0,0,22.03725,12.21089Z" style="fill: #fff"/>
+          </g>
+        </g>
+        <g>
+          <path d="M42.30227,27.13965h-4.7334l-1.13672,3.35645H34.42727l4.4834-12.418h2.083l4.4834,12.418H43.438ZM38.0591,25.59082h3.752l-1.84961-5.44727h-.05176Z" style="fill: #fff"/>
+          <path d="M55.15969,25.96973c0,2.81348-1.50586,4.62109-3.77832,4.62109a3.0693,3.0693,0,0,1-2.84863-1.584h-.043v4.48438h-1.8584V21.44238H48.4302v1.50586h.03418a3.21162,3.21162,0,0,1,2.88281-1.60059C53.645,21.34766,55.15969,23.16406,55.15969,25.96973Zm-1.91016,0c0-1.833-.94727-3.03809-2.39258-3.03809-1.41992,0-2.375,1.23047-2.375,3.03809,0,1.82422.95508,3.0459,2.375,3.0459C52.30227,29.01563,53.24953,27.81934,53.24953,25.96973Z" style="fill: #fff"/>
+          <path d="M65.12453,25.96973c0,2.81348-1.50586,4.62109-3.77832,4.62109a3.0693,3.0693,0,0,1-2.84863-1.584h-.043v4.48438h-1.8584V21.44238H58.395v1.50586h.03418A3.21162,3.21162,0,0,1,61.312,21.34766C63.60988,21.34766,65.12453,23.16406,65.12453,25.96973Zm-1.91016,0c0-1.833-.94727-3.03809-2.39258-3.03809-1.41992,0-2.375,1.23047-2.375,3.03809,0,1.82422.95508,3.0459,2.375,3.0459C62.26711,29.01563,63.21438,27.81934,63.21438,25.96973Z" style="fill: #fff"/>
+          <path d="M71.71047,27.03613c.1377,1.23145,1.334,2.04,2.96875,2.04,1.56641,0,2.69336-.80859,2.69336-1.91895,0-.96387-.67969-1.541-2.28906-1.93652l-1.60937-.3877c-2.28027-.55078-3.33887-1.61719-3.33887-3.34766,0-2.14258,1.86719-3.61426,4.51855-3.61426,2.624,0,4.42285,1.47168,4.4834,3.61426h-1.876c-.1123-1.23926-1.13672-1.9873-2.63379-1.9873s-2.52148.75684-2.52148,1.8584c0,.87793.6543,1.39453,2.25488,1.79l1.36816.33594c2.54785.60254,3.60645,1.626,3.60645,3.44238,0,2.32324-1.85059,3.77832-4.79395,3.77832-2.75391,0-4.61328-1.4209-4.7334-3.667Z" style="fill: #fff"/>
+          <path d="M83.34621,19.2998v2.14258h1.72168v1.47168H83.34621v4.99121c0,.77539.34473,1.13672,1.10156,1.13672a5.80752,5.80752,0,0,0,.61133-.043v1.46289a5.10351,5.10351,0,0,1-1.03223.08594c-1.833,0-2.54785-.68848-2.54785-2.44434V22.91406H80.16262V21.44238H81.479V19.2998Z" style="fill: #fff"/>
+          <path d="M86.065,25.96973c0-2.84863,1.67773-4.63867,4.29395-4.63867,2.625,0,4.29492,1.79,4.29492,4.63867,0,2.85645-1.66113,4.63867-4.29492,4.63867C87.72609,30.6084,86.065,28.82617,86.065,25.96973Zm6.69531,0c0-1.9541-.89551-3.10742-2.40137-3.10742s-2.40039,1.16211-2.40039,3.10742c0,1.96191.89453,3.10645,2.40039,3.10645S92.76027,27.93164,92.76027,25.96973Z" style="fill: #fff"/>
+          <path d="M96.18606,21.44238h1.77246v1.541h.043a2.1594,2.1594,0,0,1,2.17773-1.63574,2.86616,2.86616,0,0,1,.63672.06934v1.73828a2.59794,2.59794,0,0,0-.835-.1123,1.87264,1.87264,0,0,0-1.93652,2.083v5.37012h-1.8584Z" style="fill: #fff"/>
+          <path d="M109.3843,27.83691c-.25,1.64355-1.85059,2.77148-3.89844,2.77148-2.63379,0-4.26855-1.76465-4.26855-4.5957,0-2.83984,1.64355-4.68164,4.19043-4.68164,2.50488,0,4.08008,1.7207,4.08008,4.46582v.63672h-6.39453v.1123a2.358,2.358,0,0,0,2.43555,2.56445,2.04834,2.04834,0,0,0,2.09082-1.27344Zm-6.28223-2.70215h4.52637a2.1773,2.1773,0,0,0-2.2207-2.29785A2.292,2.292,0,0,0,103.10207,25.13477Z" style="fill: #fff"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <g>
+        <path d="M37.82619,8.731a2.63964,2.63964,0,0,1,2.80762,2.96484c0,1.90625-1.03027,3.002-2.80762,3.002H35.67092V8.731Zm-1.22852,5.123h1.125a1.87588,1.87588,0,0,0,1.96777-2.146,1.881,1.881,0,0,0-1.96777-2.13379h-1.125Z" style="fill: #fff"/>
+        <path d="M41.68068,12.44434a2.13323,2.13323,0,1,1,4.24707,0,2.13358,2.13358,0,1,1-4.24707,0Zm3.333,0c0-.97607-.43848-1.54687-1.208-1.54687-.77246,0-1.207.5708-1.207,1.54688,0,.98389.43457,1.55029,1.207,1.55029C44.57522,13.99463,45.01369,13.42432,45.01369,12.44434Z" style="fill: #fff"/>
+        <path d="M51.57326,14.69775h-.92187l-.93066-3.31641h-.07031l-.92676,3.31641h-.91309l-1.24121-4.50293h.90137l.80664,3.436h.06641l.92578-3.436h.85254l.92578,3.436h.07031l.80273-3.436h.88867Z" style="fill: #fff"/>
+        <path d="M53.85354,10.19482H54.709v.71533h.06641a1.348,1.348,0,0,1,1.34375-.80225,1.46456,1.46456,0,0,1,1.55859,1.6748v2.915h-.88867V12.00586c0-.72363-.31445-1.0835-.97168-1.0835a1.03294,1.03294,0,0,0-1.0752,1.14111v2.63428h-.88867Z" style="fill: #fff"/>
+        <path d="M59.09377,8.437h.88867v6.26074h-.88867Z" style="fill: #fff"/>
+        <path d="M61.21779,12.44434a2.13346,2.13346,0,1,1,4.24756,0,2.1338,2.1338,0,1,1-4.24756,0Zm3.333,0c0-.97607-.43848-1.54687-1.208-1.54687-.77246,0-1.207.5708-1.207,1.54688,0,.98389.43457,1.55029,1.207,1.55029C64.11232,13.99463,64.5508,13.42432,64.5508,12.44434Z" style="fill: #fff"/>
+        <path d="M66.4009,13.42432c0-.81055.60352-1.27783,1.6748-1.34424l1.21973-.07031v-.38867c0-.47559-.31445-.74414-.92187-.74414-.49609,0-.83984.18213-.93848.50049h-.86035c.09082-.77344.81836-1.26953,1.83984-1.26953,1.12891,0,1.76563.562,1.76563,1.51318v3.07666h-.85547v-.63281h-.07031a1.515,1.515,0,0,1-1.35254.707A1.36026,1.36026,0,0,1,66.4009,13.42432Zm2.89453-.38477v-.37646l-1.09961.07031c-.62012.0415-.90137.25244-.90137.64941,0,.40527.35156.64111.835.64111A1.0615,1.0615,0,0,0,69.29543,13.03955Z" style="fill: #fff"/>
+        <path d="M71.34816,12.44434c0-1.42285.73145-2.32422,1.86914-2.32422a1.484,1.484,0,0,1,1.38086.79h.06641V8.437h.88867v6.26074h-.85156v-.71143h-.07031a1.56284,1.56284,0,0,1-1.41406.78564C72.0718,14.772,71.34816,13.87061,71.34816,12.44434Zm.918,0c0,.95508.4502,1.52979,1.20313,1.52979.749,0,1.21191-.583,1.21191-1.52588,0-.93848-.46777-1.52979-1.21191-1.52979C72.72121,10.91846,72.26613,11.49707,72.26613,12.44434Z" style="fill: #fff"/>
+        <path d="M79.23,12.44434a2.13323,2.13323,0,1,1,4.24707,0,2.13358,2.13358,0,1,1-4.24707,0Zm3.333,0c0-.97607-.43848-1.54687-1.208-1.54687-.77246,0-1.207.5708-1.207,1.54688,0,.98389.43457,1.55029,1.207,1.55029C82.12453,13.99463,82.563,13.42432,82.563,12.44434Z" style="fill: #fff"/>
+        <path d="M84.66945,10.19482h.85547v.71533h.06641a1.348,1.348,0,0,1,1.34375-.80225,1.46456,1.46456,0,0,1,1.55859,1.6748v2.915H87.605V12.00586c0-.72363-.31445-1.0835-.97168-1.0835a1.03294,1.03294,0,0,0-1.0752,1.14111v2.63428h-.88867Z" style="fill: #fff"/>
+        <path d="M93.51516,9.07373v1.1416h.97559v.74854h-.97559V13.2793c0,.47168.19434.67822.63672.67822a2.96657,2.96657,0,0,0,.33887-.02051v.74023a2.9155,2.9155,0,0,1-.4834.04541c-.98828,0-1.38184-.34766-1.38184-1.21582v-2.543h-.71484v-.74854h.71484V9.07373Z" style="fill: #fff"/>
+        <path d="M95.70461,8.437h.88086v2.48145h.07031a1.3856,1.3856,0,0,1,1.373-.80664,1.48339,1.48339,0,0,1,1.55078,1.67871v2.90723H98.69v-2.688c0-.71924-.335-1.0835-.96289-1.0835a1.05194,1.05194,0,0,0-1.13379,1.1416v2.62988h-.88867Z" style="fill: #fff"/>
+        <path d="M104.76125,13.48193a1.828,1.828,0,0,1-1.95117,1.30273A2.04531,2.04531,0,0,1,100.73,12.46045a2.07685,2.07685,0,0,1,2.07617-2.35254c1.25293,0,2.00879.856,2.00879,2.27V12.688h-3.17969v.0498a1.1902,1.1902,0,0,0,1.19922,1.29,1.07934,1.07934,0,0,0,1.07129-.5459Zm-3.126-1.45117h2.27441a1.08647,1.08647,0,0,0-1.1084-1.1665A1.15162,1.15162,0,0,0,101.63527,12.03076Z" style="fill: #fff"/>
+      </g>
+    </g>
+  </g></symbol>
+    <symbol id="badge-android" viewBox="0 0 564 168"><image href="data:image/png;base64,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" width="564" height="168"/></symbol>
+  </defs>
+</svg>
+<header class="doc-top">
+  <div class="doc-wrap app-wrap doc-top-row">
+    <a class="brand" href="/" aria-label="Jeetak home"><svg class="wordmark" viewBox="0 0 1896 683" aria-hidden="true" focusable="false"><use href="#jk-word"/></svg></a>
+    <a class="doc-home" href="/">Home</a>
+  </div>
+</header>
+<main class="doc-wrap app-wrap">
+  <article class="doc app">
+    <div class="app-grid">
+      <figure class="app-art" aria-hidden="true"><svg viewBox="0 0 240 140" focusable="false">
+              <path class="speed" d="M24 66 H44"/>
+              <path class="speed sp2" d="M14 82 H40"/>
+              <path class="speed sp3" d="M26 98 H46"/>
+              <path class="road-dots moving" d="M-7 129 H247"/>
+              <g transform="translate(46 18)">
+                <g class="scoot">
+                  <circle class="tire" cx="40" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M31 96 H49 M35.5 88.2 L44.5 103.8 M35.5 103.8 L44.5 88.2"/></g>
+                  <circle class="c-stone" cx="40" cy="96" r="5"/>
+                  <circle class="tire" cx="138" cy="96" r="15"/>
+                  <g class="spokes"><path class="spoke" d="M129 96 H147 M133.5 88.2 L142.5 103.8 M133.5 103.8 L142.5 88.2"/></g>
+                  <circle class="c-stone" cx="138" cy="96" r="5"/>
+                  <path class="rack" d="M10 60 H46"/>
+                  <rect class="c-bag" x="8" y="22" width="38" height="36" rx="5"/>
+                  <path class="bag-seam" d="M8 34 H46"/>
+                  <g class="bag-logo"><svg x="12" y="40.5" width="30" height="10.8" viewBox="0 0 1896 683"><use href="#jk-word" class="c-white"/></svg></g>
+                  <path class="scoot-body" d="M14 88 C12 74 22 62 38 60 H82 C88 60 92 64 92 70 V88 H62 C60 78 52 72 40 72 C28 72 20 78 18 88 Z"/>
+                  <path class="scoot-dark" d="M42 60 C42 54 46 51 52 51 H80 C86 51 88 55 88 60 Z"/>
+                  <path class="scoot-body" d="M90 82 H122 C124 82 125 84 125 86 V90 H90 Z"/>
+                  <path class="scoot-body" d="M118 90 C122 78 126 64 130 48 L139 50 C135 66 131 80 128 90 Z"/>
+                  <path class="scoot-line" d="M134 49 L141 30"/>
+                  <path class="scoot-bar" d="M131 29 H151"/>
+                  <circle class="win-on" cx="143" cy="40" r="4"/>
+                  <path class="scoot-body" d="M122 92 C124 80 152 80 154 92 L148 92 C146 86 130 86 128 92 Z"/>
+                </g>
+              </g>
+            </svg></figure>
+      <div class="app-copy">
+        <p class="doc-kicker">Jeetak Driver app</p>
+        <h1>Become a driver</h1>
+        <p class="app-accent">Earn on every delivery.</p>
+        <p class="app-lede">Deliver orders around the Upper Metn and earn on every delivery. The driver app shows your deliveries and earnings. Download it and apply from your phone.</p>
+        <div class="app-stores"><a class="app-store" href="https://play.google.com/store/apps/details?id=com.jeetak.drivers" aria-label="Get it on Google Play"><svg width="564" height="168" viewBox="0 0 564 168" aria-hidden="true" focusable="false"><use href="#badge-android"/></svg></a></div>
+        <p class="app-note">iPhone version coming soon.</p>
+        <p class="app-more">Read the <a href="/driver-policy">driver policy</a>. Questions? <a href="mailto:support@jeetaklb.com">support@jeetaklb.com</a></p>
+      </div>
+    </div>
+  </article>
+</main>
+<footer class="doc-foot">
+  <div class="doc-wrap app-wrap">
+    <nav class="doc-links" aria-label="Jeetak pages"><a href="/about-us">About us</a><a href="/terms">Terms of use</a><a href="/customer_policy">Privacy policy</a><a href="/vendor-policy">Vendor policy</a><a href="/driver-policy">Driver policy</a><a href="/account-deletion">Delete account</a></nav>
+    <p class="doc-meta">© 2026 Jeetak SARL · <a href="mailto:support@jeetaklb.com">support@jeetaklb.com</a></p>
+  </div>
+</footer>
+</body>
+</html>
