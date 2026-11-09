@@ -55,6 +55,19 @@ its own HTML file, served at those exact addresses. The app store listings link
 to them, so keep the file names unchanged. Change the "Last updated" date in
 `pages_text.py` whenever the text changes.
 
+## App links: /driver and /partner
+
+`app_pages.py` makes jeetaklb.com/driver (the Jeetak Driver app) and jeetaklb.com/partner
+(the Jeetak Partner app). Share these instead of the store links: WhatsApp and other apps
+show their own preview image (`og-driver.jpg`, `og-partner.jpg`, drawn by `build.py`), and
+phones go straight to their store: Android to Google Play, iPhone to the App Store once the
+app is listed there (until then iPhones see the page). Add `?stay` to a link to see the page
+itself on a phone. The store links come from `STORE_LINKS` in `src/script.js`.
+
+The preview images use the Kanit and Readex Pro fonts, loaded from Google Fonts. Where Google
+Fonts is blocked, install them (`npm i @fontsource/kanit @fontsource/readex-pro`) and set
+`JEETAK_FONTS` to that `node_modules/@fontsource` folder before running `build.py`.
+
 ## Coverage map
 
 The "Where we deliver" section shows a map of the Upper Metn with every village.
