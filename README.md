@@ -46,6 +46,27 @@ Claude artifact preview. It plays the intro on every load and has a Replay
 button; the live site plays it once per browser session. `SITE_INTRO` in
 `build.py` turns the intro off for the live site.
 
+## Redesign preview (this branch only)
+
+The `revamp/` folder holds a redesign of the landing page that follows the brand guide
+(jeetaklb.com/brand): Saira and Cairo, orange first, the leaning blocks, the pin and the dashed
+route. It is a preview. Nothing in it is deployed, and `build.py` still builds the live site.
+
+- Build it: `python3 revamp/build.py` writes `out/revamp.html` (for the Claude artifact preview)
+  and `out/revamp-site/index.html` (the same page as a deployable file).
+- `revamp/body.html`, `style.css` and `script.js` are the page. The store links, the copy and the
+  store badges are read from `src/` at build time, so they always match the live site; copy that
+  is new in the redesign is in `EXTRA` at the top of `revamp/script.js`.
+- `revamp/assets/`: the logo as vectors (`brand_logo.json`, from the brand guide), the three app
+  icons, the delivery bag photo cut out of its white background (`tools/cut_bag.py` made
+  `bag.webp` from `bag-source.jpg`) and the QR code shown to desktop visitors (`tools/make_qr.py`).
+- The map is the same drawing code as the live site. Its labels are set in Cairo, so they were
+  measured again (`tools/measure_labels.py` writes `revamp/label_widths.json`) and the map is
+  cached in `revamp/map_cache.json`.
+
+To make it the live site: copy `out/revamp-site/index.html` over `index.html` on `main`. The policy
+pages and /driver and /partner still use the old fonts and colours and would need the same restyle.
+
 ## Policy pages
 
 `pages_text.py` holds the text of /about-us, /terms, /customer_policy,

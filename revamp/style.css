@@ -1,0 +1,800 @@
+/* Layout: the orange bag opens the page. Every band sits on one brand ground (orange, cream, pine or white);
+   English headlines lean in Saira Black Italic, Arabic stands upright in Cairo, and a dashed route between
+   two pins carries the order from the shop to the door. */
+:root {
+  /* brand colours */
+  --orange: #E23C0E;
+  --spark: #FE561E;
+  --pine: #1D3D2F;
+  --pin-green: #195D30;
+  --cream: #FFFAE6;
+  --white: #FFFFFF;
+  --ink: #000000;
+  --soft-light: #4D4D4D;
+  --soft-dark: #C8D3CD;
+
+  /* drawing colours: the illustrations only, never type or grounds */
+  --pine-deep: #10241B;
+  --pine-line: #335E4A;
+  --tire: #0A1912;
+  --stone: #EFE3C4;
+  --glow: #FFD88A;
+  --dough: #E9C27C;
+  --dough-lite: #F3DBA6;
+  --crust: #C98F45;
+  --zaatar: #6B7433;
+  --zaatar-dark: #454D1E;
+  --herb: #7FAE4E;
+  --herb-dark: #5C8A35;
+  --kraft: #C99A5D;
+  --kraft-dark: #A97C43;
+  --melon: #F7A3A8;
+  --water: #BFE6F4;
+  --water-deep: #86C6E0;
+  --tomato: #D9412F;
+  --orange-deep: #B32F0A;
+  --dot-idle: #B9B6A2;
+  --shade: rgba(0, 0, 0, 0.3);
+  --shade-soft: rgba(0, 0, 0, 0.14);
+  --zone-fill: rgba(255, 250, 230, 0.07);
+  --pulse: rgba(226, 60, 14, 0.45);
+  --pulse-clear: rgba(226, 60, 14, 0);
+
+  --lean: 12deg;
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 32px;
+
+  --font-display: "Saira", "Cairo", system-ui, sans-serif;
+  --font-text: "Cairo", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-ar: "Cairo", "Tajawal", "Geeza Pro", "Noto Sans Arabic", system-ui, sans-serif;
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --food-size: clamp(5.25rem, 22vw, 7rem);
+
+  color-scheme: light;
+  background-color: var(--orange);
+  scroll-behavior: smooth;
+}
+
+/* ---------- grounds: each one re-maps the role colours, as in the brand guide ---------- */
+.g-orange { --bg: var(--orange); --head: var(--white); --text: var(--ink); --soft: var(--ink); --accent: var(--ink); --on-accent: var(--white); --mark: var(--white); }
+.g-cream { --bg: var(--cream); --head: var(--ink); --text: var(--ink); --soft: var(--soft-light); --accent: var(--orange); --on-accent: var(--ink); --mark: var(--pin-green); }
+.g-white { --bg: var(--white); --head: var(--ink); --text: var(--ink); --soft: var(--soft-light); --accent: var(--orange); --on-accent: var(--ink); --mark: var(--pin-green); }
+.g-pine { --bg: var(--pine); --head: var(--white); --text: var(--white); --soft: var(--soft-dark); --accent: var(--spark); --on-accent: var(--ink); --mark: var(--spark); }
+.g-orange, .g-cream, .g-white, .g-pine { background-color: var(--bg); color: var(--text); }
+
+/* the logo's colourways, one per ground */
+.logo { display: block; height: auto; }
+.logo--white { --lg-j: var(--white); --lg-pin: var(--white); --lg-word: var(--white); --lg-tag: var(--white); --lg-accent: var(--white); }
+.logo--pine { --lg-j: var(--white); --lg-pin: var(--spark); --lg-word: var(--white); --lg-tag: var(--white); --lg-accent: var(--white); }
+.lg-j { fill: var(--lg-j); }
+.lg-pin { fill: var(--lg-pin); }
+.lg-word { fill: var(--lg-word); }
+.lg-tag { fill: var(--lg-tag); }
+.lg-accent { fill: var(--lg-accent); }
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+:root:lang(ar) body { font-family: var(--font-ar); font-weight: 500; line-height: 1.7; }
+
+img, svg { max-width: 100%; }
+p { margin: 0; }
+
+h1, h2, h3 {
+  margin: 0;
+  color: var(--head);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+h2 { font-size: clamp(2.5rem, 9.6vw, 4.75rem); }
+h3 { font-size: clamp(1.45rem, 4.6vw, 1.9rem); font-weight: 800; line-height: 1.05; }
+:root:lang(ar) :is(h1, h2, h3) { font-family: var(--font-ar); font-style: normal; letter-spacing: 0; line-height: 1.3; }
+:root:lang(ar) h2 { font-size: clamp(2.15rem, 8.6vw, 4.1rem); }
+:root:lang(ar) h3 { font-size: clamp(1.35rem, 4.3vw, 1.75rem); line-height: 1.4; }
+
+/* the brand's two type devices: the one coloured word and the coloured full stop */
+.acc, .stop { color: var(--accent); }
+.nb { white-space: nowrap; }
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.wrap {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+}
+
+:focus-visible { outline: 3px solid var(--text, var(--ink)); outline-offset: 3px; border-radius: 6px; }
+
+.band { padding-block: clamp(3.5rem, 9vw, 6.5rem); }
+.head { max-width: 46rem; margin-bottom: clamp(1.75rem, 5vw, 3rem); }
+.lede { max-width: 34rem; font-size: clamp(1.0625rem, 2.3vw, 1.25rem); }
+.head .lede { margin-top: 0.9rem; }
+
+/* the pin: the brand's one icon */
+.pin { display: block; flex: none; height: auto; fill: var(--mark); }
+
+/* a leaning tag: the block leans 12 degrees, the words stay upright */
+.tag { display: inline-block; padding: 0.4rem 1rem; border-radius: var(--r-sm); background: var(--spark); color: var(--ink); transform: skewX(calc(var(--lean) * -1)); }
+.tag > span {
+  display: inline-block;
+  transform: skewX(var(--lean));
+  font: italic 800 0.9375rem/1.3 var(--font-display);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+:root:lang(ar) .tag > span { font: 800 1rem/1.3 var(--font-ar); letter-spacing: 0; text-transform: none; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 1.4rem;
+  border: 3px solid transparent;
+  border-radius: var(--r-md);
+  background: var(--accent);
+  color: var(--on-accent);
+  font: 800 1.0625rem/1 var(--font-text);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+:root:lang(ar) .btn { font-family: var(--font-ar); }
+
+/* ---------- store badges ---------- */
+/* The official badges, left as supplied. Apple and Google both ask for clear space of a quarter
+   of the badge height, and Google Play must be no smaller than the App Store badge. */
+.stores { display: flex; flex-wrap: wrap; gap: 0.875rem; margin-top: 1.5rem; }
+.store { flex: none; display: block; }
+.store svg { display: block; height: clamp(2.5rem, 12.5vw, 3.25rem); width: auto; fill: #000; }
+.store[data-store="ios"] svg { aspect-ratio: 119.66407 / 40; }
+.store[data-store="android"] svg { aspect-ratio: 564 / 168; }
+.store.is-soon { display: none; }
+.store-note { margin-top: 0.8rem; font-size: 0.9375rem; font-weight: 600; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: clip; }
+.hero-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 1.1rem 0; }
+.brand { display: block; line-height: 0; border-radius: 6px; }
+.brand .logo { width: clamp(6.5rem, 24vw, 8.5rem); }
+.hero-actions { display: flex; align-items: center; gap: clamp(0.75rem, 3vw, 1.25rem); }
+.join-link {
+  color: var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  white-space: nowrap;
+}
+.join-link:hover { text-decoration-thickness: 3px; }
+.lang {
+  min-height: 40px;
+  padding: 0 0.95rem;
+  border: 3px solid var(--ink);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--ink);
+  font: 800 0.9375rem/1 var(--font-ar);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.lang[lang="en"] { font-family: var(--font-text); font-size: 0.875rem; }
+.lang:hover { background: var(--ink); color: var(--white); }
+
+.hero-main { display: grid; gap: 1.35rem; padding-block: clamp(1.9rem, 7vw, 3.75rem) 0; }
+.hero-head, .hero-side { min-width: 0; }
+.place { display: flex; align-items: center; gap: 0.5rem; margin-bottom: clamp(0.9rem, 3vw, 1.4rem); font-size: 0.9375rem; font-weight: 700; line-height: 1.3; }
+.place .pin { width: 0.85rem; }
+
+.hero-title { display: grid; font-size: clamp(2.6rem, 13.2vw, 6.9rem); line-height: 1; }
+.need { display: block; color: var(--accent); white-space: nowrap; }
+.need-word { display: inline-block; will-change: transform, opacity; }
+.answer {
+  display: block;
+  margin-top: 0.07em;
+  font-size: 1.9em;
+  line-height: 0.86;
+  white-space: nowrap;
+}
+.answer .stop { display: inline-block; transform-origin: 50% 82%; }
+:root:lang(ar) .hero-title { font-size: clamp(2.4rem, 12vw, 6.2rem); line-height: 1.25; }
+:root:lang(ar) .answer { margin-top: 0; font-size: 2.05em; line-height: 1.22; }
+
+.hero .lede { max-width: 31rem; font-weight: 500; }
+
+@media (min-width: 960px) {
+  .hero-main { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr); align-items: end; gap: 3rem; }
+  .hero-title { font-size: clamp(4.25rem, 7.4vw, 5.9rem); }
+  :root:lang(ar) .hero-title { font-size: clamp(3.9rem, 6.8vw, 5.4rem); }
+  .hero-side { padding-bottom: 0.9rem; }
+}
+
+/* the trip: a dashed route between two pins, and the order riding along it */
+.trip {
+  --pin-w: 1.15rem;
+  --rider-w: clamp(6.5rem, 30vw, 9.25rem);
+  position: relative;
+  margin-top: clamp(1.5rem, 4.5vw, 2.5rem);
+  padding-bottom: clamp(1.9rem, 5vw, 2.75rem);
+}
+.trip-row { position: relative; display: flex; align-items: center; gap: 0.55rem; padding-top: calc(var(--rider-w) * 0.44); }
+.trip-pin { width: var(--pin-w); transform-origin: 50% 100%; }
+.trip-line { flex: 1 1 0; min-width: 0; height: 6px; overflow: visible; }
+.trip-line line, .rule line { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 8 12; }
+.trip-rider {
+  position: absolute;
+  inset-inline-start: calc(var(--pin-w) + 0.55rem - var(--rider-w) * 0.26);
+  bottom: calc(var(--pin-w) * 0.634 + 1px);
+  width: var(--rider-w);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.trip-rider > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.trip-labels { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.45rem; font-size: 0.8125rem; font-weight: 700; line-height: 1.3; }
+.trip.is-arrived .trip-pin--to { animation: pin-land 0.6s cubic-bezier(0.3, 1.5, 0.5, 1); }
+.hero.is-arrived .answer .stop { animation: stop-pop 0.6s cubic-bezier(0.3, 1.6, 0.5, 1); }
+@keyframes pin-land {
+  0% { transform: scale(1, 1); }
+  30% { transform: scale(1.28, 0.76); }
+  60% { transform: scale(0.93, 1.1); }
+  100% { transform: scale(1, 1); }
+}
+@keyframes stop-pop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.55); }
+  100% { transform: scale(1); }
+}
+
+/* the scooter faces the way the trip reads; its bag keeps the logo the right way round */
+:root[dir="rtl"] .trip-rider > svg, :root[dir="rtl"] .foot-scooter > svg { transform: scaleX(-1); }
+:root[dir="rtl"] .trip-rider .bag-logo, :root[dir="rtl"] .foot-scooter .bag-logo { transform: scaleX(-1); }
+.bag-logo { transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* ---------- services: three colour blocks, split on the lean ---------- */
+.trio { list-style: none; margin: 0; padding: 0; display: grid; border-radius: var(--r-lg); overflow: hidden; isolation: isolate; }
+.trio-item {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 6rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.5rem;
+  padding-inline: 1.1rem 1.25rem;
+}
+.trio-art { width: 100%; max-width: 100%; aspect-ratio: 1; }
+.trio-art > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.trio-text { min-width: 0; }
+.trio-item h3 { margin-bottom: 0.4rem; }
+.trio-item p { color: var(--soft); }
+.trio-item.g-orange p { color: var(--ink); }
+@media (min-width: 880px) {
+  .trio { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .trio-item {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 1.5rem;
+    padding-block: 2.5rem 3rem;
+    padding-inline: clamp(2.75rem, 4.4vw, 3.75rem);
+    background: none;
+  }
+  /* each block is a leaning stripe; the first and last run on past the rounded corners */
+  .trio-item::before { content: ""; position: absolute; z-index: -1; inset: 0 -1px; background: var(--bg); transform: skewX(calc(var(--lean) * -1)); }
+  .trio-item:first-child::before { inset-inline-start: -10rem; }
+  .trio-item:last-child::before { inset-inline-end: -10rem; }
+  .trio-art { width: 9rem; }
+}
+
+/* ---------- drawings ---------- */
+.c-dough { fill: var(--dough); }
+.c-dough-lite { fill: var(--dough-lite); }
+.c-crust { fill: var(--crust); }
+.c-zaatar { fill: var(--zaatar); }
+.c-zaatar-dark { fill: var(--zaatar-dark); }
+.c-sesame { fill: var(--cream); }
+.c-herb { fill: var(--herb); }
+.c-herb-dark { fill: var(--herb-dark); }
+.herb-stem { fill: none; stroke: var(--herb-dark); stroke-width: 3; stroke-linecap: round; }
+.c-kraft { fill: var(--kraft); }
+.c-kraft-dark { fill: var(--kraft-dark); }
+.c-bag { fill: var(--orange); }
+.c-white { fill: var(--white); }
+.c-cream { fill: var(--cream); }
+.c-pine { fill: var(--pine); }
+.c-stone { fill: var(--stone); }
+.c-roof { fill: var(--orange); }
+.c-door { fill: var(--pine-deep); }
+.win-on { fill: var(--glow); }
+.c-shadow { fill: var(--ink); opacity: 0.16; }
+.bag-handle { fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; }
+.bag-seam { fill: none; stroke: var(--orange-deep); stroke-width: 2.5; }
+.steam-line { fill: none; stroke: var(--cream); stroke-width: 3.2; stroke-linecap: round; opacity: 0; animation: steam 2.8s ease-in-out infinite; transform-box: fill-box; }
+.steam-line.s2 { animation-delay: 0.9s; }
+.steam-line.s3 { animation-delay: 1.8s; }
+@keyframes steam {
+  0% { opacity: 0; transform: translateY(8px); }
+  35% { opacity: 0.9; }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+.bob { animation: bob 2.6s ease-in-out infinite; }
+.bob.b2 { animation-delay: 0.5s; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.hop { transform-box: fill-box; transform-origin: 50% 100%; animation: hop 2.4s ease-in-out infinite; }
+.bag-shadow { transform-box: fill-box; transform-origin: center; animation: hop-shadow 2.4s ease-in-out infinite; }
+@keyframes hop {
+  0%, 55%, 100% { transform: translateY(0) scale(1, 1); }
+  64% { transform: translateY(0) scale(1.07, 0.93); }
+  76% { transform: translateY(-13px) scale(0.97, 1.03); }
+  88% { transform: translateY(0) scale(1.04, 0.96); }
+}
+@keyframes hop-shadow {
+  0%, 55%, 64%, 100% { transform: scale(1); opacity: 0.16; }
+  76% { transform: scale(0.75); opacity: 0.08; }
+  88% { transform: scale(1.05); opacity: 0.16; }
+}
+
+.road-dots { fill: none; stroke: var(--spark); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 8 12; }
+.road-dots.moving { animation: road 0.55s linear infinite; }
+@keyframes road { to { stroke-dashoffset: 20; } }
+.c-parapet { fill: var(--kraft-dark); }
+.awning-a { fill: var(--orange); }
+.awning-b { fill: var(--cream); }
+.shelf { fill: none; stroke: var(--stone); stroke-width: 2; }
+.c-jar { fill: var(--dough); }
+.c-can { fill: var(--spark); }
+.c-green { fill: var(--herb); }
+.crate-slat { fill: var(--kraft-dark); }
+.ticket { transform-box: fill-box; transform-origin: 50% 100%; animation: ticket 4s ease-in-out infinite; }
+@keyframes ticket {
+  0%, 40% { transform: scale(0); }
+  48% { transform: scale(1.12); }
+  53%, 90% { transform: scale(1); }
+  97%, 100% { transform: scale(0); }
+}
+.ticket-paper { fill: var(--cream); }
+.ticket-line { fill: none; stroke: var(--pine); stroke-width: 2.4; stroke-linecap: round; }
+.ticket-dot { fill: var(--spark); }
+
+.speed { fill: none; stroke: var(--white); stroke-width: 3; stroke-linecap: round; opacity: 0; animation: speed 1.1s linear infinite; }
+.speed.sp2 { animation-delay: 0.35s; }
+.speed.sp3 { animation-delay: 0.7s; }
+@keyframes speed {
+  0% { opacity: 0; transform: translateX(10px); }
+  30% { opacity: 0.75; }
+  100% { opacity: 0; transform: translateX(-14px); }
+}
+.scoot { animation: scoot 0.5s ease-in-out infinite alternate; }
+@keyframes scoot { from { transform: translateY(0); } to { transform: translateY(-1.6px); } }
+.tire { fill: var(--tire); }
+.spokes { transform-box: fill-box; transform-origin: center; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spoke { fill: none; stroke: var(--stone); stroke-width: 2; stroke-linecap: round; opacity: 0.6; }
+.scoot-body { fill: var(--cream); }
+.scoot-dark { fill: var(--pine-deep); }
+.scoot-line { fill: none; stroke: var(--cream); stroke-width: 5; stroke-linecap: round; }
+.scoot-bar { fill: none; stroke: var(--pine-deep); stroke-width: 4; stroke-linecap: round; }
+.rack { fill: none; stroke: var(--pine-deep); stroke-width: 3; stroke-linecap: round; }
+/* on an orange ground the orange bag needs its edge drawn */
+.trip-rider .c-bag, .foot-scooter .c-bag, .intro .c-bag { stroke: var(--ink); stroke-width: 2.5; }
+.trip-rider.is-parked .spokes, .trip-rider.is-parked .scoot { animation-play-state: paused; }
+.trip-rider.is-parked .speed { animation: none; opacity: 0; }
+
+/* ---------- how it works ---------- */
+.how-grid { display: grid; gap: clamp(2.5rem, 7vw, 4rem); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+.step { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 1rem; align-items: start; }
+.step-num { color: var(--accent); font: italic 900 3.1rem/0.86 var(--font-display); font-variant-numeric: tabular-nums; }
+:root:lang(ar) .step-num { font-style: normal; font-weight: 900; font-size: 2.7rem; line-height: 1.05; }
+.step h3 { margin-bottom: 0.3rem; }
+.step p { color: var(--soft); }
+
+/* the bag that brings it, and the order card that follows it */
+.how-visual {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  width: 100%;
+  max-width: 29rem;
+  justify-self: center;
+}
+/* The photo is never mirrored, so the picture keeps one arrangement in both languages:
+   the card sits over the plain corner of the bag, clear of its logo and QR code. */
+.how-visual { direction: ltr; }
+:root[dir="rtl"] .how-visual > * { direction: rtl; }
+.how-bag { grid-column: 1 / 10; grid-row: 1; display: block; width: 100%; height: auto; }
+.how-visual .tag { position: absolute; z-index: 2; top: 7%; inset-inline-end: 0; margin: 0; }
+.status {
+  grid-column: 6 / 13;
+  grid-row: 1;
+  z-index: 1;
+  min-width: 0;
+  margin-top: 90%;   /* of its own column: the card starts below the logo on the bag */
+  padding: 1rem 1.1rem 0.75rem;
+  border-radius: var(--r-md);
+  background: var(--cream);
+  color: var(--ink);
+  box-shadow: 0 18px 38px var(--shade);
+  --mark: var(--pin-green);
+}
+.status-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; font-weight: 800; line-height: 1.3; }
+.status-head .pin { width: 0.8rem; }
+.status-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.status-list li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-block: 0.42rem;
+  color: var(--soft-light);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.35;
+  transition: color 0.3s ease;
+}
+.status-list li::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 9px;
+  top: calc(50% + 12px);
+  height: calc(100% - 24px);
+  border-inline-start: 2px dotted var(--dot-idle);
+}
+.status-list li:last-child::after { display: none; }
+.st-dot {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid var(--dot-idle);
+  display: grid;
+  place-items: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.st-dot svg { width: 12px; height: 12px; opacity: 0; transition: opacity 0.3s ease; }
+.st-dot path { fill: none; stroke: var(--white); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.status-list li.done { color: var(--ink); }
+.status-list li.done .st-dot { background: var(--pin-green); border-color: var(--pin-green); }
+.status-list li.done .st-dot svg { opacity: 1; }
+.status-list li.now { color: var(--ink); font-weight: 800; }
+.status-list li.now .st-dot { border-color: var(--orange); animation: pulse 1.4s ease-out infinite; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--pulse); }
+  100% { box-shadow: 0 0 0 10px var(--pulse-clear); }
+}
+@media (min-width: 900px) {
+  /* the headline and the steps share the first column; the picture stands beside both */
+  .how .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); column-gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+  .how .head { grid-column: 1; grid-row: 1; align-self: end; margin-bottom: 2.25rem; }
+  .how-grid { display: contents; }
+  .how .steps { grid-column: 1; grid-row: 2; align-self: start; }
+  .how-visual { grid-column: 2; grid-row: 1 / 3; max-width: 31rem; justify-self: end; }
+  .how h2 { font-size: clamp(2.6rem, 4.7vw, 3.75rem); }
+  :root:lang(ar) .how h2 { font-size: clamp(2.3rem, 4.1vw, 3.3rem); }
+}
+
+/* ---------- coverage map ---------- */
+.map-card { position: relative; border-radius: var(--r-lg); overflow: hidden; background: var(--pine); }
+.map-frame { direction: ltr; }   /* label positions are drawn left to right, in Arabic too */
+.village-map { display: block; width: 100%; height: auto; }
+
+/* Two drawings of the same map: the wide one for laptops and tablets, the compact one
+   (taller, with its own label layout) for phones, so the whole map fits without swiping. */
+.village-map.is-compact { display: none; }
+@media (max-width: 719px) {
+  .map-card { max-width: 520px; margin-inline: auto; border-radius: var(--r-md); }
+  .village-map.is-wide { display: none; }
+  .village-map.is-compact { display: block; }
+}
+
+.map-bg { fill: var(--pine); }
+.map-contour { fill: none; stroke: var(--pine-line); stroke-width: 1.1; opacity: 0.6; }
+.map-contour.is-index { stroke-width: 1.9; opacity: 0.85; }
+.map-zone { fill: var(--zone-fill); }
+.map-zone-line { fill: none; stroke: var(--spark); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 0.1 9; }
+.map-dot { fill: var(--cream); stroke: var(--pine-deep); stroke-width: 2.5; transition: fill 0.2s ease; }
+.map-ring { fill: none; stroke: var(--spark); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+.map-on .map-ring { animation: map-ring 1.5s cubic-bezier(0.2, 0.7, 0.3, 1) var(--d, 0ms) 1 both; }
+@keyframes map-ring {
+  /* the stroke thins as the ring grows, so it stays a fine line instead of a thick donut */
+  0% { opacity: 0.95; transform: scale(1); stroke-width: 2; }
+  100% { opacity: 0; transform: scale(4.2); stroke-width: 0.45; }
+}
+.map-label {
+  font-family: var(--font-text);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--cream);
+  stroke: var(--pine);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  paint-order: stroke;
+  transition: fill 0.2s ease;
+}
+.map-ar .map-label { font-family: var(--font-ar); font-size: 16px; font-weight: 700; }
+.map-leader { fill: none; stroke: var(--soft-dark); stroke-width: 1.2; opacity: 0.55; }
+.map-hit { fill: transparent; cursor: pointer; }
+.map-v:hover .map-dot, .map-v.is-active .map-dot, .map-v.is-hit .map-dot { fill: var(--spark); }
+.map-v:hover .map-label, .map-v.is-active .map-label { fill: var(--spark); }
+
+.map-ar { display: none; }
+:root:lang(ar) .map-ar { display: inline; }
+:root:lang(ar) .map-en { display: none; }
+
+.map-small { font-family: var(--font-text); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; fill: var(--soft-dark); }
+.map-small.map-ar { font-family: var(--font-ar); font-size: 13px; letter-spacing: 0; }
+.map-n { fill: var(--cream); }
+.map-arrow { fill: none; stroke: var(--soft-dark); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.map-north-a { fill: var(--spark); }
+.map-north-b { fill: var(--soft-dark); }
+.map-sb-a { fill: var(--cream); }
+.map-sb-b { fill: var(--pine-line); }
+.map-drop { pointer-events: none; }
+.map-drop-pin { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
+.pin-fill { fill: var(--spark); }
+.pin-core { fill: var(--cream); }
+
+/* the compact (phone) drawing shows at about 1:1, so its type and lines are set smaller */
+.is-compact .map-label { font-size: 10.5px; stroke-width: 3.4px; }
+.is-compact .map-ar .map-label { font-size: 12px; }
+.is-compact .map-small { font-size: 8.5px; letter-spacing: 0.05em; }
+.is-compact .map-small.map-ar { font-size: 9.5px; letter-spacing: 0; }
+.is-compact .map-dot { stroke-width: 1.8; }
+.is-compact .map-leader { stroke-width: 1; opacity: 0.6; }
+.is-compact .map-zone-line { stroke-width: 2.6; stroke-dasharray: 0.1 7.5; }
+.is-compact .map-arrow { stroke-width: 1.5; }
+.is-compact .map-contour { stroke-width: 0.9; }
+.is-compact .map-contour.is-index { stroke-width: 1.5; }
+
+/* ---------- join: one card per app ---------- */
+.join-grid { display: grid; gap: 1.25rem; }
+.app-card { display: flex; flex-direction: column; min-width: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--cream); }
+.app-cover { background: var(--pine); aspect-ratio: 12 / 6.4; max-width: 100%; }
+.app-cover > svg { display: block; width: 100%; height: 100%; }
+.app-body { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; padding: 0 clamp(1.15rem, 3vw, 1.75rem) 1.6rem; }
+.app-id { display: flex; align-items: flex-end; gap: 0.85rem; margin-top: -1.9rem; margin-bottom: 0.5rem; }
+.app-icon { flex: none; width: 4.75rem; height: 4.75rem; padding: 4px; border-radius: 1.3rem; background: var(--cream); }
+.app-icon img { display: block; width: 100%; height: 100%; }
+.app-id-text { min-width: 0; padding-bottom: 0.2rem; }
+.app-name { font: italic 800 1.3rem/1.1 var(--font-display); letter-spacing: -0.01em; }
+.app-for { color: var(--soft); font-size: 0.875rem; font-weight: 700; line-height: 1.35; }
+.app-text { color: var(--soft); }
+.app-apply { margin-top: auto; padding-top: 0.7rem; font-size: 0.9375rem; font-weight: 700; }
+.app-card .stores { margin-top: 0.5rem; }
+.app-card .store svg { height: clamp(2.5rem, 11vw, 2.875rem); }
+@media (min-width: 820px) {
+  .join-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+}
+
+/* ---------- sign-off ---------- */
+.signoff { padding-bottom: 0; }
+.signoff-grid { display: grid; gap: 2rem; align-items: center; }
+.lockup { width: min(100%, 19rem); }
+.signoff h2 { margin-bottom: 1rem; }
+.signoff .lede { font-weight: 600; }
+.qr { display: none; }
+@media (min-width: 1000px) {
+  .signoff-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr) auto; gap: clamp(2.25rem, 4.5vw, 4rem); }
+  .lockup { width: min(100%, 21rem); }
+  .signoff h2 { font-size: clamp(2.6rem, 4.5vw, 3.6rem); }
+  :root:lang(ar) .signoff h2 { font-size: clamp(2.3rem, 4vw, 3.2rem); }
+  .qr {
+    display: grid;
+    gap: 0.6rem;
+    width: 11.5rem;
+    padding: 0.9rem 0.9rem 0.8rem;
+    border-radius: var(--r-md);
+    background: var(--white);
+    color: var(--ink);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    line-height: 1.35;
+    text-align: center;
+  }
+  .qr svg { display: block; width: 100%; height: auto; fill: var(--ink); }
+}
+
+.foot { margin-top: clamp(3rem, 7vw, 5rem); display: grid; gap: 1rem; font-size: 0.875rem; }
+.rule { display: block; width: 100%; height: 6px; overflow: visible; margin-bottom: 0.4rem; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; }
+.foot-links a, .foot-meta a { position: relative; z-index: 1; color: var(--ink); font-size: 0.9375rem; font-weight: 700; text-decoration: none; }
+.foot-links a:hover, .foot-meta a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; font-weight: 600; }
+.foot-meta a { font-size: 0.875rem; font-weight: 600; }
+.foot-legal { max-width: 44rem; font-size: 0.75rem; line-height: 1.5; }
+
+/* footer: food pops up from under the page */
+.foot-stage {
+  position: relative;
+  height: calc(clamp(6.75rem, 26vw, 8.5rem) + 7rem);
+  margin-top: calc(0.75rem - 7rem); /* the top 7rem is headroom for hops, over the row above */
+  overflow: hidden;
+  pointer-events: none;
+}
+.food, .foot-scooter { position: absolute; bottom: 0; left: 0; }
+.food {
+  width: var(--food-size);
+  height: var(--food-size);
+  transform: translateY(102%);
+  transform-origin: 50% 100%;
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.food.is-still { transform: translate(-50%, 26%) rotate(var(--tilt, 0deg)); }
+.food > svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.foot-scooter { width: clamp(8rem, 34vw, 10.5rem); transform: translateX(-120%); }
+.foot-scooter > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.foot-scooter .spokes { animation-duration: 0.45s; }
+.ol { stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ln { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; }
+.ln-soft { opacity: 0.35; }
+.ln-water { stroke: var(--water-deep); }
+.ln-crust { stroke: var(--kraft-dark); }
+.c-melon { fill: var(--melon); }
+.c-water { fill: var(--water); }
+.c-seed { fill: var(--ink); }
+.c-tomato { fill: var(--tomato); }
+.c-bag-lit { fill: var(--spark); }
+
+/* ---------- phones: a download bar that follows the page ---------- */
+.appbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem max(1rem, env(safe-area-inset-right, 0px)) calc(0.6rem + env(safe-area-inset-bottom, 0px)) max(1rem, env(safe-area-inset-left, 0px));
+  box-shadow: 0 -1px 0 var(--shade-soft), 0 -12px 28px var(--shade-soft);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 0.3s;
+}
+.appbar.is-on { transform: none; visibility: visible; transition-delay: 0s; }
+.appbar-icon { flex: none; display: block; width: 2.75rem; height: 2.75rem; }
+.appbar-text { flex: 1; min-width: 0; display: grid; line-height: 1.25; }
+.appbar-name { font: italic 800 1.15rem/1.1 var(--font-display); }
+.appbar-note { overflow: hidden; color: var(--soft); font-size: 0.8125rem; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.appbar .btn { min-height: 44px; padding: 0 1.1rem; font-size: 1rem; }
+@media (min-width: 720px) {
+  .appbar { display: none; }
+}
+
+/* ---------- intro: the rider crosses a pine screen and pulls the orange page in behind it ---------- */
+.intro { display: none; }
+.intro-on .intro {
+  --w: min(62vw, 23rem);                      /* the rider's width */
+  --road: calc(54% + var(--w) * 0.226);       /* where its wheels touch the ground */
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  direction: ltr;
+  background-color: var(--pine);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: intro-fade 0.26s ease 1.75s forwards, intro-gone 0s linear 2.05s forwards;
+}
+html.intro-on, .intro-on body { overflow: hidden; }
+
+/* the logo waits on the pine screen until the orange sweeps over it */
+.intro-logo { position: absolute; left: 50%; top: 27%; width: min(50vw, 15rem); transform: translate(-50%, -50%); }
+.intro-road { position: absolute; left: 0; top: calc(var(--road) - 3px); width: 100%; height: 10px; overflow: hidden; }
+.intro-road line { stroke: var(--spark); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 10 15; }
+.intro-train { position: absolute; inset: 0; transform: translateX(-118vw); animation: intro-cross 1.45s linear 0.3s forwards; }
+/* the orange page: a leaning block that follows right behind the rider */
+.intro-wipe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: calc(50% + var(--w) * 0.38);
+  width: 420vw;
+  background: var(--orange);
+  transform: skewX(calc(var(--lean) * -1));
+  transform-origin: 100% var(--road);
+}
+.intro-rider { position: absolute; left: 50%; top: 54%; width: var(--w); transform: translate(-50%, -50%); }
+.intro-rider > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.intro .spokes { animation-duration: 0.4s; }
+.intro .scoot { animation-duration: 0.22s; }
+
+/* in Arabic the rider comes from the right; the block still leans the brand's way */
+:root[dir="rtl"] .intro-train { transform: translateX(118vw); animation-name: intro-cross-rtl; }
+:root[dir="rtl"] .intro-wipe { right: auto; left: calc(50% + var(--w) * 0.38); transform-origin: 0 var(--road); }
+:root[dir="rtl"] .intro-rider > svg { transform: scaleX(-1); }
+:root[dir="rtl"] .intro .bag-logo { transform: scaleX(-1); }
+
+/* the page settles in as the orange arrives */
+.intro-on .hero-top,
+.intro-on .hero-head > *,
+.intro-on .hero-side > *,
+.intro-on .trip { animation: intro-rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.intro-on .hero-top { animation-delay: 1.71s; }
+.intro-on .hero-head > :nth-child(1) { animation-delay: 1.77s; }
+.intro-on .hero-head > :nth-child(2) { animation-delay: 1.83s; }
+.intro-on .hero-side > :nth-child(1) { animation-delay: 1.91s; }
+.intro-on .hero-side > :nth-child(2) { animation-delay: 1.97s; }
+.intro-on .hero-side > :nth-child(3) { animation-delay: 2.03s; }
+.intro-on .trip { animation-delay: 2.11s; }
+
+/* tap to skip */
+.intro-skip .intro { animation: none; opacity: 0; transition: opacity 0.2s ease; pointer-events: none; }
+.intro-skip .hero-top,
+.intro-skip .hero-head > *,
+.intro-skip .hero-side > *,
+.intro-skip .trip { animation: none; }
+
+@keyframes intro-cross {
+  0% { transform: translateX(-118vw); animation-timing-function: cubic-bezier(0.15, 0.75, 0.3, 1); }
+  42% { transform: translateX(-5vw); animation-timing-function: linear; }
+  56% { transform: translateX(5vw); animation-timing-function: cubic-bezier(0.6, 0, 0.9, 0.45); }
+  100% { transform: translateX(132vw); }
+}
+@keyframes intro-cross-rtl {
+  0% { transform: translateX(118vw); animation-timing-function: cubic-bezier(0.15, 0.75, 0.3, 1); }
+  42% { transform: translateX(5vw); animation-timing-function: linear; }
+  56% { transform: translateX(-5vw); animation-timing-function: cubic-bezier(0.6, 0, 0.9, 0.45); }
+  100% { transform: translateX(-132vw); }
+}
+@keyframes intro-fade { to { opacity: 0; } }
+@keyframes intro-gone { to { visibility: hidden; pointer-events: none; } }
+@keyframes intro-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* preview only: replay the intro */
+.intro-replay {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right, 0px));
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 70;
+  min-height: 36px;
+  padding: 0 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font: 700 0.8125rem/1 var(--font-text);
+  box-shadow: 0 6px 18px var(--shade);
+  cursor: pointer;
+  transition: opacity 0.2s ease, bottom 0.3s ease;
+}
+.intro-on .intro-replay { opacity: 0; pointer-events: none; }
+.bar-on .intro-replay { bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px)); }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .steam-line { opacity: 0.7; }
+  .intro-on .intro { display: none; }
+  html.intro-on, .intro-on body { overflow: visible; }
+}
