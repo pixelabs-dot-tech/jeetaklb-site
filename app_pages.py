@@ -1,12 +1,14 @@
-"""Public app pages: jeetaklb.com/driver (Jeetak Driver) and jeetaklb.com/partner (Jeetak Partner).
+"""One link per app: jeetaklb.com/app (Jeetak, for customers), jeetaklb.com/partner (Jeetak Partner)
+and jeetaklb.com/driver (Jeetak Driver).
 
 Share these links instead of the store links. WhatsApp and other apps show the Jeetak
 preview image set here (a store link only shows what the store decides), and the page
-sends phones straight to the right store: Android to Google Play, iPhone to the App Store
-once the app is listed there. Add ?stay to a link to see the page itself on a phone.
+sends phones straight to the right store: Android to Google Play, iPhone to the App Store.
+Computers see the page itself, with both store badges. Add ?stay to a link to see the
+page on a phone.
 
-build.py writes driver.html and partner.html, and draws their preview images
-(og-driver.jpg, og-partner.jpg) with Playwright.
+build.py writes app.html, partner.html and driver.html, and draws their preview images
+(og-app.jpg, og-partner.jpg, og-driver.jpg) with Playwright.
 """
 import base64
 import html as htmllib
@@ -17,6 +19,19 @@ from pathlib import Path
 from pages import COMPANY, CSS as DOC_CSS, EMAIL, SITE_URL, nav_links
 
 APPS = [
+    {
+        "slug": "app", "store": "customer", "name": "Jeetak",
+        "kicker": "Jeetak app", "label": "",
+        "title": "Get the Jeetak app", "og_title": ("Get the", "Jeetak app."),
+        "page_title": "Get the Jeetak app · Everything you need",
+        "accent": "Everything you need.",
+        "lede": "Food, groceries and anything else from the shops near you, ordered in one app and "
+                "delivered across 24 villages in the Upper Metn. No calls. No voice notes.",
+        "desc": "Food, groceries and anything else from the shops near you, delivered across "
+                "24 villages in the Upper Metn. Download the Jeetak app.",
+        "policy": ("customer_policy", "privacy policy"),
+        "art": "food", "art_bg": "orange", "og_theme": "orange", "og_art": "edge",
+    },
     {
         "slug": "driver", "store": "driver", "name": "Jeetak Driver",
         "kicker": "Jeetak Driver app",
@@ -55,7 +70,23 @@ ART_CSS = """
   --orange: #E23C0E; --orange-lit: #FF7A45; --orange-ink: #B32F0A; --pine: #1D3D2F; --pine-deep: #10241B;
   --cream: #FFFAE6; --stone: #EFE3C4; --glow: #FFD88A; --tree-fore: #0A1912; --white: #FFFFFF;
   --dough: #E9C27C; --herb: #7FAE4E; --kraft: #C99A5D; --kraft-dark: #A97C43;
+  --dough-lite: #F3DBA6; --crust: #C98F45; --zaatar: #6B7433; --zaatar-dark: #454D1E; --herb-dark: #5C8A35;
+  --melon: #F7A3A8; --water: #BFE6F4; --water-deep: #86C6E0; --tomato: #D9412F;
 }
+.c-dough { fill: var(--dough); } .c-crust { fill: var(--crust); } .c-zaatar { fill: var(--zaatar); }
+.c-zaatar-dark { fill: var(--zaatar-dark); } .c-herb { fill: var(--herb); } .c-herb-dark { fill: var(--herb-dark); }
+.c-cream { fill: var(--cream); } .c-pine { fill: var(--pine); } .c-melon { fill: var(--melon); }
+.c-water { fill: var(--water); } .c-seed { fill: var(--pine-deep); } .c-tomato { fill: var(--tomato); }
+.c-bag-lit { fill: var(--orange-lit); } .c-kraft-dark { fill: var(--kraft-dark); }
+.ol { stroke: var(--pine-deep); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.ln { fill: none; stroke: var(--pine-deep); stroke-width: 2.4; stroke-linecap: round; }
+.ln-soft { opacity: 0.35; } .ln-water { stroke: var(--water-deep); } .ln-crust { stroke: var(--kraft-dark); }
+.steam-line { fill: none; stroke: var(--cream); stroke-width: 3.2; stroke-linecap: round; opacity: 0.85; }
+.app-art .steam-line { opacity: 0; animation: steam 2.8s ease-in-out infinite; transform-box: fill-box; }
+.app-art .steam-line.s2 { animation-delay: 0.9s; }
+@keyframes steam { 0% { opacity: 0; transform: translateY(8px); } 35% { opacity: 0.9; } 100% { opacity: 0; transform: translateY(-12px); } }
+.pop { animation: pop 2.8s ease-in-out infinite; }
+@keyframes pop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 .road-dots { fill: none; stroke: var(--orange-lit); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 0.1 13; }
 .road-dots.moving { animation: road 0.55s linear infinite; }
 @keyframes road { to { stroke-dashoffset: 13; } }
@@ -86,6 +117,7 @@ ART_CSS = """
 @media (prefers-reduced-motion: reduce) {
   .app-art * { animation: none !important; }
   .app-art .speed { opacity: 0.5; }
+  .app-art .steam-line { opacity: 0.85; }
 }
 """
 
@@ -110,6 +142,7 @@ APP_CSS = """
   color: var(--orange-ink);
 }
 .app-art { margin: 0; background: var(--pine); border-radius: 22px; overflow: hidden; aspect-ratio: 12 / 7; }
+.app-art.is-orange { background: var(--orange); }
 .app-art > svg { display: block; width: 100%; height: 100%; }
 .app-lede { margin: 1.1rem 0 0; font-size: 1.0625rem; max-width: 34rem; }
 .app-stores { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem; }
@@ -143,13 +176,32 @@ def missing_note(links):
     return SOON[gone[0]] if len(gone) == 1 else ""
 
 
-def render(site_dir, word_d, wm_w, wm_h, font_links, store_links, art, badge_symbols):
-    """Write driver.html and partner.html. art maps "scooter"/"shop" to inline SVG markup."""
+# The customer app's picture: food from the landing page's footer, popping up from the bottom edge.
+# (name, centre x, bottom y, scale, tilt) in a 240 x 140 box; anything below 140 is cut off.
+FOOD_SPREAD = [("groceries", 41, 150, 1.18, -7), ("coffee", 98, 146, 1.16, 5), ("shawarma", 152, 152, 1.18, -4),
+               ("booza", 201, 148, 1.16, 5), ("manoushe", 137, 171, 0.8, -6)]
+FOOD_BOX = {"manoushe": (2.6, 106.2, 98.3), "shawarma": (28, 101, 72.1), "coffee": (27, 101, 73), "booza": (26.8, 102, 73.2),
+            "groceries": (25, 102, 75)}      # each drawing's left edge, bottom and right edge in its 100 x 100 box
+
+
+def food_svg(pin_w, pin_h):
+    from food_items import FOOD
+    drawings = {name: inner.replace("{PIN_W}", str(pin_w)).replace("{PIN_H}", str(pin_h)) for name, inner in FOOD}
+    out = []
+    for i, (name, cx, bottom, scale, tilt) in enumerate(FOOD_SPREAD):
+        left, low, right = FOOD_BOX[name]
+        out.append(f'<g class="pop" style="animation-delay:{-0.55 * i:.2f}s"><g transform="translate({cx} {bottom}) '
+                   f'rotate({tilt}) scale({scale}) translate({-(left + right) / 2:.1f} {-low})">{drawings[name]}</g></g>')
+    return f'<svg viewBox="0 0 240 140" focusable="false">{"".join(out)}</svg>'
+
+
+def render(site_dir, word_d, wm_w, wm_h, font_links, store_links, art, badge_symbols, extra_defs=""):
+    """Write app.html, driver.html and partner.html. art maps "food"/"scooter"/"shop" to inline SVG markup."""
     written = []
     for a in APPS:
         links = store_links[a["store"]]
         title = f'{a["og_title"][0]} {a["og_title"][1]}'.replace(".", "")
-        page_title = f'{a["name"]} app · {title}'
+        page_title = a.get("page_title") or f'{a["name"]} app · {title}'
         url = f"{SITE_URL}/{a['slug']}"
         redirect = json.dumps({"ios": links.get("ios", ""), "android": links.get("android", "")})
         note = missing_note(links)
@@ -194,7 +246,7 @@ def render(site_dir, word_d, wm_w, wm_h, font_links, store_links, art, badge_sym
 <body class="app-page">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
-    <path id="jk-word" fill-rule="evenodd" d="{word_d}"/>
+    <path id="jk-word" fill-rule="evenodd" d="{word_d}"/>{extra_defs}
     {badge_symbols}
   </defs>
 </svg>
@@ -207,7 +259,7 @@ def render(site_dir, word_d, wm_w, wm_h, font_links, store_links, art, badge_sym
 <main class="doc-wrap app-wrap">
   <article class="doc app">
     <div class="app-grid">
-      <figure class="app-art" aria-hidden="true">{art[a['art']]}</figure>
+      <figure class="app-art{' is-orange' if a.get('art_bg') == 'orange' else ''}" aria-hidden="true">{art[a['art']]}</figure>
       <div class="app-copy">
         <p class="doc-kicker">{esc(a['kicker'])}</p>
         <h1>{esc(a['title'])}</h1>
@@ -244,12 +296,13 @@ OG_THEMES = {
 }
 
 
-def og_html(a, word_d, wm_w, wm_h, art, badge_symbols, store_links, font_css):
+def og_html(a, word_d, wm_w, wm_h, art, badge_symbols, store_links, font_css, extra_defs=""):
     t = OG_THEMES[a["og_theme"]]
     links = store_links[a["store"]]
     note = missing_note(links)
-    label = a["name"].split()[-1]                    # "Driver" / "Partner"
-    panel = a["og_theme"] != "pine"                  # the shop's orange awning needs a pine card on orange
+    label = a.get("label", a["name"].split()[-1])    # "Driver" / "Partner"; none for the customer app
+    # the shop's orange awning needs a pine card on orange; the food pops up from the bottom edge
+    mode = a.get("og_art") or ("panel" if a["og_theme"] != "pine" else "bare")
     art_svg = art[a["art"]]
     return f"""<!doctype html><html><head><meta charset="utf-8"><style>
 {font_css}
@@ -273,17 +326,19 @@ h1 {{ margin: 16px 0 0; font-family: "Kanit"; font-style: italic; font-weight: 7
 .og-art {{ position: absolute; right: 50px; width: 540px; }}
 .og-art > svg {{ display: block; width: 100%; height: auto; }}
 .og-art.is-bare {{ bottom: 60px; }}
+.og-art.is-edge {{ bottom: 0; right: 20px; width: 650px; }}
+.og .steam-line {{ opacity: 0.85; }}
 .og-art.is-panel {{ top: 132px; right: 46px; width: 442px; padding: 0; border-radius: 26px; overflow: hidden; background: #1D3D2F;
   transform: rotate(-2.5deg); box-shadow: 0 22px 44px rgba(16, 36, 27, 0.35); }}
 </style></head><body>
-<svg width="0" height="0" style="position:absolute"><defs><path id="jk-word" fill-rule="evenodd" d="{word_d}"/>{badge_symbols}</defs></svg>
+<svg width="0" height="0" style="position:absolute"><defs><path id="jk-word" fill-rule="evenodd" d="{word_d}"/>{extra_defs}{badge_symbols}</defs></svg>
 <div class="og">
-  <div class="brandrow"><svg viewBox="0 0 {wm_w} {wm_h}"><use href="#jk-word"/></svg><span>{esc(label)}</span></div>
+  <div class="brandrow"><svg viewBox="0 0 {wm_w} {wm_h}"><use href="#jk-word"/></svg>{f'<span>{esc(label)}</span>' if label else ''}</div>
   <p class="kicker">{esc(a['kicker'])}</p>
   <h1>{esc(a['og_title'][0])}<br>{esc(a['og_title'][1])}</h1>
   <p class="accent">{esc(a['accent'])}</p>
   <div class="stores">{badges(links)}{f'<span class="soon">{note}</span>' if note else ''}</div>
-  <div class="og-art {'is-panel' if panel else 'is-bare'}">{art_svg}</div>
+  <div class="og-art is-{mode}">{art_svg}</div>
 </div>
 </body></html>"""
 

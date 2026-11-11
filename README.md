@@ -76,14 +76,20 @@ its own HTML file, served at those exact addresses. The app store listings link
 to them, so keep the file names unchanged. Change the "Last updated" date in
 `pages_text.py` whenever the text changes.
 
-## App links: /driver and /partner
+## App links: /app, /partner and /driver
 
-`app_pages.py` makes jeetaklb.com/driver (the Jeetak Driver app) and jeetaklb.com/partner
-(the Jeetak Partner app). Share these instead of the store links: WhatsApp and other apps
-show their own preview image (`og-driver.jpg`, `og-partner.jpg`, drawn by `build.py`), and
-phones go straight to their store: Android to Google Play, iPhone to the App Store once the
-app is listed there (until then iPhones see the page). Add `?stay` to a link to see the page
-itself on a phone. The store links come from `STORE_LINKS` in `src/script.js`.
+One link per app, made by `app_pages.py`:
+
+- jeetaklb.com/app: Jeetak, the customer app
+- jeetaklb.com/partner: Jeetak Partner, for restaurants and shops
+- jeetaklb.com/driver: Jeetak Driver
+
+Share these instead of the store links. Phones go straight to their store (Android to Google
+Play, iPhone and iPad to the App Store); computers see a page with both store badges. Add
+`?stay` to a link to see that page on a phone. WhatsApp and other apps show each link's own
+preview image (`og-app.jpg`, `og-partner.jpg`, `og-driver.jpg`, drawn by `build.py`). The store
+links come from `STORE_LINKS` in `src/script.js`, so changing a link there and rebuilding
+updates the landing page, these pages and their preview images together.
 
 The preview images use the Kanit and Readex Pro fonts, loaded from Google Fonts. Where Google
 Fonts is blocked, install them (`npm i @fontsource/kanit @fontsource/readex-pro`) and set
