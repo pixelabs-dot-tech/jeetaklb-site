@@ -6,7 +6,7 @@
   var STORE_LINKS = {
     customer: { ios: "https://apps.apple.com/lb/app/jeetak-%D8%AC%D9%8A%D8%AA%D9%83/id6817658758", android: "https://play.google.com/store/apps/details?id=com.food.jeetak" },     // Jeetak customer app
     vendor:   { ios: "https://apps.apple.com/lb/app/jeetak-partner/id6817663791", android: "https://play.google.com/store/apps/details?id=com.jeetak.vendor" },   // vendor app for restaurants and shops
-    driver:   { ios: "", android: "https://play.google.com/store/apps/details?id=com.jeetak.drivers" }   // driver app
+    driver:   { ios: "https://apps.apple.com/lb/app/jeetak-driver/id6817666299", android: "https://play.google.com/store/apps/details?id=com.jeetak.drivers" }   // driver app
   };
 
   var T = {

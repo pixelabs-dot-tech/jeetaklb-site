@@ -424,10 +424,11 @@ import pages  # noqa: E402
 written = pages.render(SITE, WORD_D, WM_W, WM_H, font_links, VILLAGES)
 print("pages", ", ".join(written))
 
-# ---------------------------------------------------------------- app pages (/driver, /partner)
+# ---------------------------------------------------------------- app pages (/app, /partner, /driver)
 import app_pages  # noqa: E402
-APP_ART = {"scooter": SCOOTER_SVG, "shop": shop_svg()}
-written = app_pages.render(SITE, WORD_D, WM_W, WM_H, font_links, STORE_LINKS, APP_ART, badge_symbols())
+APP_ART = {"scooter": SCOOTER_SVG, "shop": shop_svg(), "food": app_pages.food_svg(PIN_W, PIN_H)}
+APP_DEFS = f'\n    <path id="jk-pin" fill-rule="evenodd" d="{PIN_D}"/>'
+written = app_pages.render(SITE, WORD_D, WM_W, WM_H, font_links, STORE_LINKS, APP_ART, badge_symbols(), APP_DEFS)
 print("app pages", ", ".join(written))
 
 # ---------------------------------------------------------------- favicon and home-screen icons
@@ -444,10 +445,10 @@ with sync_playwright() as p:
     page = browser.new_page(viewport={"width": 1200, "height": 630})
     page.set_content(og_html)
     page.screenshot(path=str(SITE / "og-image.png"))
-    # the /driver and /partner preview images
+    # the /app, /partner and /driver preview images
     for app in app_pages.APPS:
         page.set_content(app_pages.og_html(app, WORD_D, WM_W, WM_H, APP_ART, badge_symbols(), STORE_LINKS,
-                                           app_pages.og_font_css(FONTS)))
+                                           app_pages.og_font_css(FONTS), APP_DEFS))
         page.evaluate("""() => Promise.all([document.fonts.load('italic 700 84px Kanit'),
             document.fonts.load('italic 600 36px Kanit'), document.fonts.load('600 21px "Readex Pro"'),
             document.fonts.load('500 19px "Readex Pro"')]).then(() => document.fonts.ready)""")
