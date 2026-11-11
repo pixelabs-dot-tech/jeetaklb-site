@@ -185,26 +185,42 @@ p { margin: 0; }
   color: var(--cream-dim);
 }
 
-/* ---------- store badges ---------- */
-/* The official badges, left as supplied. Apple and Google both ask for clear space of a quarter
-   of the badge height, and Google Play must be no smaller than the App Store badge. */
-.stores {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.875rem;
-  margin-top: 1.75rem;
+/* ---------- download buttons ---------- */
+/* One button per app. On a phone it opens the app in that phone's store (App Store on iPhone,
+   Google Play on Android). On a computer it opens jeetaklb.com/app, /partner or /driver,
+   which show both stores. */
+.get { margin-top: 1.75rem; }
+.get-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.25rem;
+  padding-block: 0.3rem 0.35rem;
+  padding-inline: 1.15rem 1.5rem;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--white);
+  font: italic 600 1.25rem/1.1 var(--font-display);
+  text-decoration: none;
+  box-shadow: 0 5px 0 var(--orange-ink);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
 }
-.store { flex: none; display: block; }
-.store svg {
-  display: block;
-  height: clamp(2.5rem, 12.5vw, 3.25rem);
-  width: auto;
-  fill: #000;
+.get-btn:hover { transform: translateY(-2px); box-shadow: 0 7px 0 var(--orange-ink); }
+.get-btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--orange-ink); }
+.get-btn svg {
+  flex: none;
+  width: 1.3rem;
+  height: 1.3rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
-.store[data-store="ios"] svg { aspect-ratio: 119.66407 / 40; }
-.store[data-store="android"] svg { aspect-ratio: 564 / 168; }
-.store.is-soon { display: none; }
-.store-note { margin-top: 0.85rem; font-size: 0.9375rem; color: var(--cream-dim); }
+.get-btn.is-soon { display: none; }
+:root:lang(ar) .get-btn { font-style: normal; font-weight: 800; font-size: 1.2rem; padding-block: 0.4rem 0.25rem; }
+.get-note { margin-top: 1rem; font-size: 0.9375rem; color: var(--cream-dim); }
 
 /* ---------- hero landscape ---------- */
 .hero-art {
@@ -476,9 +492,10 @@ h2 { font-size: var(--step-h2); }
 :root:lang(ar) .join-kicker { letter-spacing: 0; text-transform: none; font-size: 0.9375rem; }
 .join-card h3 { font-size: var(--step-h3); margin-bottom: 0.15rem; }
 .join-text { color: var(--ink-soft); }
-.join-apply { margin-top: auto; padding-top: 0.75rem; font-size: 0.9375rem; font-weight: 500; color: var(--ink); }
-.join-card .stores { margin-top: 0.6rem; }
-.join-card .store svg { height: clamp(2.5rem, 11vw, 2.875rem); }
+.join-card .get { margin-top: auto; padding-top: 0.9rem; }
+.join-card .get-btn { font-size: 1.0625rem; padding-inline: 1rem 1.25rem; }
+.get-btn span { text-wrap: balance; }
+.join-card .get-note { margin-top: 0.85rem; color: var(--ink-soft); }
 @media (min-width: 820px) {
   .join-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
 }
@@ -532,7 +549,8 @@ h2 { font-size: var(--step-h2); }
 .lockup { width: min(100%, 21rem); height: auto; fill: var(--white); }
 .signoff h2 { margin-bottom: 1rem; }
 .signoff p.body { max-width: 30rem; font-size: var(--step-lede); font-weight: 500; color: var(--white); }
-.signoff .stores { margin-top: 1.6rem; }
+.signoff .get { margin-top: 1.6rem; }
+.signoff .get-btn { background: var(--white); color: var(--pine); }
 @media (min-width: 820px) {
   .signoff-grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 4rem; }
   .logo-tile { place-items: center start; }
@@ -558,7 +576,6 @@ h2 { font-size: var(--step-h2); }
 .foot-links a:hover, .foot-meta a:hover { text-decoration: underline; }
 .foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
 .foot-meta a { font-size: 0.875rem; font-weight: 400; }
-.foot-legal { max-width: 44rem; font-size: 0.75rem; line-height: 1.5; }
 
 /* ---------- footer: food pops up from under the page ---------- */
 .signoff { padding-block-end: 0; }

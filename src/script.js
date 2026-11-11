@@ -54,16 +54,19 @@
       vendorTitle: "Become a partner",
       vendorBody: "Get orders from customers across 24 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.",
       vendorApplySoon: "The vendor app is coming soon. You’ll download it and apply right here.",
-      vendorApplyLive: "Download the vendor app and apply.",
+      vendorApplyLive: "On iPhone and Android. Apply in the app.",
       vendorApplyAndroid: "Download the vendor app on Android and apply. The iPhone version is coming soon.",
       vendorApplyIos: "Download the vendor app on iPhone and apply. The Android version is coming soon.",
       driverKicker: "Drivers",
       driverTitle: "Become a driver",
       driverBody: "Deliver orders around the Upper Metn and earn on every delivery. The driver app shows your deliveries and earnings.",
       driverApplySoon: "The driver app is coming soon. You’ll download it and apply right here.",
-      driverApplyLive: "Download the driver app and apply.",
+      driverApplyLive: "On iPhone and Android. Apply in the app.",
       driverApplyAndroid: "Download the driver app on Android and apply. The iPhone version is coming soon.",
       driverApplyIos: "Download the driver app on iPhone and apply. The Android version is coming soon.",
+      getApp: "Download the app",
+      getVendor: "Download the vendor app",
+      getDriver: "Download the driver app",
       ctaTitle: "Get Jeetak on your phone.",
       ctaBodySoon: "The app launches soon on iPhone and Android. The download links will appear right here.",
       ctaBodyLive: "Download the app and place your first order.",
@@ -126,16 +129,19 @@
       vendorTitle: "صير شريك",
       vendorBody: "وصّل محلّك لزباين بـ24 ضيعة. بتقبل الطلبيات وبتجهّزها من تطبيق المحلات، ودليفري جيتك بيمرق ياخدها.",
       vendorApplySoon: "تطبيق المحلات نازل قريباً، ورح تنزّلو وتقدّم طلبك من هون.",
-      vendorApplyLive: "نزّل تطبيق المحلات وقدّم طلبك.",
+      vendorApplyLive: "على آيفون وأندرويد. قدّم طلبك من التطبيق.",
       vendorApplyAndroid: "نزّل تطبيق المحلات على أندرويد وقدّم طلبك. نسخة الآيفون نازلة قريباً.",
       vendorApplyIos: "نزّل تطبيق المحلات على آيفون وقدّم طلبك. نسخة الأندرويد نازلة قريباً.",
       driverKicker: "سائقين",
       driverTitle: "اشتغل دليفري",
       driverBody: "وصّل طلبيات بالمتن الأعلى واربح عن كل توصيلة. تطبيق الدليفري بيورجيك توصيلاتك ومدخولك.",
       driverApplySoon: "تطبيق الدليفري نازل قريباً، ورح تنزّلو وتقدّم طلبك من هون.",
-      driverApplyLive: "نزّل تطبيق الدليفري وقدّم طلبك.",
+      driverApplyLive: "على آيفون وأندرويد. قدّم طلبك من التطبيق.",
       driverApplyAndroid: "نزّل تطبيق الدليفري على أندرويد وقدّم طلبك. نسخة الآيفون نازلة قريباً.",
       driverApplyIos: "نزّل تطبيق الدليفري على آيفون وقدّم طلبك. نسخة الأندرويد نازلة قريباً.",
+      getApp: "نزّل التطبيق",
+      getVendor: "نزّل تطبيق المحلات",
+      getDriver: "نزّل تطبيق الدليفري",
       ctaTitle: "نزّل جيتك على تلفونك.",
       ctaBodySoon: "التطبيق نازل قريباً على آيفون وأندرويد، وروابط التنزيل رح تكون هون.",
       ctaBodyLive: "نزّل التطبيق واطلب أوّل طلبية.",
@@ -174,21 +180,23 @@
     return !!(links.ios || links.android);
   }
 
-  function setStores(dict) {
-    each(".store", function (el) {
-      var key = el.getAttribute("data-store");
-      var url = linksFor(el.getAttribute("data-app"))[key];
-      if (url) {
-        el.setAttribute("href", url);
+  // One download button per app. On a phone it goes straight to that phone's store; elsewhere it
+  // keeps its jeetaklb.com/app (/partner, /driver) link, a page with both stores.
+  function setGetButtons() {
+    var os = detectOS();
+    each(".get-btn", function (el) {
+      var links = linksFor(el.getAttribute("data-app"));
+      var direct = os ? links[os] : "";
+      if (direct) {
+        el.setAttribute("href", direct);
         el.setAttribute("target", "_blank");
         el.setAttribute("rel", "noopener");
-        el.setAttribute("aria-label", key === "ios" ? dict.storeLiveIos + " App Store" : dict.storeLiveAndroid + " Google Play");
-        el.classList.remove("is-soon");
-      } else {
-        el.removeAttribute("href");
-        el.classList.add("is-soon");
       }
+      el.classList.toggle("is-soon", !(links.ios || links.android));
     });
+  }
+
+  function setStores(dict) {
     each("[data-i18n-state]", function (el) {
       var links = linksFor(el.getAttribute("data-app"));
       var state = links.ios && links.android ? "Live" : links.android ? "Android" : links.ios ? "Ios" : "Soon";
@@ -238,15 +246,6 @@
     if (/iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) return "ios";
     if (/Android/i.test(ua)) return "android";
     return null;
-  }
-
-  function orderStores() {
-    var os = detectOS();
-    if (!os) return;
-    each(".stores", function (group) {
-      var mine = group.querySelector('[data-store="' + os + '"]');
-      if (mine) group.insertBefore(mine, group.firstChild);
-    });
   }
 
   function initLanguage() {
@@ -698,7 +697,7 @@
     }, { threshold: 0.3 }).observe(card);
   }
 
-  orderStores();
+  setGetButtons();
   initLanguage();
   var route = initRoute();
   initIntro(route);

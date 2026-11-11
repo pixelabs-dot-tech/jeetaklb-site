@@ -5,7 +5,6 @@
     <path id="jk-word" fill-rule="evenodd" d="{{WORDMARK_D}}"/>
     <path id="jk-slogan" fill-rule="evenodd" d="{{SLOGAN_D}}"/>
     <path id="jk-pin" fill-rule="evenodd" d="{{PIN_D}}"/>
-    {{BADGE_SYMBOLS}}
   </defs>
 </svg>
 
@@ -24,11 +23,10 @@
       <p class="eyebrow" data-i18n="heroEyebrow">Upper Metn · 24 villages</p>
       <h1 data-i18n="heroTitle">From the village shop to your door.</h1>
       <p class="lede" data-i18n="heroLede">Food, groceries and anything else nearby, ordered in one app. No calls. No voice notes.</p>
-      <div class="stores">
-        {{STORE_IOS}}
-        {{STORE_ANDROID}}
+      <div class="get">
+        <a class="get-btn" data-app="customer" href="{{SITE}}/app"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5v11.5M6.5 10l5.5 5.5 5.5-5.5M4.5 20.5h15"/></svg><span data-i18n="getApp">Download the app</span></a>
+        <p class="get-note" data-i18n-state="storeNote">Available now on iPhone and Android.</p>
       </div>
-      <p class="store-note" data-i18n-state="storeNote">The app is launching soon on iPhone and Android.</p>
     </div>
   </div>
   <div class="hero-art">
@@ -185,10 +183,9 @@
             <p class="join-kicker" data-i18n="vendorKicker">Restaurants &amp; shops</p>
             <h3 data-i18n="vendorTitle">Become a partner</h3>
             <p class="join-text" data-i18n="vendorBody">Get orders from customers across 24 villages. Accept and prepare them in the vendor app, and a Jeetak driver picks them up.</p>
-            <p class="join-apply" data-app="vendor" data-i18n-state="vendorApply">The vendor app is coming soon. You’ll download it and apply right here.</p>
-            <div class="stores">
-              {{STORE_VENDOR_IOS}}
-              {{STORE_VENDOR_ANDROID}}
+            <div class="get">
+              <a class="get-btn" data-app="vendor" href="{{SITE}}/partner"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5v11.5M6.5 10l5.5 5.5 5.5-5.5M4.5 20.5h15"/></svg><span data-i18n="getVendor">Download the vendor app</span></a>
+              <p class="get-note" data-app="vendor" data-i18n-state="vendorApply">On iPhone and Android. Apply in the app.</p>
             </div>
           </div>
         </article>
@@ -200,10 +197,9 @@
             <p class="join-kicker" data-i18n="driverKicker">Drivers</p>
             <h3 data-i18n="driverTitle">Become a driver</h3>
             <p class="join-text" data-i18n="driverBody">Deliver orders around the Upper Metn and earn on every delivery. The driver app shows your deliveries and earnings.</p>
-            <p class="join-apply" data-app="driver" data-i18n-state="driverApply">The driver app is coming soon. You’ll download it and apply right here.</p>
-            <div class="stores">
-              {{STORE_DRIVER_IOS}}
-              {{STORE_DRIVER_ANDROID}}
+            <div class="get">
+              <a class="get-btn" data-app="driver" href="{{SITE}}/driver"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5v11.5M6.5 10l5.5 5.5 5.5-5.5M4.5 20.5h15"/></svg><span data-i18n="getDriver">Download the driver app</span></a>
+              <p class="get-note" data-app="driver" data-i18n-state="driverApply">On iPhone and Android. Apply in the app.</p>
             </div>
           </div>
         </article>
@@ -221,9 +217,8 @@
       <div>
         <h2 data-i18n="ctaTitle">Get Jeetak on your phone.</h2>
         <p class="body" data-i18n-state="ctaBody">The app launches soon on iPhone and Android. The download links will appear right here.</p>
-        <div class="stores">
-          {{STORE_IOS}}
-          {{STORE_ANDROID}}
+        <div class="get">
+          <a class="get-btn" data-app="customer" href="{{SITE}}/app"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5v11.5M6.5 10l5.5 5.5 5.5-5.5M4.5 20.5h15"/></svg><span data-i18n="getApp">Download the app</span></a>
         </div>
       </div>
     </div>
@@ -240,7 +235,6 @@
         <span data-i18n="footCopy">© 2026 Jeetak SARL</span>
         <a href="mailto:support@jeetaklb.com">support@jeetaklb.com</a>
       </div>
-      <p class="foot-legal" data-i18n="footLegal">Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other countries. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.</p>
     </footer>
   </div>
   <div class="foot-stage" id="footStage" aria-hidden="true"></div>
