@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Façadéco | Decorative facades and sun control in Lebanon</title>
-<meta name="description" content="Façadéco designs and installs HPL and aluminium composite cladding, mechanically fixed stone and terracotta, corten shutters and tension screens for new builds and renovations in Lebanon.">
+<meta name="description" content="Façadéco designs and installs HPL and aluminium composite (ACP) cladding in a wide range of colours, plus tension screens for sun control, for new builds and renovations in Lebanon.">
 <meta name="theme-color" content="#E7E7E3">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Façadéco | Decorative facades and sun control">
-<meta property="og:description" content="Cladding, corten shutters and sun control, designed and installed in Lebanon.">
+<meta property="og:description" content="HPL and ACP facade cladding in many colours, and sun control, designed and installed in Lebanon.">
 <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1200,fit=crop/mxB7kMXz0OSoQXPl/screenshot-2024-08-03-at-11.39.24a-pm-YZ9bVDkNxZcKQa99.png">
 <link rel="preconnect" href="https://assets.zyrosite.com">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%232A2F32'/%3E%3Cg fill='%23B5592E'%3E%3Crect x='9' y='10' width='6' height='44'/%3E%3Crect x='19' y='10' width='6' height='44'/%3E%3Crect x='29' y='10' width='6' height='44'/%3E%3Crect x='39' y='10' width='6' height='44'/%3E%3Crect x='49' y='10' width='6' height='44'/%3E%3C/g%3E%3C/svg%3E">
@@ -222,27 +222,37 @@ html:not(.motion) .hero__img{transition:none}
 .chip input:checked + .chip__in{border-color:var(--anthracite);box-shadow:inset 0 0 0 1px var(--anthracite);background:#F3F2EF}
 .chip input:focus-visible + .chip__in{outline:3px solid var(--corten);outline-offset:2px}
 .chip__sw{width:32px;height:32px;flex:none;border-radius:1px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.14)}
-.sw-render{background:linear-gradient(135deg,#F1EEE8,#E1DDD5)}
-.sw-oak{background:repeating-linear-gradient(90deg,#BE8F62 0 3px,#A87A4F 3px 4px,#C99B6D 4px 8px,#B18257 8px 9px)}
-.sw-anth{background:linear-gradient(135deg,#4B5256,#363C40)}
-.sw-white{background:linear-gradient(135deg,#F6F4F0,#E2E0DB)}
-.sw-silver{background:linear-gradient(135deg,#B5BBBE,#EEF0F1 45%,#A3A9AD)}
-.sw-bronze{background:linear-gradient(135deg,#7D6853,#B59C7D 45%,#6E5B48)}
-.sw-anthm{background:linear-gradient(135deg,#33393C,#5A6266 45%,#2D3336)}
-.sw-terra{background:linear-gradient(0deg,transparent 0 47%,#5B3020 47% 53%,transparent 53%),linear-gradient(90deg,#B96C45 0 60%,#5B3020 60% 63%,#A85D3B 63%) 0 0/100% 50% no-repeat,linear-gradient(90deg,#C27751 0 28%,#5B3020 28% 31%,#B1653F 31%) 0 100%/100% 50% no-repeat}
-.sw-stone{background:linear-gradient(0deg,transparent 48%,#A2967F 48% 54%,transparent 54%),linear-gradient(90deg,#DDD0B7 0 44%,#A2967F 44% 48%,#CEBFA3 48%)}
-.sw-slide{background:radial-gradient(circle,rgba(34,16,7,.75) 0 1px,transparent 1.5px) 0 0/5px 5px,linear-gradient(135deg,#A4532B,#7A391C)}
-.sw-fold{background:repeating-linear-gradient(90deg,#A9582E 0 7px,#7A391C 7px 8px,#8C4422 8px 15px,#6A3117 15px 16px)}
 .sw-mesh{background:repeating-linear-gradient(0deg,rgba(255,255,255,.14) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(255,255,255,.14) 0 1px,transparent 1px 3px),#2F3538}
 .sw-none{background:linear-gradient(135deg,transparent 46%,rgba(42,47,50,.45) 46% 54%,transparent 54%),#FAFAF8}
+.mat{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:440px}
+.mat label{position:relative;display:flex}
+.mat input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer}
+.mat span{flex:1;display:flex;flex-direction:column;gap:3px;padding:10px 14px;border:1.5px solid rgba(42,47,50,.24);border-radius:var(--r);background:var(--render);transition:border-color .2s,box-shadow .2s,background-color .2s}
+.mat b{font-family:var(--ff-d);font-weight:760;font-size:1.4rem;line-height:1}
+.mat small{font-size:.86rem;color:var(--muted);line-height:1.2}
+.mat label:hover span{border-color:rgba(42,47,50,.55)}
+.mat input:checked + span{border-color:var(--anthracite);box-shadow:inset 0 0 0 1px var(--anthracite);background:#F3F2EF}
+.mat input:focus-visible + span{outline:3px solid var(--corten);outline-offset:2px}
+.pal{margin-top:16px;display:grid;gap:14px}
+.pal__lbl{font-size:.88rem;font-weight:620;color:var(--muted);margin-bottom:8px}
+.pal__row{display:flex;flex-wrap:wrap;gap:8px}
+.swc{position:relative;display:inline-flex}
+.swc input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:pointer;z-index:1}
+.swc__c{width:40px;height:40px;border-radius:2px;background:var(--c);box-shadow:inset 0 0 0 1px rgba(0,0,0,.16);transition:transform .15s,box-shadow .15s}
+.swc__c[data-kind="wood"]{background:repeating-linear-gradient(90deg,rgba(58,36,20,.26) 0 1px,transparent 1px 4px,rgba(58,36,20,.13) 4px 5px,transparent 5px 9px),var(--c)}
+.swc__c[data-kind="solid"]{background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(0,0,0,.06)),var(--c)}
+.swc__c[data-kind="metal"]{background:linear-gradient(135deg,rgba(0,0,0,.16),rgba(255,255,255,.42) 45%,rgba(0,0,0,.2)),var(--c)}
+.swc__c[data-kind="gloss"]{background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,0) 50%,rgba(0,0,0,.1)),var(--c)}
+.swc:hover .swc__c{transform:translateY(-2px)}
+.swc input:checked + .swc__c{box-shadow:inset 0 0 0 1px rgba(0,0,0,.16),0 0 0 2px var(--render),0 0 0 4px var(--anthracite)}
+.swc input:focus-visible + .swc__c{outline:3px solid var(--corten);outline-offset:5px}
+.cfg__pick{margin-top:12px;font-size:.98rem;color:var(--muted)}
+.cfg__pick b{color:var(--anthracite);font-weight:650}
+@media (max-width:680px){.swc__c{width:36px;height:36px}.mat b{font-size:1.25rem}}
 .cfg__note{margin-top:14px;color:var(--muted);font-size:.98rem;max-width:54ch}
 .cfg__note b{color:var(--anthracite);font-weight:650}
 .cfg__note .spec{display:block;margin-top:6px;color:var(--anthracite);font-weight:600;font-size:.94rem}
 .cfg__note a{color:var(--anthracite);font-weight:600;text-decoration-color:var(--corten);text-underline-offset:3px;text-decoration-thickness:2px}
-.tog{margin-top:12px;min-height:42px;padding:0 14px;border:1.5px solid rgba(42,47,50,.3);border-radius:var(--r);background:var(--render);font-weight:620;font-size:.95rem;transition:background-color .2s,color .2s,border-color .2s,opacity .2s}
-.tog:hover{border-color:var(--anthracite)}
-.tog[aria-pressed="true"]{background:var(--anthracite);color:var(--render);border-color:var(--anthracite)}
-.tog:disabled{opacity:.4;cursor:default}
 .cfg__range{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;align-items:center;margin-top:12px}
 .cfg__range label{font-weight:620;font-size:.95rem}
 .range--light::-webkit-slider-runnable-track{background:linear-gradient(90deg,var(--corten) var(--v,45%),rgba(42,47,50,.18) var(--v,45%))}
@@ -269,7 +279,6 @@ html:not(.motion) .hero__img{transition:none}
   .cfg__sum{font-size:.94rem}
 }
 @media (max-width:680px) and (max-height:760px){.cfg__stage{position:relative;top:auto}}
-
 /* sun control */
 .sun{background:var(--anthracite)}
 .sun__grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:48px;align-items:center}
@@ -392,9 +401,9 @@ fieldset.field{border:0;margin:0;padding:0}
       <a href="#process">How we work</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a class="call" href="tel:+9613482885" aria-label="Call 03 482 885">
+    <a class="call" href="tel:+96171181142" aria-label="Call 71 181 142">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M5.2 3.8h3.3l1.7 4.3-2.2 1.4a11.5 11.5 0 0 0 6.5 6.5l1.4-2.2 4.3 1.7v3.3a1.7 1.7 0 0 1-1.8 1.7A16.6 16.6 0 0 1 3.5 5.6a1.7 1.7 0 0 1 1.7-1.8z"/></svg>
-      <span class="num">03&nbsp;482&nbsp;885</span>
+      <span class="num">71&nbsp;181&nbsp;142</span>
     </a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="lbl">Menu</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span></button>
   </div>
@@ -410,7 +419,7 @@ fieldset.field{border:0;margin:0;padding:0}
     <a href="#contact" style="--n:4">Contact</a>
   </nav>
   <div class="menu__foot">
-    <p><a href="tel:+9613482885">03&nbsp;482&nbsp;885</a> or <a href="tel:+96171181142">71&nbsp;181&nbsp;142</a></p>
+    <p><a href="tel:+96171181142">71&nbsp;181&nbsp;142</a> or <a href="tel:+9613482885">03&nbsp;482&nbsp;885</a></p>
     <p>Gulf Tower, 6th floor, Jdeideh Highway</p>
   </div>
 </div>
@@ -428,11 +437,11 @@ fieldset.field{border:0;margin:0;padding:0}
     </div>
     <div class="hero__shade" aria-hidden="true"></div>
     <canvas class="hero__wall" aria-hidden="true"></canvas>
-    <p class="hero__tag" aria-hidden="true">Facade cladding, corten shutters and sun control in Lebanon</p>
+    <p class="hero__tag" aria-hidden="true">HPL and ACP facade cladding and sun control in Lebanon</p>
     <div class="hero__cue gone" aria-hidden="true"><span>Scroll</span><i></i></div>
     <div class="hero__text wrap">
       <h1 id="hero-h"><span class="vh">Decorative facades and sun control</span><span class="h1v" aria-hidden="true">Decorative facades and sun control</span></h1>
-      <p class="hero__lede fade">Façadéco designs and installs HPL and aluminium composite cladding, mechanically fixed stone and terracotta, corten shutters and tension screens, for new builds and renovations in Lebanon.</p>
+      <p class="hero__lede fade">Façadéco designs and installs HPL and aluminium composite cladding in a wide range of colours, plus tension screens for sun control, for new builds and renovations in Lebanon.</p>
       <div class="hero__cta fade fade--2">
         <a class="btn btn--primary" href="#contact">Book a consultation</a>
         <a class="btn btn--ghost" href="#work">See our work</a>
@@ -493,33 +502,26 @@ fieldset.field{border:0;margin:0;padding:0}
   <div class="wrap">
     <div class="head">
       <h2 id="services-h">What we install</h2>
-      <p>Choose finishes for the demo building and watch them go on. We supply and install every system shown, on new buildings and on renovations.</p>
+      <p>Pick a cladding and a colour for the demo building and watch it go on. We supply and install HPL and ACP cladding in a wide range of colours, plus tension screens, on new buildings and renovations.</p>
     </div>
     <div class="cfg" id="cfg">
       <div class="cfg__stage">
         <div class="cfg__view">
           <svg class="bld" id="bld" viewBox="0 0 800 600" role="img" aria-labelledby="bld-t bld-d">
             <title id="bld-t">Demo building</title>
-            <desc id="bld-d">A four-storey building that updates with the walls, frame, shutters and sun control you choose.</desc>
+            <desc id="bld-d">A four-storey building that updates with the cladding, colours and sun control you choose.</desc>
             <defs>
               <linearGradient id="b-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B3CAD7"/><stop offset=".8" stop-color="#E3E3DB"/><stop offset="1" stop-color="#EAE6DC"/></linearGradient>
               <radialGradient id="b-sun" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(700 58) scale(170)"><stop offset="0" stop-color="#FFF8E7" stop-opacity=".95"/><stop offset=".22" stop-color="#FFF3D8" stop-opacity=".55"/><stop offset="1" stop-color="#FFF3D8" stop-opacity="0"/></radialGradient>
               <linearGradient id="b-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B7CCD7"/><stop offset=".5" stop-color="#8099A6"/><stop offset="1" stop-color="#5D717B"/></linearGradient>
               <linearGradient id="b-warm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3D9A6" stop-opacity="0"/><stop offset="1" stop-color="#F3D9A6" stop-opacity=".42"/></linearGradient>
-              <linearGradient id="b-acp-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C6CBCE"/><stop offset=".38" stop-color="#E7EAEB"/><stop offset=".7" stop-color="#B6BCC0"/><stop offset="1" stop-color="#D2D6D8"/></linearGradient>
-              <linearGradient id="b-acp-bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7D6853"/><stop offset=".38" stop-color="#B59C7D"/><stop offset=".7" stop-color="#715D4A"/><stop offset="1" stop-color="#A08667"/></linearGradient>
-              <linearGradient id="b-acp-anth" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#363C3F"/><stop offset=".4" stop-color="#596165"/><stop offset=".72" stop-color="#2E3437"/><stop offset="1" stop-color="#474E52"/></linearGradient>
               <linearGradient id="b-shL" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#15181A" stop-opacity=".34"/><stop offset="1" stop-color="#15181A" stop-opacity="0"/></linearGradient>
               <linearGradient id="b-shR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#15181A" stop-opacity="0"/><stop offset="1" stop-color="#15181A" stop-opacity=".32"/></linearGradient>
               <linearGradient id="b-shT" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15181A" stop-opacity=".36"/><stop offset="1" stop-color="#15181A" stop-opacity="0"/></linearGradient>
               <linearGradient id="b-ao" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15181A" stop-opacity="0"/><stop offset="1" stop-color="#15181A" stop-opacity=".16"/></linearGradient>
               <linearGradient id="b-streak" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A3E2D" stop-opacity=".3"/><stop offset="1" stop-color="#4A3E2D" stop-opacity="0"/></linearGradient>
-              <pattern id="b-terra" width="164" height="36" patternUnits="userSpaceOnUse"><rect width="164" height="36" fill="#5B3020"/><rect x="1" y="1" width="80" height="16" fill="#B96C45"/><rect x="83" y="1" width="80" height="16" fill="#A85D3B"/><rect x="-40" y="19" width="80" height="16" fill="#C27751"/><rect x="42" y="19" width="80" height="16" fill="#B1653F"/><rect x="124" y="19" width="80" height="16" fill="#C27751"/><path d="M0 1.6H164M0 19.6H164" stroke="#fff" stroke-opacity=".18"/><path d="M0 9.5H164M0 27.5H164" stroke="#000" stroke-opacity=".08"/></pattern>
-              <pattern id="b-stone" width="132" height="52" patternUnits="userSpaceOnUse"><rect width="132" height="52" fill="#A2967F"/><rect x="1" y="1" width="33" height="24" fill="#DDD0B7"/><rect x="36" y="1" width="44" height="24" fill="#CEBFA3"/><rect x="82" y="1" width="49" height="24" fill="#E3D8C1"/><rect x="-20" y="27" width="39" height="24" fill="#D5C7AC"/><rect x="21" y="27" width="36" height="24" fill="#E1D4BC"/><rect x="59" y="27" width="51" height="24" fill="#CAB99C"/><rect x="112" y="27" width="39" height="24" fill="#D5C7AC"/><path d="M0 1.6H132M0 27.6H132" stroke="#fff" stroke-opacity=".22"/></pattern>
-              <pattern id="b-perf" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.2" fill="#2A1408" fill-opacity=".75"/></pattern>
               <pattern id="b-mesh" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#262B2E"/><path d="M0 .5H4M.5 0V4" stroke="#4F585D" stroke-width=".8"/></pattern>
-              <pattern id="b-wood" width="160" height="320" patternUnits="userSpaceOnUse"><image width="160" height="320" preserveAspectRatio="none" href="data:,"/></pattern>
-              <pattern id="b-rust" width="160" height="160" patternUnits="userSpaceOnUse"><image width="160" height="160" preserveAspectRatio="none" href="data:,"/></pattern>
+              <pattern id="b-woodgrain" width="160" height="320" patternUnits="userSpaceOnUse"><image width="160" height="320" preserveAspectRatio="none" href="data:,"/></pattern>
               <pattern id="b-grain" width="128" height="128" patternUnits="userSpaceOnUse"><image width="128" height="128" preserveAspectRatio="none" href="data:,"/></pattern>
               <pattern id="b-grime" width="280" height="280" patternUnits="userSpaceOnUse"><image width="280" height="280" preserveAspectRatio="none" href="data:,"/></pattern>
               <pattern id="b-conc" width="160" height="160" patternUnits="userSpaceOnUse"><image width="160" height="160" preserveAspectRatio="none" href="data:,"/></pattern>
@@ -533,39 +535,26 @@ fieldset.field{border:0;margin:0;padding:0}
         </div>
         <p class="cfg__sum" id="cfgSum" aria-live="polite">Before: stained render, bare concrete and nothing to block the sun.</p>
       </div>
-      <form class="cfg__panel" id="cfgForm" aria-label="Choose finishes for the demo building">
+      <form class="cfg__panel" id="cfgForm" aria-label="Choose cladding and colours for the demo building">
         <fieldset class="cfg__grp">
           <legend>Walls</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="walls" value="render"><span class="chip__in"><span class="chip__sw sw-render"></span>Paint and render</span></label>
-            <label class="chip"><input type="radio" name="walls" value="hpl-oak" checked><span class="chip__in"><span class="chip__sw sw-oak"></span>HPL, oak</span></label>
-            <label class="chip"><input type="radio" name="walls" value="hpl-anth"><span class="chip__in"><span class="chip__sw sw-anth"></span>HPL, anthracite</span></label>
-            <label class="chip"><input type="radio" name="walls" value="acp-silver"><span class="chip__in"><span class="chip__sw sw-silver"></span>ACP, silver</span></label>
-            <label class="chip"><input type="radio" name="walls" value="acp-bronze"><span class="chip__in"><span class="chip__sw sw-bronze"></span>ACP, bronze</span></label>
-            <label class="chip"><input type="radio" name="walls" value="terracotta"><span class="chip__in"><span class="chip__sw sw-terra"></span>Terracotta</span></label>
-            <label class="chip"><input type="radio" name="walls" value="stone"><span class="chip__in"><span class="chip__sw sw-stone"></span>Natural stone</span></label>
+          <div class="mat">
+            <label><input type="radio" name="walls-mat" value="hpl" checked><span><b>HPL</b><small>Compact laminate</small></span></label>
+            <label><input type="radio" name="walls-mat" value="acp"><span><b>ACP</b><small>Aluminium composite</small></span></label>
           </div>
+          <div class="pal" id="palWalls" role="radiogroup" aria-label="Wall colours"></div>
+          <p class="cfg__pick" id="pickWalls" aria-live="polite"></p>
           <p class="cfg__note" id="noteWalls"></p>
         </fieldset>
         <fieldset class="cfg__grp">
           <legend>Feature frame</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="frame" value="hpl-oak"><span class="chip__in"><span class="chip__sw sw-oak"></span>HPL, oak</span></label>
-            <label class="chip"><input type="radio" name="frame" value="hpl-white"><span class="chip__in"><span class="chip__sw sw-white"></span>HPL, white</span></label>
-            <label class="chip"><input type="radio" name="frame" value="acp-anth" checked><span class="chip__in"><span class="chip__sw sw-anthm"></span>ACP, anthracite</span></label>
-            <label class="chip"><input type="radio" name="frame" value="acp-bronze"><span class="chip__in"><span class="chip__sw sw-bronze"></span>ACP, bronze</span></label>
+          <div class="mat">
+            <label><input type="radio" name="frame-mat" value="hpl"><span><b>HPL</b><small>Compact laminate</small></span></label>
+            <label><input type="radio" name="frame-mat" value="acp" checked><span><b>ACP</b><small>Aluminium composite</small></span></label>
           </div>
-          <p class="cfg__note">The frame around the balconies can match the walls or stand out from them, in HPL or ACP.</p>
-        </fieldset>
-        <fieldset class="cfg__grp">
-          <legend>Window shutters</legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="shutters" value="none"><span class="chip__in"><span class="chip__sw sw-none"></span>None</span></label>
-            <label class="chip"><input type="radio" name="shutters" value="sliding" checked><span class="chip__in"><span class="chip__sw sw-slide"></span>Corten, sliding</span></label>
-            <label class="chip"><input type="radio" name="shutters" value="folding"><span class="chip__in"><span class="chip__sw sw-fold"></span>Corten, folding</span></label>
-          </div>
-          <button type="button" class="tog" id="shutTog" aria-pressed="false">Close the shutters</button>
-          <p class="cfg__note"><b>Corten shutters.</b> Folding and sliding shutters in weathering steel, custom made for each opening.</p>
+          <div class="pal" id="palFrame" role="radiogroup" aria-label="Frame colours"></div>
+          <p class="cfg__pick" id="pickFrame" aria-live="polite"></p>
+          <p class="cfg__note">The frame around the balconies can match the walls or stand out from them.</p>
         </fieldset>
         <fieldset class="cfg__grp">
           <legend>Sun control</legend>
@@ -588,12 +577,9 @@ fieldset.field{border:0;margin:0;padding:0}
     </div>
     <noscript>
       <ul class="cfg__fallback">
-        <li><b>HPL cladding.</b> Compact laminate panels for exterior walls, made to EN 438, with a 10-year product warranty.</li>
-        <li><b>ACP cladding.</b> Aluminium composite panels: a durable, affordable finish in many colours.</li>
-        <li><b>Tiles, stone and terracotta.</b> Natural and artificial tiles, stone and terracotta, fixed mechanically to the wall.</li>
-        <li><b>Corten shutters.</b> Folding and sliding shutters in weathering steel, custom made for each opening.</li>
+        <li><b>HPL cladding.</b> Compact laminate panels for exterior walls in many colours and woodgrains, made to EN 438, with a 10-year product warranty.</li>
+        <li><b>ACP cladding.</b> Aluminium composite panels: a durable, affordable finish in many metallic and solid colours.</li>
         <li><b>Sun control.</b> Tension screens and window coverings, operated by hand, by motor or fully automated.</li>
-        <li><b>Facade care.</b> Paint and facade maintenance, waterproofing and plaster treatment.</li>
       </ul>
     </noscript>
   </div>
@@ -675,7 +661,7 @@ fieldset.field{border:0;margin:0;padding:0}
           <tr><th scope="row">Experience</th><td>15 years</td></tr>
           <tr><th scope="row">Clients</th><td>150+</td></tr>
           <tr><th scope="row">HPL panels</th><td>EN 438, 10-year product warranty</td></tr>
-          <tr><th scope="row">Tile and stone fixing</th><td>Mechanical</td></tr>
+          <tr><th scope="row">Colours</th><td>Woodgrains, solids and metallics</td></tr>
           <tr><th scope="row">Sun control</th><td>Manual, motorised or automated</td></tr>
           <tr><th scope="row">Projects</th><td>New builds and renovations</td></tr>
           <tr><th scope="row">Delivery</th><td>Faster than traditional methods</td></tr>
@@ -712,11 +698,11 @@ fieldset.field{border:0;margin:0;padding:0}
       <h2 id="contact-h">Talk to us about your building</h2>
       <p>Call, send us a WhatsApp message or fill in the form. Tell us a little about the project and we'll set up a consultation.</p>
       <div class="phones">
-        <a href="tel:+9613482885">03&nbsp;482&nbsp;885</a>
         <a href="tel:+96171181142">71&nbsp;181&nbsp;142</a>
+        <a href="tel:+9613482885">03&nbsp;482&nbsp;885</a>
       </div>
       <ul class="info">
-        <li><span>WhatsApp</span><a href="https://wa.me/9613482885" target="_blank" rel="noopener">Message us on WhatsApp</a></li>
+        <li><span>WhatsApp</span><a href="https://wa.me/96171181142" target="_blank" rel="noopener">Message us on WhatsApp</a></li>
         <li><span>Email</span><a href="mailto:info@facadecolb.com">info@facadecolb.com</a></li>
         <li><span>Office</span><a href="https://www.google.com/maps/search/?api=1&amp;query=Gulf+Tower+Jdeideh+Highway+Lebanon" target="_blank" rel="noopener">Gulf Tower, 6th floor, Jdeideh Highway</a></li>
         <li><span>Instagram</span><a href="https://www.instagram.com/facadecolb" target="_blank" rel="noopener">@facadecolb</a></li>
@@ -741,16 +727,14 @@ fieldset.field{border:0;margin:0;padding:0}
         <div class="opts">
           <label><input type="checkbox" name="need" value="HPL cladding"><span>HPL cladding</span></label>
           <label><input type="checkbox" name="need" value="ACP cladding"><span>ACP cladding</span></label>
-          <label><input type="checkbox" name="need" value="Tiles, stone and terracotta"><span>Tiles and stone</span></label>
-          <label><input type="checkbox" name="need" value="Corten shutters"><span>Corten shutters</span></label>
           <label><input type="checkbox" name="need" value="Sun control"><span>Sun control</span></label>
-          <label><input type="checkbox" name="need" value="Facade care"><span>Facade care</span></label>
+          <label><input type="checkbox" name="need" value="Not sure yet"><span>Not sure yet</span></label>
         </div>
       </fieldset>
       <div class="field"><label for="f-loc">Project location</label><input id="f-loc" name="location" type="text" placeholder="Town or area"></div>
       <div class="field"><label for="f-msg">Anything else we should know?</label><textarea id="f-msg" name="message" rows="4"></textarea></div>
       <div class="send">
-        <a class="btn btn--primary" id="send-wa" href="https://wa.me/9613482885" target="_blank" rel="noopener">Send on WhatsApp</a>
+        <a class="btn btn--primary" id="send-wa" href="https://wa.me/96171181142" target="_blank" rel="noopener">Send on WhatsApp</a>
         <a class="btn btn--ghost" id="send-mail" href="mailto:info@facadecolb.com">Send by email</a>
       </div>
       <p class="status" id="status" role="status" aria-live="polite"></p>
@@ -771,8 +755,8 @@ fieldset.field{border:0;margin:0;padding:0}
       <div>
         <h3>Contact</h3>
         <ul>
-          <li><a href="tel:+9613482885">03&nbsp;482&nbsp;885</a></li>
           <li><a href="tel:+96171181142">71&nbsp;181&nbsp;142</a></li>
+          <li><a href="tel:+9613482885">03&nbsp;482&nbsp;885</a></li>
           <li><a href="mailto:info@facadecolb.com">info@facadecolb.com</a></li>
         </ul>
       </div>
@@ -799,7 +783,7 @@ fieldset.field{border:0;margin:0;padding:0}
   </div>
 </footer>
 
-<a class="wa-fab" href="https://wa.me/9613482885" target="_blank" rel="noopener" aria-label="Message Façadéco on WhatsApp">
+<a class="wa-fab" href="https://wa.me/96171181142" target="_blank" rel="noopener" aria-label="Message Façadéco on WhatsApp">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4.3 19.7l1.3-3.9a8 8 0 1 1 2.8 2.6z"/><path d="M9.2 9.3c.3 2.3 2.2 4.4 4.6 5" stroke-linecap="round"/></svg>
   <span>WhatsApp</span>
 </a>
@@ -1450,6 +1434,62 @@ fieldset.field{border:0;margin:0;padding:0}
       });
     };
 
+    /* colours: edit this list to match the supplier catalogue */
+    var PALETTE = {
+      hpl: [
+        { label: 'Woodgrains', kind: 'wood', items: [
+          ['light-oak', 'Light oak', '#CBA87A'], ['natural-oak', 'Natural oak', '#B88757'], ['teak', 'Teak', '#93603A'],
+          ['cedar', 'Cedar', '#A3633F'], ['walnut', 'Walnut', '#6F4B33'], ['grey-oak', 'Grey oak', '#928C82']
+        ] },
+        { label: 'Solid colours', kind: 'solid', items: [
+          ['pure-white', 'Pure white', '#F1F0EC'], ['cream', 'Cream', '#E7DEC8'], ['light-grey', 'Light grey', '#C8CAC7'],
+          ['mid-grey', 'Mid grey', '#8D908E'], ['anthracite', 'Anthracite', '#3F4549'], ['black', 'Black', '#202325'],
+          ['sand', 'Sand', '#CCB792'], ['clay-red', 'Clay red', '#9C4A35'], ['olive', 'Olive', '#6D7455'], ['petrol-blue', 'Petrol blue', '#2F5965']
+        ] }
+      ],
+      acp: [
+        { label: 'Metallic', kind: 'metal', items: [
+          ['silver', 'Silver', '#BEC3C6'], ['champagne', 'Champagne', '#C8B38D'], ['gold', 'Gold', '#C29D58'],
+          ['bronze', 'Bronze', '#8A6C50'], ['copper', 'Copper', '#AD6844'], ['gunmetal', 'Gunmetal', '#5A5F63']
+        ] },
+        { label: 'Solid colours', kind: 'gloss', items: [
+          ['white', 'White', '#F0F0ED'], ['ivory', 'Ivory', '#E8E0CB'], ['light-grey', 'Light grey', '#BEC1C1'],
+          ['anthracite', 'Anthracite', '#383E42'], ['black', 'Black', '#1E2022'], ['red', 'Red', '#A2322B'],
+          ['blue', 'Blue', '#2D4D79'], ['green', 'Green', '#3D6A4E']
+        ] }
+      ]
+    };
+    var COL = {};
+    Object.keys(PALETTE).forEach(function (mat) {
+      PALETTE[mat].forEach(function (grp) {
+        grp.items.forEach(function (it) {
+          var id = mat + '-' + it[0];
+          COL[id] = { id: id, mat: mat, kind: grp.kind, name: it[1], hex: it[2] };
+        });
+      });
+    });
+
+    var hexRgb = function (h) { h = h.replace('#', ''); return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)]; };
+    var mix = function (h, t) {
+      var c = hexRgb(h), to = t > 0 ? 255 : 0, a = Math.abs(t);
+      return 'rgb(' + c.map(function (v) { return Math.round(v + (to - v) * a); }).join(',') + ')';
+    };
+    // ACP sheen: metallic walls get one soft sweep across the whole building, everything else a gentle sheen per panel
+    var gradFor = function (col, scope) {
+      var wide = scope === 'wall' && col.kind === 'metal';
+      var id = 'g-' + col.id + (wide ? '-wide' : '');
+      if (!document.getElementById(id)) {
+        var g = el('linearGradient', wide
+          ? { id: id, gradientUnits: 'userSpaceOnUse', x1: BX, y1: BY, x2: BX + BW * .8, y2: GROUND }
+          : { id: id, x1: 0, y1: 0, x2: 1, y2: 1 }, defs);
+        var stops = wide ? [[0, -.1], [.42, .2], [.66, -.07], [1, .07]]
+          : col.kind === 'metal' ? [[0, -.12], [.38, .3], [.7, -.16], [1, .1]]
+          : [[0, .06], [.5, .15], [1, -.07]];
+        stops.forEach(function (st) { el('stop', { offset: st[0], 'stop-color': mix(col.hex, st[1]) }, g); });
+      }
+      return 'url(#' + id + ')';
+    };
+
     /* textures, generated once into small bitmaps */
     var rnd = function (seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; };
     var noise = function (seed, gx, gy) {
@@ -1483,28 +1523,15 @@ fieldset.field{border:0;margin:0;padding:0}
       return c.toDataURL('image/png');
     };
     var TEX = {
-      'b-wood': function () {
+      'b-woodgrain': function () {
         return texture(240, 480, function (d, w, h) {
           var warp = fbm(11, 3, 2, 3), fine = fbm(23, 60, 3, 2), band = fbm(37, 6, 1, 2);
           for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
             var u = x / w, v = y / h, n = warp(u, v);
             var s = .5 + .5 * Math.sin((u * 64 + n * 3.2) * Math.PI);
-            var t = clamp(s * s * .5 + fine(u, v) * .42 + band(u, v) * .3 - .16, 0, 1);
+            var t = clamp(s * s * .55 + fine(u, v) * .45 + band(u, v) * .28 - .2, 0, 1);
             var i = (y * w + x) * 4;
-            d[i] = 200 - 42 * t; d[i + 1] = 155 - 42 * t; d[i + 2] = 109 - 34 * t; d[i + 3] = 255;
-          }
-        });
-      },
-      'b-rust': function () {
-        return texture(240, 240, function (d, w, h) {
-          var m = fbm(31, 4, 4, 4), g = fbm(47, 30, 30, 2);
-          for (var y = 0; y < h; y++) for (var x = 0; x < w; x++) {
-            var u = x / w, v = y / h, a = smooth(.28, .72, m(u, v)), b = g(u, v);
-            var r = 98 + 52 * a, gg = 45 + 27 * a, bb = 20 + 15 * a;
-            if (b > .6) { var k = (b - .6) * 2.4; r += (192 - r) * k; gg += (100 - gg) * k; bb += (48 - bb) * k; }
-            if (b < .3) { var q = (.3 - b) * 2.6; r *= 1 - q * .5; gg *= 1 - q * .55; bb *= 1 - q * .55; }
-            var i = (y * w + x) * 4;
-            d[i] = r; d[i + 1] = gg; d[i + 2] = bb; d[i + 3] = 255;
+            d[i] = 56; d[i + 1] = 35; d[i + 2] = 19; d[i + 3] = 16 + t * 118;
           }
         });
       },
@@ -1564,7 +1591,7 @@ fieldset.field{border:0;margin:0;padding:0}
 
     var gBg = el('g', null, svg), gWalls = el('g', null, svg), gWallFx = el('g', null, svg);
     var gBalc = el('g', null, svg), gScr = el('g', null, svg), gRail = el('g', null, svg);
-    var gFrame = el('g', null, svg), gWin = el('g', null, svg), gShut = el('g', null, svg);
+    var gFrame = el('g', null, svg), gWin = el('g', null, svg);
     var gGF = el('g', null, svg), gTop = el('g', null, svg), gFg = el('g', null, svg);
 
     /* static scene */
@@ -1670,57 +1697,58 @@ fieldset.field{border:0;margin:0;padding:0}
     /* material layers */
     var ROWS_HPL = [[118, 140], [140, 240], [240, 340], [340, 440], [440, 540]];
     var ROWS_ACP = [[118, 140], [140, 190], [190, 240], [240, 290], [290, 340], [340, 390], [390, 440], [440, 490], [490, 540]];
-    var wallLayer = function (mat) {
-      var g = el('g'), H = GROUND - BY, r = rnd(mat.length * 7 + 3);
-      if (mat === 'render' || mat === 'weathered') {
-        el('rect', { x: BX, y: BY, width: BW, height: H, fill: mat === 'render' ? '#EDE9E1' : '#D4CABA' }, g);
-        if (mat === 'weathered') {
-          el('rect', { x: BX, y: BY, width: BW, height: H, fill: 'url(#b-grime)' }, g);
-          [[150, 296, 64, 38], [418, 176, 48, 70], [244, 468, 74, 28], [160, 170, 30, 26]].forEach(function (p) {
-            el('rect', { x: p[0], y: p[1], width: p[2], height: p[3], fill: '#C8BCA8', opacity: .6 }, g);
-          });
-          WINS.forEach(function (w) {
-            el('path', { d: 'M' + (w.x + 4) + ' ' + (w.y + w.h + 6) + 'h' + (w.w - 8) + 'l-8 64h' + (-(w.w - 24)) + 'Z', fill: 'url(#b-streak)' }, g);
-          });
-          [146, 214, 296, 362, 436].forEach(function (x, i) {
-            el('rect', { x: x, y: BY, width: 8 + i % 3 * 4, height: 46 + i * 9, fill: 'url(#b-streak)' }, g);
-          });
-          el('path', { d: 'M266 334l5 9-4 8 6 11-3 9 4 7', stroke: '#6F6352', 'stroke-width': 1.1, fill: 'none', opacity: .75 }, g);
-          el('path', { d: 'M430 246l-4 10 5 7-3 12', stroke: '#6F6352', 'stroke-width': 1, fill: 'none', opacity: .7 }, g);
-        }
-      } else if (mat.indexOf('hpl') === 0) {
-        el('rect', { x: BX, y: BY, width: BW, height: H, fill: mat === 'hpl-oak' ? '#2E2924' : '#1C2022' }, g);
-        var cols = 14, pw = BW / cols;
-        ROWS_HPL.forEach(function (row) {
-          for (var c = 0; c < cols; c++) {
-            var x = BX + c * pw + 1, y = row[0] + 1, w = pw - 2, h = row[1] - row[0] - 2;
-            el('rect', { x: x, y: y, width: w, height: h, fill: mat === 'hpl-oak' ? 'url(#b-wood)' : '#40474B' }, g);
-            var v = r();
-            el('rect', { x: x, y: y, width: w, height: h, fill: v > .5 ? '#fff' : '#000', opacity: (Math.abs(v - .5) * .13).toFixed(3) }, g);
-          }
+    var wallLayer = function (id) {
+      var g = el('g'), H = GROUND - BY, r = rnd(id.length * 7 + 3);
+      if (id === 'weathered') {
+        el('rect', { x: BX, y: BY, width: BW, height: H, fill: '#D4CABA' }, g);
+        el('rect', { x: BX, y: BY, width: BW, height: H, fill: 'url(#b-grime)' }, g);
+        [[150, 296, 64, 38], [418, 176, 48, 70], [244, 468, 74, 28], [160, 170, 30, 26]].forEach(function (p) {
+          el('rect', { x: p[0], y: p[1], width: p[2], height: p[3], fill: '#C8BCA8', opacity: .6 }, g);
         });
-      } else if (mat.indexOf('acp') === 0) {
-        el('rect', { x: BX, y: BY, width: BW, height: H, fill: '#1C2022' }, g);
-        var colsA = 8, pwA = BW / colsA, grad = mat === 'acp-silver' ? 'url(#b-acp-silver)' : 'url(#b-acp-bronze)';
-        ROWS_ACP.forEach(function (row) {
-          for (var c = 0; c < colsA; c++) {
-            var x = BX + c * pwA + 2, y = row[0] + 2, w = pwA - 4, h = row[1] - row[0] - 4;
-            el('rect', { x: x, y: y, width: w, height: h, fill: grad }, g);
-            el('rect', { x: x, y: y, width: w, height: 1, fill: '#fff', opacity: .4 }, g);
-          }
+        WINS.forEach(function (w) {
+          el('path', { d: 'M' + (w.x + 4) + ' ' + (w.y + w.h + 6) + 'h' + (w.w - 8) + 'l-8 64h' + (-(w.w - 24)) + 'Z', fill: 'url(#b-streak)' }, g);
         });
+        [146, 214, 296, 362, 436].forEach(function (x, i) {
+          el('rect', { x: x, y: BY, width: 8 + i % 3 * 4, height: 46 + i * 9, fill: 'url(#b-streak)' }, g);
+        });
+        el('path', { d: 'M266 334l5 9-4 8 6 11-3 9 4 7', stroke: '#6F6352', 'stroke-width': 1.1, fill: 'none', opacity: .75 }, g);
+        el('path', { d: 'M430 246l-4 10 5 7-3 12', stroke: '#6F6352', 'stroke-width': 1, fill: 'none', opacity: .7 }, g);
       } else {
-        el('rect', { x: BX, y: BY, width: BW, height: H, fill: mat === 'terracotta' ? 'url(#b-terra)' : 'url(#b-stone)' }, g);
+        var col = COL[id];
+        var dark = hexRgb(col.hex).reduce(function (a, b) { return a + b; }, 0) < 300;
+        el('rect', { x: BX, y: BY, width: BW, height: H, fill: dark ? '#0F1112' : '#24282A' }, g);
+        if (col.mat === 'hpl') {
+          var cols = 14, pw = BW / cols;
+          ROWS_HPL.forEach(function (row) {
+            for (var c = 0; c < cols; c++) {
+              var x = BX + c * pw + 1, y = row[0] + 1, w = pw - 2, h = row[1] - row[0] - 2;
+              el('rect', { x: x, y: y, width: w, height: h, fill: col.hex }, g);
+              if (col.kind === 'wood') el('rect', { x: x, y: y, width: w, height: h, fill: 'url(#b-woodgrain)' }, g);
+              var v = r();
+              el('rect', { x: x, y: y, width: w, height: h, fill: v > .5 ? '#fff' : '#000', opacity: (Math.abs(v - .5) * .12).toFixed(3) }, g);
+            }
+          });
+        } else {
+          var colsA = 8, pwA = BW / colsA, fill = gradFor(col, 'wall'), vary = col.kind === 'metal' ? .16 : .07;
+          ROWS_ACP.forEach(function (row) {
+            for (var c = 0; c < colsA; c++) {
+              var x = BX + c * pwA + 1.25, y = row[0] + 1.25, w = pwA - 2.5, h = row[1] - row[0] - 2.5, v = r();
+              el('rect', { x: x, y: y, width: w, height: h, fill: fill }, g);
+              el('rect', { x: x, y: y, width: w, height: h, fill: v > .5 ? '#fff' : '#000', opacity: (Math.abs(v - .5) * vary).toFixed(3) }, g);
+              el('rect', { x: x, y: y, width: w, height: 1, fill: '#fff', opacity: .4 }, g);
+            }
+          });
+        }
       }
       el('rect', { x: BX, y: BY, width: BW, height: H, fill: 'url(#b-grain)', opacity: .55 }, g);
       return g;
     };
-    var frameLayer = function (mat) {
-      var g = el('g');
-      var fill = { 'hpl-oak': 'url(#b-wood)', 'hpl-white': '#F1EFEA', 'acp-anth': 'url(#b-acp-anth)', 'acp-bronze': 'url(#b-acp-bronze)', concrete: '#B6B4AC' }[mat];
+    var frameLayer = function (id) {
+      var g = el('g'), col = COL[id];
+      var fill = id === 'concrete' ? '#B6B4AC' : (col.mat === 'acp' ? gradFor(col) : col.hex);
       el('path', { d: FRAME_D, 'fill-rule': 'evenodd', fill: fill }, g);
       var cl = el('g', { 'clip-path': 'url(#b-frameclip)' }, g);
-      if (mat === 'concrete') {
+      if (id === 'concrete') {
         el('rect', { x: FX, y: FY, width: FW, height: FH, fill: 'url(#b-conc)', opacity: .95 }, cl);
         el('rect', { x: FX, y: FY, width: FW, height: FH, fill: 'url(#b-grime)', opacity: .8 }, cl);
         for (var ty = FY + 30; ty < FY + FH; ty += 40) {
@@ -1728,7 +1756,9 @@ fieldset.field{border:0;margin:0;padding:0}
           el('circle', { cx: FX + FW - 8, cy: ty, r: 1.5, fill: '#77756E' }, cl);
         }
       } else {
-        var jc = mat === 'hpl-white' ? 'rgba(40,44,46,.3)' : 'rgba(10,12,13,.6)';
+        if (col.kind === 'wood') el('rect', { x: FX, y: FY, width: FW, height: FH, fill: 'url(#b-woodgrain)' }, cl);
+        var light = hexRgb(col.hex).reduce(function (a, b) { return a + b; }, 0) > 560;
+        var jc = light ? 'rgba(40,44,46,.3)' : 'rgba(8,10,11,.6)';
         for (var y = FY + 86; y < FY + FH - 20; y += 86) {
           el('rect', { x: FX, y: y, width: FK, height: 2, fill: jc }, cl);
           el('rect', { x: FX + FW - FK, y: y, width: FK, height: 2, fill: jc }, cl);
@@ -1743,56 +1773,6 @@ fieldset.field{border:0;margin:0;padding:0}
       el('rect', { x: FX + FK, y: FY + FK, width: FW - 2 * FK, height: 3, fill: '#000', opacity: .26 }, g);
       el('rect', { x: FX, y: FY, width: FW, height: 1.5, fill: '#fff', opacity: .4 }, g);
       return g;
-    };
-
-    /* shutters */
-    var makeShutters = function (type) {
-      var g = el('g', { opacity: 0 }, gShut), items = [];
-      WINS.forEach(function (w) {
-        if (type === 'sliding') {
-          el('rect', { x: w.x - 42, y: w.y - 9, width: w.w + 84, height: 2.5, fill: '#2E3336' }, g);
-          var mk = function (x0) {
-            var p = el('g', null, g);
-            el('rect', { x: x0 - 3, y: w.y - 6, width: 3, height: w.h + 12, fill: 'url(#b-shL)' }, p);
-            el('rect', { x: x0, y: w.y - 6, width: 36, height: w.h + 12, fill: 'url(#b-rust)' }, p);
-            el('rect', { x: x0, y: w.y - 6, width: 36, height: w.h + 12, fill: 'url(#b-perf)' }, p);
-            el('rect', { x: x0 + .5, y: w.y - 5.5, width: 35, height: w.h + 11, fill: 'none', stroke: '#4E220D', 'stroke-width': 1 }, p);
-            el('rect', { x: x0 + 34.5, y: w.y - 6, width: 1.5, height: w.h + 12, fill: '#fff', opacity: .18 }, p);
-            return p;
-          };
-          items.push({ k: 's', L: mk(w.x), R: mk(w.x + 36) });
-        } else {
-          var leaves = [];
-          for (var i = 0; i < 4; i++) {
-            var lg = el('g', null, g);
-            var face = el('rect', { y: w.y - 4, height: w.h + 8, fill: 'url(#b-rust)' }, lg);
-            var groove = el('rect', { y: w.y - 4, height: w.h + 8, fill: '#3E1A09', opacity: .35 }, lg);
-            var tone = el('rect', { y: w.y - 4, height: w.h + 8, fill: i % 2 ? '#fff' : '#000', opacity: 0 }, lg);
-            leaves.push({ face: face, groove: groove, tone: tone, i: i });
-          }
-          items.push({ k: 'f', w: w, leaves: leaves });
-        }
-      });
-      var set = function (t) {
-        items.forEach(function (it, n) {
-          if (it.k === 's') {
-            it.L.setAttribute('transform', 'translate(' + (-38 * t).toFixed(2) + ' 0)');
-            it.R.setAttribute('transform', 'translate(' + (38 * t).toFixed(2) + ' 0)');
-          } else {
-            var w = it.w, lw = 18 - 11.5 * t;
-            var lx = w.x - 13 * t, rr = w.x + w.w + 13 * t;
-            var xs = [lx, lx + lw, rr - 2 * lw, rr - lw];
-            it.leaves.forEach(function (lf, i) {
-              var x = xs[i];
-              lf.face.setAttribute('x', x.toFixed(2)); lf.face.setAttribute('width', lw.toFixed(2));
-              lf.tone.setAttribute('x', x.toFixed(2)); lf.tone.setAttribute('width', lw.toFixed(2));
-              lf.tone.setAttribute('opacity', (t * (i % 2 ? .12 : .3)).toFixed(3));
-              lf.groove.setAttribute('x', (i % 2 ? x : x + lw - 1).toFixed(2)); lf.groove.setAttribute('width', 1);
-            });
-          }
-        });
-      };
-      return { g: g, set: set, t: 0 };
     };
 
     /* install animation: new layer is wiped on, floor by floor */
@@ -1847,87 +1827,65 @@ fieldset.field{border:0;margin:0;padding:0}
 
     /* state */
     var form = $('#cfgForm', root), sumEl = $('#cfgSum', root), noteWalls = $('#noteWalls', root);
-    var shutTog = $('#shutTog', root), posIn = $('#scrPos', root), statusEl = $('#cfgStatus', root);
+    var posIn = $('#scrPos', root), statusEl = $('#cfgStatus', root);
     var modeBtns = $$('.cfg__mode button', root);
-    var S = { walls: 'hpl-oak', frame: 'acp-anth', shutters: 'sliding', closed: false, sun: 'screens', pos: .45 };
-    var mode = 'before', touched = false, shutSet = null, shownShut = null, shutT = 0, gen = 0;
+    var PAL = { walls: $('#palWalls', root), frame: $('#palFrame', root) };
+    var PICK = { walls: $('#pickWalls', root), frame: $('#pickFrame', root) };
+    var S = { walls: 'hpl-natural-oak', frame: 'acp-anthracite', sun: 'screens', pos: .45 };
+    var mode = 'before', touched = false, gen = 0;
     var shown = { walls: null, frame: null };
-
-    var NAMES = {
-      walls: { render: 'Painted render walls', 'hpl-oak': 'Oak HPL walls', 'hpl-anth': 'Anthracite HPL walls', 'acp-silver': 'Silver ACP walls', 'acp-bronze': 'Bronze ACP walls', terracotta: 'Terracotta tile walls', stone: 'Natural stone walls' },
-      frame: { 'hpl-oak': 'an oak HPL frame', 'hpl-white': 'a white HPL frame', 'acp-anth': 'an anthracite ACP frame', 'acp-bronze': 'a bronze ACP frame' },
-      shutters: { sliding: 'corten sliding shutters', folding: 'corten folding shutters' }
-    };
     var INFO = {
-      care: ['Facade care', 'Paint and facade maintenance, waterproofing and plaster treatment, to protect the building you already have.'],
       hpl: ['HPL cladding', 'Compact laminate panels made for exterior walls. They stand up to sun and rain, in a wide range of colours, woodgrains and finishes.', 'Made to EN 438, with a 10-year product warranty'],
-      acp: ['ACP cladding', 'Aluminium composite panels: a durable, affordable finish in many colours, for homes and commercial buildings.'],
-      tiles: ['Tiles, stone and terracotta', 'Natural and artificial tiles, stone and terracotta, fixed mechanically to the wall instead of relying on adhesive alone.']
+      acp: ['ACP cladding', 'Aluminium composite panels: a durable, affordable finish in a wide range of metallic and solid colours, for homes and commercial buildings.']
     };
-    var service = function (mat) {
-      if (mat === 'render') return 'care';
-      if (mat.indexOf('hpl') === 0) return 'hpl';
-      if (mat.indexOf('acp') === 0) return 'acp';
-      return 'tiles';
-    };
-    var NEED = { care: 'Facade care', hpl: 'HPL cladding', acp: 'ACP cladding', tiles: 'Tiles, stone and terracotta' };
+    var NEED = { hpl: 'HPL cladding', acp: 'ACP cladding' };
 
+    var renderPalette = function (part) {
+      var mat = COL[S[part]].mat;
+      PAL[part].innerHTML = PALETTE[mat].map(function (grp) {
+        return '<div class="pal__grp"><p class="pal__lbl">' + grp.label + '</p><div class="pal__row">' + grp.items.map(function (it) {
+          var id = mat + '-' + it[0];
+          return '<label class="swc" title="' + it[1] + '"><input type="radio" name="' + part + '-col" value="' + id + '"' + (id === S[part] ? ' checked' : '') + '>' +
+            '<span class="swc__c" data-kind="' + grp.kind + '" style="--c:' + it[2] + '"></span><span class="vh">' + it[1] + '</span></label>';
+        }).join('') + '</div></div>';
+      }).join('');
+      var mr = $('input[name="' + part + '-mat"][value="' + mat + '"]', form);
+      if (mr) mr.checked = true;
+    };
+    var article = function (w) { return /^[aeiou]/i.test(w) ? 'an' : 'a'; };
     var describe = function () {
-      var parts = [NAMES.walls[S.walls], NAMES.frame[S.frame]];
-      if (S.shutters !== 'none') parts.push(NAMES.shutters[S.shutters] + (S.closed ? ', closed' : ''));
-      if (S.sun === 'screens') parts.push('tension screens');
-      var last = parts.pop();
-      return parts.join(', ') + ' and ' + last + '.';
+      var w = COL[S.walls], f = COL[S.frame];
+      var wallTxt = w.name + ' ' + w.mat.toUpperCase() + ' walls';
+      var frameTxt = article(f.name) + ' ' + f.name.toLowerCase() + ' ' + f.mat.toUpperCase() + ' frame';
+      return S.sun === 'screens' ? wallTxt + ', ' + frameTxt + ' and tension screens.' : wallTxt + ' and ' + frameTxt + '.';
     };
     var updateText = function () {
       sumEl.textContent = mode === 'before' ? 'Before: stained render, bare concrete and nothing to block the sun.' : describe();
-      var inf = INFO[service(S.walls)];
+      ['walls', 'frame'].forEach(function (part) {
+        var c = COL[S[part]];
+        PICK[part].innerHTML = 'Colour: <b>' + c.name + '</b> (' + c.mat.toUpperCase() + ')';
+      });
+      var inf = INFO[COL[S.walls].mat];
       noteWalls.innerHTML = '<b>' + inf[0] + '.</b> ' + inf[1] + (inf[2] ? '<span class="spec">' + inf[2] + '</span>' : '');
-      shutTog.disabled = S.shutters === 'none';
-      shutTog.setAttribute('aria-pressed', S.closed ? 'true' : 'false');
-      shutTog.textContent = S.closed ? 'Open the shutters' : 'Close the shutters';
       posIn.disabled = S.sun !== 'screens';
       posIn.value = Math.round(S.pos * 100);
       posIn.style.setProperty('--v', Math.round(S.pos * 100) + '%');
       modeBtns.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-mode') === mode ? 'true' : 'false'); });
     };
 
-    var applyWalls = function (mat, how) {
-      if (shown.walls === mat) return Promise.resolve();
-      shown.walls = mat;
-      var layer = wallLayer(mat);
+    var applyWalls = function (id, how) {
+      if (shown.walls === id) return Promise.resolve();
+      shown.walls = id;
+      var layer = wallLayer(id);
       if (how === 'now') { gWalls.textContent = ''; gWalls.appendChild(layer); return Promise.resolve(); }
       return how === 'fade' ? fadeIn(gWalls, layer, 450) : install(gWalls, layer, WALL_BANDS, false, 720, 170);
     };
-    var applyFrame = function (mat, how) {
-      if (shown.frame === mat) return Promise.resolve();
-      shown.frame = mat;
-      var layer = frameLayer(mat);
+    var applyFrame = function (id, how) {
+      if (shown.frame === id) return Promise.resolve();
+      shown.frame = id;
+      var layer = frameLayer(id);
       if (how === 'now') { gFrame.textContent = ''; gFrame.appendChild(layer); return Promise.resolve(); }
       return how === 'fade' ? fadeIn(gFrame, layer, 450) : install(gFrame, layer, FRAME_BANDS, true, 820, 0);
-    };
-    var moveShutters = function (to, dur) {
-      if (!shutSet) return Promise.resolve();
-      var set = shutSet, from = shutT;
-      return tween(dur, function (p) { shutT = from + (to - from) * easeC(p); set.set(shutT); });
-    };
-    var applyShutters = function (type, how) {
-      var target = type === 'none' ? null : type;
-      if (shownShut === target && shutSet) return moveShutters(S.closed ? 0 : 1, 700);
-      shownShut = target;
-      var oldSet = shutSet;
-      if (oldSet) {
-        shutSet = null;
-        tween(how === 'now' ? 0 : 260, function (p) { oldSet.g.setAttribute('opacity', (1 - p).toFixed(3)); }).then(function () { oldSet.g.remove(); });
-      }
-      if (!target) return Promise.resolve();
-      shutSet = makeShutters(target);
-      if (how === 'now') { shutT = S.closed ? 0 : 1; shutSet.set(shutT); shutSet.g.setAttribute('opacity', 1); return Promise.resolve(); }
-      shutT = 0; shutSet.set(0);
-      var g = shutSet.g;
-      return tween(300, function (p) { g.setAttribute('opacity', p.toFixed(3)); })
-        .then(function () { return wait(S.closed ? 0 : 160); })
-        .then(function () { return moveShutters(S.closed ? 0 : 1, 900); });
     };
     var applySun = function (on, how) {
       var fromV = scrVis, fromP = scrPos, toP = on ? S.pos : 0;
@@ -1945,10 +1903,9 @@ fieldset.field{border:0;margin:0;padding:0}
       updateText();
       applyWalls('weathered', 'fade');
       applyFrame('concrete', 'fade');
-      applyShutters('none', 'fade');
       applySun(false, 'fade');
     };
-    var toAfter = function (fromUser) {
+    var toAfter = function () {
       var my = ++gen;
       mode = 'after';
       updateText();
@@ -1956,53 +1913,42 @@ fieldset.field{border:0;margin:0;padding:0}
       return wait(motion ? 420 : 0).then(function () {
         if (my !== gen) return;
         applyFrame(S.frame, 'wipe');
-        return wait(motion ? 700 : 0);
-      }).then(function () {
-        if (my !== gen) return;
-        applyShutters(S.shutters, 'wipe');
-        return wait(motion ? 450 : 0);
+        return wait(motion ? 900 : 0);
       }).then(function () {
         if (my !== gen) return;
         applySun(S.sun === 'screens', 'wipe');
       });
     };
 
-    var readForm = function () {
-      var fd = new FormData(form);
-      S.walls = fd.get('walls'); S.frame = fd.get('frame'); S.shutters = fd.get('shutters'); S.sun = fd.get('sun');
-    };
-    var setRadios = function () {
-      ['walls', 'frame', 'shutters', 'sun'].forEach(function (n) {
-        var r = $('input[name="' + n + '"][value="' + S[n] + '"]', form);
-        if (r) r.checked = true;
-      });
+    // when the material changes, keep a similar colour if that material has one
+    var switchMat = function (part, mat) {
+      var cur = COL[S[part]];
+      if (cur.mat === mat) return;
+      var same = mat + '-' + cur.id.slice(4);
+      S[part] = COL[same] ? same : mat + '-' + PALETTE[mat][0].items[0][0];
+      renderPalette(part);
     };
     form.addEventListener('change', function (e) {
-      if (e.target.name === undefined || e.target === posIn) return;
+      var n = e.target.name;
+      if (!n) return;
       touched = true;
-      var name = e.target.name;
-      readForm();
       statusEl.textContent = '';
-      if (mode === 'before') { toAfter(true); return; }
+      var part = n.split('-')[0];
+      if (n === 'walls-mat' || n === 'frame-mat') switchMat(part, e.target.value);
+      else if (n === 'walls-col' || n === 'frame-col') S[part] = e.target.value;
+      else if (n === 'sun') S.sun = e.target.value;
+      if (mode === 'before') { toAfter(); return; }
       updateText();
-      if (name === 'walls') applyWalls(S.walls, 'wipe');
-      else if (name === 'frame') applyFrame(S.frame, 'wipe');
-      else if (name === 'shutters') applyShutters(S.shutters, 'wipe');
-      else if (name === 'sun') applySun(S.sun === 'screens', 'wipe');
+      if (part === 'walls') applyWalls(S.walls, 'wipe');
+      else if (part === 'frame') applyFrame(S.frame, 'wipe');
+      else if (n === 'sun') applySun(S.sun === 'screens', 'wipe');
     });
     form.addEventListener('submit', function (e) { e.preventDefault(); });
-    shutTog.addEventListener('click', function () {
-      touched = true;
-      S.closed = !S.closed;
-      if (mode === 'before') { toAfter(true); return; }
-      updateText();
-      moveShutters(S.closed ? 0 : 1, 800);
-    });
     posIn.addEventListener('input', function () {
       touched = true;
       S.pos = +posIn.value / 100;
       posIn.style.setProperty('--v', posIn.value + '%');
-      if (mode === 'before') { toAfter(true); return; }
+      if (mode === 'before') { toAfter(); return; }
       if (S.sun === 'screens') { scrVis = 1; scrPos = S.pos; paintScreens(); }
     });
     modeBtns.forEach(function (b) {
@@ -2010,28 +1956,30 @@ fieldset.field{border:0;margin:0;padding:0}
         touched = true;
         var m = b.getAttribute('data-mode');
         if (m === mode) return;
-        if (m === 'before') toBefore(); else toAfter(true);
+        if (m === 'before') toBefore(); else toAfter();
       });
     });
-    var pick = function (arr, not) { var a = arr.filter(function (x) { return x !== not; }); return a[Math.floor(Math.random() * a.length)]; };
+    var anyColour = function (not) {
+      var ids = Object.keys(COL).filter(function (id) { return id !== not; });
+      return ids[Math.floor(Math.random() * ids.length)];
+    };
     $('#cfgShuffle', root).addEventListener('click', function () {
       touched = true;
-      S.walls = pick(['render', 'hpl-oak', 'hpl-anth', 'acp-silver', 'acp-bronze', 'terracotta', 'stone'], S.walls);
-      S.frame = pick(['hpl-oak', 'hpl-white', 'acp-anth', 'acp-bronze'], S.frame);
-      S.shutters = pick(['sliding', 'folding', 'sliding', 'folding', 'none'], null);
+      S.walls = anyColour(S.walls);
+      do { S.frame = anyColour(S.frame); } while (S.frame === S.walls);
       S.sun = Math.random() < .75 ? 'screens' : 'none';
-      S.closed = false;
-      setRadios();
+      renderPalette('walls'); renderPalette('frame');
+      var sr = $('input[name="sun"][value="' + S.sun + '"]', form);
+      if (sr) sr.checked = true;
       statusEl.textContent = '';
-      toAfter(true);
+      toAfter();
     });
     $('#cfgQuote', root).addEventListener('click', function () {
       var quote = $('#quote');
       if (!quote) return;
       var needs = {};
-      needs[NEED[service(S.walls)]] = 1;
-      needs[NEED[service(S.frame)]] = 1;
-      if (S.shutters !== 'none') needs['Corten shutters'] = 1;
+      needs[NEED[COL[S.walls].mat]] = 1;
+      needs[NEED[COL[S.frame].mat]] = 1;
       if (S.sun === 'screens') needs['Sun control'] = 1;
       $$('input[name="need"]', quote).forEach(function (cb) { cb.checked = !!needs[cb.value]; });
       var msg = $('#f-msg', quote);
@@ -2044,10 +1992,11 @@ fieldset.field{border:0;margin:0;padding:0}
     });
 
     /* first render */
-    setRadios();
+    renderPalette('walls');
+    renderPalette('frame');
     applyWalls(motion ? 'weathered' : S.walls, 'now');
     applyFrame(motion ? 'concrete' : S.frame, 'now');
-    if (!motion) { mode = 'after'; applyShutters(S.shutters, 'now'); applySun(true, 'now'); }
+    if (!motion) { mode = 'after'; applySun(true, 'now'); }
     updateText();
     if ('IntersectionObserver' in window) {
       new IntersectionObserver(function (en, obs) {
@@ -2058,12 +2007,12 @@ fieldset.field{border:0;margin:0;padding:0}
           if (!en[0].isIntersecting) return;
           obs.disconnect();
           makeTextures();
-          setTimeout(function () { if (!touched && mode === 'before') toAfter(false); }, 700);
+          setTimeout(function () { if (!touched && mode === 'before') toAfter(); }, 700);
         }, { threshold: .45 }).observe($('.cfg__view', root));
       }
     } else {
       makeTextures();
-      if (motion) toAfter(false);
+      if (motion) toAfter();
     }
   })();
 
@@ -2143,7 +2092,7 @@ fieldset.field{border:0;margin:0;padding:0}
     };
     var update = function () {
       var text = compose();
-      wa.href = 'https://wa.me/9613482885?text=' + encodeURIComponent(text);
+      wa.href = 'https://wa.me/96171181142?text=' + encodeURIComponent(text);
       var who = (nameIn.value || '').trim();
       mail.href = 'mailto:info@facadecolb.com?subject=' + encodeURIComponent('Consultation request' + (who ? ' from ' + who : '')) + '&body=' + encodeURIComponent(text);
     };
@@ -2162,7 +2111,7 @@ fieldset.field{border:0;margin:0;padding:0}
       nameIn.removeAttribute('aria-invalid');
       nameErr.textContent = '';
       update();
-      status.textContent = 'Opening ' + label + ' with your message. If nothing opens, call us on 03 482 885.';
+      status.textContent = 'Opening ' + label + ' with your message. If nothing opens, call us on 71 181 142.';
     };
     wa.addEventListener('click', function (e) { guard(e, 'WhatsApp'); });
     mail.addEventListener('click', function (e) { guard(e, 'your email app'); });
